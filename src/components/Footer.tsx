@@ -1,7 +1,8 @@
 'use client';
 
 import { Mail, Phone } from 'lucide-react';
-import { ReactNode } from 'react';
+import { ReactNode, useState } from 'react';
+import LegalModal, { PrivacyContent, OfferContent } from './LegalModal';
 
 const TelegramIcon = ({ className }: { className?: string }) => (
   <svg viewBox="0 0 24 24" className={className} fill="currentColor">
@@ -31,6 +32,9 @@ const socialLinks: { label: string; href: string; icon: ReactNode }[] = [
 ];
 
 export default function Footer() {
+  const [privacyOpen, setPrivacyOpen] = useState(false);
+  const [offerOpen, setOfferOpen] = useState(false);
+
   const scrollTo = (href: string) => {
     const el = document.querySelector(href);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
@@ -125,15 +129,29 @@ export default function Footer() {
         <div className="border-t border-border/30 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-[0.75rem] text-muted">&copy; 2025 ProMindLab. Все права защищены.</p>
           <div className="flex gap-6">
-            <button className="text-[0.75rem] text-muted hover:text-foreground transition-colors cursor-pointer">
+            <button
+              onClick={() => setPrivacyOpen(true)}
+              className="text-[0.75rem] text-muted hover:text-foreground transition-colors cursor-pointer"
+            >
               Политика конфиденциальности
             </button>
-            <button className="text-[0.75rem] text-muted hover:text-foreground transition-colors cursor-pointer">
+            <button
+              onClick={() => setOfferOpen(true)}
+              className="text-[0.75rem] text-muted hover:text-foreground transition-colors cursor-pointer"
+            >
               Оферта
             </button>
           </div>
         </div>
       </div>
+
+      <LegalModal isOpen={privacyOpen} onClose={() => setPrivacyOpen(false)} title="Политика конфиденциальности">
+        <PrivacyContent />
+      </LegalModal>
+
+      <LegalModal isOpen={offerOpen} onClose={() => setOfferOpen(false)} title="Публичная оферта">
+        <OfferContent />
+      </LegalModal>
     </footer>
   );
 }
