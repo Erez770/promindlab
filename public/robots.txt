@@ -1,0 +1,37 @@
+# ProMindLab — robots.txt
+
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_next/
+
+# Yandex
+User-agent: Yandex
+Allow: /
+
+# Google
+User-agent: Googlebot
+Allow: /
+
+# ChatGPT
+User-agent: ChatGPT-User
+Allow: /
+User-agent: GPTBot
+Allow: /
+
+# Claude
+User-agent: Claude-Web
+Allow: /
+User-agent: anthropic-ai
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+# Apple
+User-agent: Applebot
+Allow: /
+
+Sitemap: https://promindlab.ru/sitemap.xml
