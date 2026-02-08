@@ -44,7 +44,7 @@ export function NavBar({ items, className, trailing }: NavBarProps) {
         className,
       )}
     >
-      <div className="flex items-center gap-3 bg-[var(--glass-bg)] border border-[var(--glass-border)] backdrop-blur-xl py-1 px-1 rounded-full shadow-lg">
+      <div className="flex items-center gap-1 sm:gap-3 bg-[var(--glass-bg)] border border-[var(--glass-border)] backdrop-blur-xl py-1 px-1 rounded-full shadow-lg">
         {items.map((item) => {
           const Icon = item.icon
           const isActive = activeTab === item.name
@@ -54,7 +54,7 @@ export function NavBar({ items, className, trailing }: NavBarProps) {
               key={item.name}
               onClick={() => handleClick(item)}
               className={cn(
-                "relative cursor-pointer text-[0.9375rem] font-medium tracking-[-0.01em] px-6 py-2 rounded-full transition-colors",
+                "relative cursor-pointer text-[0.9375rem] font-medium tracking-[-0.01em] px-3 sm:px-6 py-2 rounded-full transition-colors",
                 "text-foreground/80 hover:text-primary",
                 isActive && "bg-muted text-primary",
               )}
