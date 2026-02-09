@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import JsonLd from "@/components/JsonLd";
+import YandexMetrika from "@/components/YandexMetrika";
 
 const inter = Inter({
   subsets: ["latin", "cyrillic"],
@@ -45,6 +46,9 @@ export const metadata: Metadata = {
     description:
       "Сайты, SaaS, боты на Claude/GPT-4. От 25,000₽. Готово за неделю.",
   },
+  verification: {
+    yandex: "a48e7d06e84c3266",
+  },
 };
 
 export default function RootLayout({
@@ -56,6 +60,7 @@ export default function RootLayout({
     <html lang="ru" className={`${inter.variable} scroll-smooth`}>
       <body className="antialiased w-full min-h-screen overflow-x-hidden">
         <JsonLd />
+        <YandexMetrika />
         {children}
       </body>
     </html>
