@@ -47,7 +47,7 @@ export const metadata: Metadata = {
       "Сайты, SaaS, боты на Claude/GPT-4. От 25,000₽. Готово за неделю.",
   },
   verification: {
-    yandex: "a48e7d06e84c3266",
+    yandex: "358ed387c1d469fb",
   },
 };
 
