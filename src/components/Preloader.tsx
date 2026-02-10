@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 
 export default function Preloader() {
   const [isLoading, setIsLoading] = useState(true);
@@ -21,11 +22,16 @@ export default function Preloader() {
         >
           <motion.div className="flex flex-col items-center gap-6">
             <motion.div
-              className="relative w-16 h-16"
-              animate={{ rotate: 360 }}
-              transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
+              animate={{ scale: [1, 1.1, 1] }}
+              transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
             >
-              <div className="absolute inset-0 rounded-full border-2 border-transparent border-t-primary border-r-secondary" />
+              <Image
+                src="/branding/icon.png"
+                alt="ProMindLab"
+                width={64}
+                height={64}
+                priority
+              />
             </motion.div>
             <motion.div
               className="font-heading text-[1.375rem] font-bold tracking-[-0.02em] gradient-text"

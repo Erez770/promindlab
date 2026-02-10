@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { reachGoal } from '@/lib/metrika';
 import ContactForm from './ContactForm';
 import FloatingButtons from './FloatingButtons';
@@ -44,8 +45,15 @@ export default function LandingPage({
         {/* Minimal Header */}
         <header className="fixed top-0 left-0 right-0 z-50 glass">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            <a href="/" className="font-heading text-lg font-bold gradient-text">
-              ProMindLab
+            <a href="/" className="inline-flex items-center">
+              <Image
+                src="/branding/logo.png"
+                alt="ProMindLab"
+                width={140}
+                height={35}
+                priority
+                className="h-8 w-auto"
+              />
             </a>
             <button
               onClick={() => {

@@ -2,6 +2,7 @@
 
 import { Mail, Phone } from 'lucide-react';
 import { ReactNode, useState } from 'react';
+import Image from 'next/image';
 import LegalModal, { PrivacyContent, OfferContent } from './LegalModal';
 
 const TelegramIcon = ({ className }: { className?: string }) => (
@@ -46,7 +47,13 @@ export default function Footer() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           {/* Brand */}
           <div className="sm:col-span-2 lg:col-span-1">
-            <h3 className="font-heading text-[1.125rem] font-bold tracking-[-0.02em] gradient-text mb-4">ProMindLab</h3>
+            <Image
+              src="/branding/logo.png"
+              alt="ProMindLab"
+              width={140}
+              height={35}
+              className="h-9 w-auto mb-4"
+            />
             <p className="text-muted text-[0.8125rem] leading-relaxed mb-6">
               Создаём сайты, SaaS, боты и веб-приложения с помощью AI-технологий за 3-7 дней.
             </p>
