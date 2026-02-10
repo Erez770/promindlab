@@ -1,7 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { useRef } from 'react';
+import { reachGoal } from '@/lib/metrika';
 
 const plans = [
   {
@@ -55,10 +56,20 @@ function formatPrice(price: number): string {
 }
 
 export default function Pricing() {
-  const [isSubscription, setIsSubscription] = useState(false);
+  const hasFiredView = useRef(false);
 
   return (
-    <section id="pricing" className="py-24 relative">
+    <motion.section
+      id="pricing"
+      className="py-24 relative"
+      onViewportEnter={() => {
+        if (!hasFiredView.current) {
+          hasFiredView.current = true;
+          reachGoal('pricing_view');
+        }
+      }}
+      viewport={{ once: true, amount: 0.3 }}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           className="text-center mb-16"
@@ -70,43 +81,14 @@ export default function Pricing() {
           <h2 className="font-heading text-[1.875rem] sm:text-[2.5rem] lg:text-[3rem] font-bold tracking-[-0.025em] leading-[1.15] mb-4">
             Прозрачные <span className="gradient-text">цены</span>
           </h2>
-          <p className="text-muted text-[1.0625rem] leading-[1.65] tracking-[-0.01em] max-w-2xl mx-auto mb-8">
+          <p className="text-muted text-[1.0625rem] leading-[1.65] tracking-[-0.01em] max-w-2xl mx-auto">
             Выберите пакет под ваш проект
           </p>
-
-          {/* Toggle */}
-          <div className="inline-flex items-center gap-4 glass rounded-full p-1.5">
-            <button
-              onClick={() => setIsSubscription(false)}
-              className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 cursor-pointer ${
-                !isSubscription
-                  ? 'bg-gradient-to-r from-primary to-secondary text-white'
-                  : 'text-muted hover:text-foreground'
-              }`}
-            >
-              Разовый проект
-            </button>
-            <button
-              onClick={() => setIsSubscription(true)}
-              className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 cursor-pointer ${
-                isSubscription
-                  ? 'bg-gradient-to-r from-primary to-secondary text-white'
-                  : 'text-muted hover:text-foreground'
-              }`}
-            >
-              Абонемент
-              <span className="ml-2 px-2 py-0.5 rounded-full bg-success/20 text-success text-xs">
-                -20%
-              </span>
-            </button>
-          </div>
         </motion.div>
 
         <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
           {plans.map((plan, i) => {
-            const price = isSubscription
-              ? Math.round(plan.price * 0.8)
-              : plan.price;
+            const price = plan.price;
 
             return (
               <motion.div
@@ -137,11 +119,6 @@ export default function Pricing() {
                         {formatPrice(price)}₽
                       </span>
                     </div>
-                    {isSubscription && (
-                      <p className="text-xs text-muted mt-1 line-through">
-                        {formatPrice(plan.price)}₽
-                      </p>
-                    )}
                   </div>
 
                   <ul className="space-y-3 mb-8 flex-1">
@@ -154,11 +131,12 @@ export default function Pricing() {
                   </ul>
 
                   <button
-                    onClick={() =>
+                    onClick={() => {
+                      reachGoal('pricing_click', { plan: plan.name });
                       document
                         .querySelector('#contact')
-                        ?.scrollIntoView({ behavior: 'smooth' })
-                    }
+                        ?.scrollIntoView({ behavior: 'smooth' });
+                    }}
                     className={`w-full py-3 rounded-xl font-semibold transition-all duration-300 cursor-pointer ${
                       plan.popular
                         ? 'bg-gradient-to-r from-primary to-secondary text-white hover:shadow-lg hover:shadow-primary/25'
@@ -173,6 +151,6 @@ export default function Pricing() {
           })}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }

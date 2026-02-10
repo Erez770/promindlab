@@ -20,6 +20,9 @@ import Footer from '@/components/Footer';
 import FloatingButtons from '@/components/FloatingButtons';
 import CookieBanner from '@/components/CookieBanner';
 import ThemeProvider from '@/components/ThemeProvider';
+import ExitIntentPopup from '@/components/ExitIntentPopup';
+import StickyCTA from '@/components/StickyCTA';
+import PricingCalculator from '@/components/PricingCalculator';
 
 export default function Home() {
   return (
@@ -38,6 +41,7 @@ export default function Home() {
         <Statistics />
         <Testimonials />
         <Pricing />
+        <PricingCalculator />
         <Advantages />
         <FAQ />
         <ContactForm />
@@ -45,6 +49,8 @@ export default function Home() {
       <SeoContent />
       <Footer />
       <FloatingButtons />
+      <StickyCTA />
+      <ExitIntentPopup />
       <CookieBanner />
     </div>
     </ThemeProvider>

@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react';
+import { reachGoal } from '@/lib/metrika';
 
 export default function FloatingButtons() {
   const [isVisible, setIsVisible] = useState(false);
@@ -28,6 +29,7 @@ export default function FloatingButtons() {
             href="https://t.me/ProMindLabAdmin"
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => reachGoal('telegram_click')}
             className="w-14 h-14 rounded-full bg-[#229ED9] flex items-center justify-center shadow-lg hover:scale-110 transition-transform"
             aria-label="Telegram"
           >
@@ -39,6 +41,7 @@ export default function FloatingButtons() {
             href="https://wa.me/79104666668"
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => reachGoal('whatsapp_click')}
             className="w-14 h-14 rounded-full bg-[#25D366] flex items-center justify-center shadow-lg hover:scale-110 transition-transform"
             aria-label="WhatsApp"
           >

@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useState } from 'react';
+import { reachGoal } from '@/lib/metrika';
 
 const schema = z.object({
   name: z.string().min(2, 'Минимум 2 символа'),
@@ -55,6 +56,7 @@ export default function ContactForm() {
         throw new Error(err.error || 'Ошибка отправки');
       }
 
+      reachGoal('form_submit', { service: data.projectType });
       setIsSubmitted(true);
       reset();
       setTimeout(() => setIsSubmitted(false), 5000);
