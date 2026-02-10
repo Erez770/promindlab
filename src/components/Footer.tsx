@@ -50,9 +50,10 @@ export default function Footer() {
             <Image
               src="/branding/logo.png"
               alt="ProMindLab"
-              width={140}
-              height={35}
-              className="h-9 w-auto mb-4"
+              width={420}
+              height={105}
+              className="mb-4"
+              style={{ width: '220px', height: 'auto' }}
             />
             <p className="text-muted text-[0.8125rem] leading-relaxed mb-6">
               Создаём сайты, SaaS, боты и веб-приложения с помощью AI-технологий за 3-7 дней.
