@@ -1,213 +1,149 @@
 'use client';
 
-import React, { useState } from 'react';
-import { BarChart3, GraduationCap, Bot, Palette, ShoppingCart } from 'lucide-react';
+import { useState } from 'react';
+import Image from 'next/image';
+import { motion } from 'framer-motion';
+import { BarChart3, GraduationCap, Bot, Palette, ShoppingCart, ExternalLink } from 'lucide-react';
 
-const options = [
+const projects = [
   {
     title: "FinTrack SaaS",
-    description: "Платформа для учёта финансов и аналитики",
+    category: "SaaS платформа",
+    description: "Платформа для учёта финансов и аналитики с дашбордами и отчётами",
     image: "/portfolio-fintrack.png",
-    icon: <BarChart3 size={24} color="white" />,
+    icon: BarChart3,
+    tags: ["React", "Node.js", "PostgreSQL"],
   },
   {
     title: "EduPlatform",
-    description: "Онлайн-школа с курсами и вебинарами",
+    category: "Онлайн-школа",
+    description: "Платформа для онлайн-обучения с курсами, вебинарами и прогрессом",
     image: "/portfolio-eduplatform.webp",
-    icon: <GraduationCap size={24} color="white" />,
+    icon: GraduationCap,
+    tags: ["Next.js", "Stripe", "AI"],
   },
   {
     title: "ShopBot",
-    description: "Telegram-бот для автоматизации продаж",
+    category: "Telegram-бот",
+    description: "Бот для автоматизации продаж: приём заказов, оплата, уведомления",
     image: "/portfolio-shopbot.webp",
-    icon: <Bot size={24} color="white" />,
+    icon: Bot,
+    tags: ["Python", "Telegram API", "PostgreSQL"],
   },
   {
     title: "LuxeDesign Studio",
-    description: "Премиум-лендинг с 3D-анимациями",
+    category: "Премиум лендинг",
+    description: "Лендинг для кофейного бренда с атмосферным дизайном и анимациями",
     image: "/portfolio-landing.webp",
-    icon: <Palette size={24} color="white" />,
+    icon: Palette,
+    tags: ["Next.js", "Framer Motion", "3D"],
   },
   {
-    title: "E-Commerce",
-    description: "Интернет-магазин с ЮKassa и CRM",
+    title: "Stella E-Commerce",
+    category: "Интернет-магазин",
+    description: "Магазин одежды с фильтрами, корзиной, оплатой и мобильной версией",
     image: "/portfolio-ecommerce.webp",
-    icon: <ShoppingCart size={24} color="white" />,
+    icon: ShoppingCart,
+    tags: ["React", "ЮKassa", "CRM"],
   },
 ];
 
-export default function InteractiveSelector() {
-  const [active, setActive] = useState(0);
+function ProjectCard({ project, index }: { project: typeof projects[0]; index: number }) {
+  const [isHovered, setIsHovered] = useState(false);
+  const Icon = project.icon;
 
   return (
-    <>
-      <style>{`
-        .selector-wrap {
-          display: flex;
-          flex-direction: column;
-          max-width: 900px;
-          margin: 0 auto;
-          border-radius: 12px;
-          overflow: hidden;
-          position: relative;
-          z-index: 5;
-        }
-        .selector-panel {
-          position: relative;
-          cursor: pointer;
-          background-size: cover;
-          background-position: center;
-          background-repeat: no-repeat;
-          border: 2px solid rgba(41,41,41,0.5);
-          overflow: hidden;
-          transition: flex-grow 0.7s ease-in-out, border-color 0.7s ease-in-out;
-          -webkit-tap-highlight-color: transparent;
-          height: 70px;
-        }
-        .selector-panel.active {
-          height: 220px;
-          border-color: rgba(255,255,255,0.3);
-        }
-        .selector-panel * {
-          pointer-events: none;
-        }
-        .panel-gradient {
-          position: absolute;
-          left: 0; right: 0; bottom: 0;
-          height: 80px;
-          background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
-        }
-        .panel-label {
-          position: absolute;
-          left: 0; right: 0; bottom: 12px;
-          display: flex;
-          align-items: center;
-          padding: 0 12px;
-          gap: 10px;
-          height: 40px;
-        }
-        .panel-icon {
-          min-width: 36px; max-width: 36px; height: 36px;
-          display: flex; align-items: center; justify-content: center;
-          border-radius: 50%;
-          background: rgba(32,32,32,0.85);
-          border: 2px solid #444;
-          flex-shrink: 0;
-        }
-        .panel-title {
-          font-weight: 700;
-          font-size: 0.9rem;
-          color: white;
-          white-space: nowrap;
-          opacity: 1;
-          transition: opacity 0.5s ease-in-out;
-        }
-        .panel-desc {
-          font-size: 0.75rem;
-          color: #d1d5db;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          opacity: 0;
-          transition: opacity 0.5s ease-in-out;
-        }
-        .selector-panel.active .panel-desc {
-          opacity: 1;
-        }
+    <motion.div
+      className="group relative overflow-hidden rounded-2xl cursor-pointer aspect-[4/3]"
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {/* Image */}
+      <Image
+        src={project.image}
+        alt={project.title}
+        fill
+        className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+      />
 
-        /* Tablet (640px+) */
-        @media (min-width: 640px) {
-          .selector-wrap {
-            flex-direction: row;
-            height: 350px;
-            border-radius: 16px;
-          }
-          .selector-panel {
-            flex: 1 1 0%;
-            min-width: 50px;
-            height: auto;
-            background-size: auto 120%;
-            transition: flex-grow 0.7s ease-in-out, background-size 0.7s ease-in-out, border-color 0.7s ease-in-out;
-          }
-          .selector-panel.active {
-            flex-grow: 6;
-            height: auto;
-            background-size: auto 100%;
-          }
-          .panel-gradient {
-            height: 100px;
-          }
-          .panel-label {
-            bottom: 16px;
-            padding: 0 14px;
-            gap: 10px;
-            height: 44px;
-          }
-          .panel-icon {
-            min-width: 40px; max-width: 40px; height: 40px;
-          }
-          .panel-title {
-            font-size: 1rem;
-            opacity: 0;
-          }
-          .panel-desc {
-            font-size: 0.8rem;
-          }
-          .selector-panel.active .panel-title {
-            opacity: 1;
-          }
-        }
+      {/* Always-visible gradient at bottom */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
-        /* Desktop (1024px+) */
-        @media (min-width: 1024px) {
-          .selector-wrap {
-            height: 400px;
-          }
-          .selector-panel {
-            min-width: 60px;
-          }
-          .selector-panel.active {
-            flex-grow: 7;
-          }
-          .panel-gradient {
-            height: 120px;
-          }
-          .panel-label {
-            bottom: 20px;
-            padding: 0 16px;
-            gap: 12px;
-            height: 48px;
-          }
-          .panel-icon {
-            min-width: 44px; max-width: 44px; height: 44px;
-          }
-          .panel-title {
-            font-size: 1.125rem;
-          }
-          .panel-desc {
-            font-size: 0.875rem;
-          }
-        }
-      `}</style>
-      <div className="selector-wrap">
-        {options.map((opt, i) => (
-          <div
-            key={i}
-            className={`selector-panel${active === i ? ' active' : ''}`}
-            style={{ backgroundImage: `url('${opt.image}')` }}
-            onClick={() => setActive(i)}
-          >
-            <div className="panel-gradient" />
-            <div className="panel-label">
-              <div className="panel-icon">{opt.icon}</div>
-              <div>
-                <div className="panel-title">{opt.title}</div>
-                <div className="panel-desc">{opt.description}</div>
-              </div>
-            </div>
-          </div>
-        ))}
+      {/* Hover overlay */}
+      <div
+        className="absolute inset-0 bg-black/50 backdrop-blur-[2px] transition-opacity duration-500"
+        style={{ opacity: isHovered ? 1 : 0 }}
+      />
+
+      {/* Category badge - always visible */}
+      <div className="absolute top-4 left-4 z-10">
+        <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs font-medium text-white">
+          <Icon size={14} />
+          {project.category}
+        </span>
       </div>
-    </>
+
+      {/* Bottom info - always visible */}
+      <div className="absolute bottom-0 left-0 right-0 p-5 z-10">
+        <h3 className="font-heading text-lg sm:text-xl font-bold text-white mb-1">
+          {project.title}
+        </h3>
+
+        {/* Description - shows on hover */}
+        <div
+          className="transition-all duration-500 overflow-hidden"
+          style={{
+            maxHeight: isHovered ? '80px' : '0px',
+            opacity: isHovered ? 1 : 0,
+          }}
+        >
+          <p className="text-white/80 text-sm mb-3">{project.description}</p>
+          <div className="flex flex-wrap gap-2">
+            {project.tags.map((tag) => (
+              <span
+                key={tag}
+                className="px-2.5 py-1 rounded-md bg-white/10 text-xs text-white/90 font-medium"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* View icon on hover */}
+      <div
+        className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center transition-all duration-500"
+        style={{
+          opacity: isHovered ? 1 : 0,
+          transform: isHovered ? 'scale(1)' : 'scale(0.5)',
+        }}
+      >
+        <ExternalLink size={18} className="text-white" />
+      </div>
+    </motion.div>
+  );
+}
+
+export default function InteractiveSelector() {
+  return (
+    <div className="space-y-4 sm:space-y-5">
+      {/* Row 1: 2 cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+        <ProjectCard project={projects[0]} index={0} />
+        <ProjectCard project={projects[1]} index={1} />
+      </div>
+      {/* Row 2: 3 cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+        <ProjectCard project={projects[2]} index={2} />
+        <ProjectCard project={projects[3]} index={3} />
+        <ProjectCard project={projects[4]} index={4} />
+      </div>
+    </div>
   );
 }
