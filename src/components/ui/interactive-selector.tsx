@@ -7,42 +7,42 @@ import { BarChart3, GraduationCap, Bot, Palette, ShoppingCart, ExternalLink } fr
 
 const projects = [
   {
-    title: "FinTrack SaaS",
+    title: "FinTech",
     category: "SaaS платформа",
-    description: "Платформа для учёта финансов и аналитики с дашбордами и отчётами",
+    description: "Финтех-платформа с аналитикой портфеля, графиками и транзакциями в реальном времени",
     image: "/portfolio-fintrack.png",
     icon: BarChart3,
     tags: ["React", "Node.js", "PostgreSQL"],
   },
   {
-    title: "EduPlatform",
+    title: "Education Platform",
     category: "Онлайн-школа",
-    description: "Платформа для онлайн-обучения с курсами, вебинарами и прогрессом",
-    image: "/portfolio-eduplatform.webp",
+    description: "Платформа онлайн-курсов с видеоуроками, прогрессом и адаптивным дизайном",
+    image: "/portfolio-eduplatform.png",
     icon: GraduationCap,
     tags: ["Next.js", "Stripe", "AI"],
   },
   {
-    title: "ShopBot",
-    category: "Telegram-бот",
-    description: "Бот для автоматизации продаж: приём заказов, оплата, уведомления",
-    image: "/portfolio-shopbot.webp",
+    title: "Telegram / WhatsApp Bot",
+    category: "Telegram/WhatsApp бот",
+    description: "AI-платформа для автоматизации чатов в Telegram и WhatsApp с визуальным конструктором",
+    image: "/portfolio-shopbot.png",
     icon: Bot,
-    tags: ["Python", "Telegram API", "PostgreSQL"],
+    tags: ["Node.js", "Telegram API", "WhatsApp API"],
   },
   {
-    title: "LuxeDesign Studio",
+    title: "Luxury Landing Page",
     category: "Премиум лендинг",
-    description: "Лендинг для кофейного бренда с атмосферным дизайном и анимациями",
-    image: "/portfolio-landing.webp",
+    description: "Премиальный лендинг для консалтингового агентства с 3D-элементами и анимациями",
+    image: "/portfolio-landing.png",
     icon: Palette,
     tags: ["Next.js", "Framer Motion", "3D"],
   },
   {
-    title: "Stella E-Commerce",
+    title: "E-Commerce",
     category: "Интернет-магазин",
-    description: "Магазин одежды с фильтрами, корзиной, оплатой и мобильной версией",
-    image: "/portfolio-ecommerce.webp",
+    description: "Премиальный магазин одежды с каталогом, фильтрами и мобильной версией",
+    image: "/portfolio-ecommerce.png",
     icon: ShoppingCart,
     tags: ["React", "ЮKassa", "CRM"],
   },
@@ -71,8 +71,8 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
       />
 
-      {/* Always-visible gradient at bottom */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+      {/* Always-visible gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/20" />
 
       {/* Hover overlay */}
       <div
@@ -82,7 +82,7 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
 
       {/* Category badge - always visible */}
       <div className="absolute top-4 left-4 z-10">
-        <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs font-medium text-white">
+        <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/15 text-xs font-medium text-white">
           <Icon size={14} />
           {project.category}
         </span>
