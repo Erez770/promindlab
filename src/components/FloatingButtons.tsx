@@ -19,7 +19,7 @@ export default function FloatingButtons() {
     <AnimatePresence>
       {isVisible && (
         <motion.div
-          className="fixed bottom-22 sm:bottom-6 right-4 sm:right-6 z-40 flex flex-col gap-3"
+          className="fixed bottom-[5.5rem] sm:bottom-6 right-4 sm:right-6 z-40 flex flex-col gap-3"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 20 }}
