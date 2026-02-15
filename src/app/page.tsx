@@ -11,7 +11,7 @@ import Technologies from '@/components/Technologies';
 import Portfolio from '@/components/Portfolio';
 import Statistics from '@/components/Statistics';
 import Testimonials from '@/components/Testimonials';
-import Pricing from '@/components/Pricing';
+import WhyUs from '@/components/WhyUs/WhyUs';
 import Advantages from '@/components/Advantages';
 import FAQ from '@/components/FAQ';
 import ContactForm from '@/components/ContactForm';
@@ -40,7 +40,7 @@ export default function Home() {
         <Portfolio />
         <Statistics />
         <Testimonials />
-        <Pricing />
+        <WhyUs />
         <PricingCalculator />
         <Advantages />
         <FAQ />
