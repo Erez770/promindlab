@@ -28,7 +28,7 @@ const footerLinks = [
 
 const socialLinks: { label: string; href: string; icon: ReactNode }[] = [
   { label: 'Telegram', href: 'https://t.me/ProMindLabAdmin', icon: <TelegramIcon className="w-5 h-5" /> },
-  { label: 'WhatsApp', href: 'https://wa.me/79104666668', icon: <WhatsAppIcon className="w-5 h-5" /> },
+  { label: 'WhatsApp', href: 'https://wa.me/79263000674', icon: <WhatsAppIcon className="w-5 h-5" /> },
   { label: 'Email', href: 'mailto:hello@promindlab.ru', icon: <Mail size={20} /> },
 ];
 
@@ -125,8 +125,8 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-2">
                 <Phone size={16} />
-                <a href="tel:+79104666668" className="hover:text-foreground transition-colors">
-                  +7 (910) 466-66-68
+                <a href="tel:+79263000674" className="hover:text-foreground transition-colors">
+                  +7 (926) 300-06-74
                 </a>
               </li>
             </ul>

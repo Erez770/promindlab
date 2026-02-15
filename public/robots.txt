@@ -34,4 +34,4 @@ Allow: /
 User-agent: Applebot
 Allow: /
 
-Sitemap: https://promindlab.ru/sitemap.xml
+Sitemap: https://www.promindlab.ru/sitemap.xml

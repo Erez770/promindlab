@@ -161,7 +161,7 @@ export function PrivacyContent() {
         ProMindLab<br />
         Email: hello@promindlab.ru<br />
         Telegram: @ProMindLabAdmin<br />
-        Телефон: +7 (910) 466-66-68
+        Телефон: +7 (926) 300-06-74
       </p>
     </>
   );
@@ -254,7 +254,7 @@ export function OfferContent() {
         ProMindLab<br />
         Email: hello@promindlab.ru<br />
         Telegram: @ProMindLabAdmin<br />
-        Телефон: +7 (910) 466-66-68
+        Телефон: +7 (926) 300-06-74
       </p>
     </>
   );

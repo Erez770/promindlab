@@ -225,7 +225,7 @@ export default function LandingPage({
             <p className="text-xs text-muted">&copy; 2025 ProMindLab. Все права защищены.</p>
             <div className="flex gap-6 text-xs text-muted">
               <a href="https://t.me/ProMindLabAdmin" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">Telegram</a>
-              <a href="https://wa.me/79104666668" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">WhatsApp</a>
+              <a href="https://wa.me/79263000674" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">WhatsApp</a>
               <a href="mailto:hello@promindlab.ru" className="hover:text-foreground transition-colors">Email</a>
             </div>
           </div>

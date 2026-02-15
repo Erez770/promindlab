@@ -8,7 +8,7 @@ export default function JsonLd() {
     description:
       "Разработка сайтов, SaaS-платформ и Telegram-ботов с использованием AI (Claude, GPT-4). Быстро, качественно, доступно.",
     email: "hello@promindlab.ru",
-    telephone: "+7-910-466-66-68",
+    telephone: "+7-926-300-06-74",
     address: {
       "@type": "PostalAddress",
       addressCountry: "RU",
@@ -17,7 +17,7 @@ export default function JsonLd() {
     sameAs: ["https://t.me/ProMindLabAdmin"],
     contactPoint: {
       "@type": "ContactPoint",
-      telephone: "+7-910-466-66-68",
+      telephone: "+7-926-300-06-74",
       contactType: "Customer Service",
       availableLanguage: ["Russian", "English"],
     },

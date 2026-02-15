@@ -38,7 +38,7 @@ export default function FloatingButtons() {
 
           {/* WhatsApp */}
           <a
-            href="https://wa.me/79104666668"
+            href="https://wa.me/79263000674"
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => reachGoal('whatsapp_click')}
