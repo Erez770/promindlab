@@ -1,16 +1,17 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { Rocket, ShoppingCart, Cloud, BookOpen, TrendingUp, CreditCard, HeartPulse, Users, type LucideIcon } from 'lucide-react';
 
-const categories = [
-  { name: 'Стартапы', icon: '🚀' },
-  { name: 'E-commerce', icon: '🛒' },
-  { name: 'SaaS', icon: '☁️' },
-  { name: 'Образование', icon: '📚' },
-  { name: 'Маркетинг', icon: '📈' },
-  { name: 'Финтех', icon: '💳' },
-  { name: 'Медтех', icon: '🏥' },
-  { name: 'HR Tech', icon: '👥' },
+const categories: { name: string; Icon: LucideIcon }[] = [
+  { name: 'Стартапы', Icon: Rocket },
+  { name: 'E-commerce', Icon: ShoppingCart },
+  { name: 'SaaS', Icon: Cloud },
+  { name: 'Образование', Icon: BookOpen },
+  { name: 'Маркетинг', Icon: TrendingUp },
+  { name: 'Финтех', Icon: CreditCard },
+  { name: 'Медтех', Icon: HeartPulse },
+  { name: 'HR Tech', Icon: Users },
 ];
 
 export default function SocialProof() {
@@ -36,7 +37,7 @@ export default function SocialProof() {
                 key={i}
                 className="flex items-center gap-3 px-8 py-3 mx-4 rounded-xl glass-light whitespace-nowrap shrink-0"
               >
-                <span className="text-2xl">{cat.icon}</span>
+                <cat.Icon size={20} className="text-primary" />
                 <span className="text-foreground/80 text-[0.875rem] font-medium">{cat.name}</span>
               </div>
             ))}

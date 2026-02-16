@@ -133,8 +133,15 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* Legal info */}
+        <div className="border-t border-border/30 pt-6 mb-4">
+          <p className="text-[0.6875rem] text-muted/60">
+            ООО &laquo;ПРОМАЙНД&raquo; | ОГРН: 1197746653961 | ИНН: 7743321261
+          </p>
+        </div>
+
         {/* Bottom */}
-        <div className="border-t border-border/30 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-[0.75rem] text-muted">&copy; 2025 ProMindLab. Все права защищены.</p>
           <div className="flex gap-6">
             <button

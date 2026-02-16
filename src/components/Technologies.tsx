@@ -1,24 +1,25 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { Atom, Triangle, Code2, Server, Palette, Brain, Sparkles, Send, Zap, Flame, CreditCard, Wallet, FileCode2, Database, Container, Globe, type LucideIcon } from 'lucide-react';
 
-const techs = [
-  { name: 'React', icon: '⚛️', color: 'from-cyan-500/20 to-blue-500/20' },
-  { name: 'Next.js', icon: '▲', color: 'from-white/10 to-gray-500/10' },
-  { name: 'Python', icon: '🐍', color: 'from-yellow-500/20 to-green-500/20' },
-  { name: 'Node.js', icon: '💚', color: 'from-green-500/20 to-emerald-500/20' },
-  { name: 'Tailwind CSS', icon: '🎨', color: 'from-cyan-500/20 to-teal-500/20' },
-  { name: 'Claude AI', icon: '🧠', color: 'from-orange-500/20 to-amber-500/20' },
-  { name: 'GPT-4', icon: '✨', color: 'from-emerald-500/20 to-green-500/20' },
-  { name: 'Telegram API', icon: '📱', color: 'from-blue-500/20 to-sky-500/20' },
-  { name: 'Supabase', icon: '⚡', color: 'from-green-500/20 to-emerald-500/20' },
-  { name: 'Firebase', icon: '🔥', color: 'from-amber-500/20 to-orange-500/20' },
-  { name: 'Stripe', icon: '💳', color: 'from-purple-500/20 to-indigo-500/20' },
-  { name: 'ЮKassa', icon: '💰', color: 'from-blue-500/20 to-indigo-500/20' },
-  { name: 'TypeScript', icon: '📘', color: 'from-blue-500/20 to-blue-700/20' },
-  { name: 'PostgreSQL', icon: '🐘', color: 'from-blue-500/20 to-indigo-500/20' },
-  { name: 'Docker', icon: '🐳', color: 'from-blue-400/20 to-cyan-500/20' },
-  { name: 'Vercel', icon: '🔺', color: 'from-white/10 to-gray-400/10' },
+const techs: { name: string; Icon: LucideIcon; color: string }[] = [
+  { name: 'React', Icon: Atom, color: 'from-cyan-500/20 to-blue-500/20' },
+  { name: 'Next.js', Icon: Triangle, color: 'from-white/10 to-gray-500/10' },
+  { name: 'Python', Icon: Code2, color: 'from-yellow-500/20 to-green-500/20' },
+  { name: 'Node.js', Icon: Server, color: 'from-green-500/20 to-emerald-500/20' },
+  { name: 'Tailwind CSS', Icon: Palette, color: 'from-cyan-500/20 to-teal-500/20' },
+  { name: 'Claude AI', Icon: Brain, color: 'from-orange-500/20 to-amber-500/20' },
+  { name: 'GPT-4', Icon: Sparkles, color: 'from-emerald-500/20 to-green-500/20' },
+  { name: 'Telegram API', Icon: Send, color: 'from-blue-500/20 to-sky-500/20' },
+  { name: 'Supabase', Icon: Zap, color: 'from-green-500/20 to-emerald-500/20' },
+  { name: 'Firebase', Icon: Flame, color: 'from-amber-500/20 to-orange-500/20' },
+  { name: 'Stripe', Icon: CreditCard, color: 'from-purple-500/20 to-indigo-500/20' },
+  { name: 'ЮKassa', Icon: Wallet, color: 'from-blue-500/20 to-indigo-500/20' },
+  { name: 'TypeScript', Icon: FileCode2, color: 'from-blue-500/20 to-blue-700/20' },
+  { name: 'PostgreSQL', Icon: Database, color: 'from-blue-500/20 to-indigo-500/20' },
+  { name: 'Docker', Icon: Container, color: 'from-blue-400/20 to-cyan-500/20' },
+  { name: 'Vercel', Icon: Globe, color: 'from-white/10 to-gray-400/10' },
 ];
 
 export default function Technologies() {
@@ -62,9 +63,9 @@ export default function Technologies() {
                 className={`glass rounded-2xl p-4 text-center hover:scale-110 transition-transform duration-300 cursor-default group`}
               >
                 <div
-                  className={`w-12 h-12 mx-auto rounded-xl bg-gradient-to-br ${tech.color} flex items-center justify-center text-2xl mb-2 group-hover:scale-110 transition-transform`}
+                  className={`w-12 h-12 mx-auto rounded-xl bg-gradient-to-br ${tech.color} flex items-center justify-center mb-2 group-hover:scale-110 transition-transform`}
                 >
-                  {tech.icon}
+                  <tech.Icon size={22} className="text-foreground/70" />
                 </div>
                 <p className="text-[0.75rem] font-medium tracking-[0.01em] text-muted group-hover:text-foreground transition-colors">
                   {tech.name}

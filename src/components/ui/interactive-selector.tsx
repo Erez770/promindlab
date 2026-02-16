@@ -13,6 +13,8 @@ const projects = [
     image: "/portfolio-fintrack.png",
     icon: BarChart3,
     tags: ["React", "Node.js", "PostgreSQL"],
+    url: "#", // TODO: Заменить на реальную ссылку
+    timeline: "7 дней",
   },
   {
     title: "Education Platform",
@@ -21,6 +23,8 @@ const projects = [
     image: "/portfolio-eduplatform.png",
     icon: GraduationCap,
     tags: ["Next.js", "Stripe", "AI"],
+    url: "#", // TODO: Заменить на реальную ссылку
+    timeline: "5 дней",
   },
   {
     title: "Telegram / WhatsApp Bot",
@@ -29,6 +33,8 @@ const projects = [
     image: "/portfolio-shopbot.png",
     icon: Bot,
     tags: ["Node.js", "Telegram API", "WhatsApp API"],
+    url: "#", // TODO: Заменить на реальную ссылку
+    timeline: "3 дня",
   },
   {
     title: "Luxury Landing Page",
@@ -37,6 +43,8 @@ const projects = [
     image: "/portfolio-landing.png",
     icon: Palette,
     tags: ["Next.js", "Framer Motion", "3D"],
+    url: "#", // TODO: Заменить на реальную ссылку
+    timeline: "3 дня",
   },
   {
     title: "E-Commerce",
@@ -45,6 +53,8 @@ const projects = [
     image: "/portfolio-ecommerce.png",
     icon: ShoppingCart,
     tags: ["React", "ЮKassa", "CRM"],
+    url: "#", // TODO: Заменить на реальную ссылку
+    timeline: "5 дней",
   },
 ];
 
@@ -103,16 +113,33 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
           }}
         >
           <p className="text-white/80 text-sm mb-3">{project.description}</p>
-          <div className="flex flex-wrap gap-2">
-            {project.tags.map((tag) => (
-              <span
-                key={tag}
-                className="px-2.5 py-1 rounded-md bg-white/10 text-xs text-white/90 font-medium"
-              >
-                {tag}
-              </span>
-            ))}
+          <div className="flex items-center gap-3 mb-3">
+            <div className="flex flex-wrap gap-2">
+              {project.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="px-2.5 py-1 rounded-md bg-white/10 text-xs text-white/90 font-medium"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+            <span className="text-xs text-white/50 shrink-0">
+              {project.timeline}
+            </span>
           </div>
+          {project.url !== '#' && (
+            <a
+              href={project.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-xs font-medium text-primary hover:text-primary/80 transition-colors"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <ExternalLink size={12} />
+              Открыть сайт
+            </a>
+          )}
         </div>
       </div>
 

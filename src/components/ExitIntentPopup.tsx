@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react';
+import { Gift } from 'lucide-react';
 import { reachGoal } from '@/lib/metrika';
 
 export default function ExitIntentPopup() {
@@ -69,7 +70,9 @@ export default function ExitIntentPopup() {
               &times;
             </button>
 
-            <div className="text-5xl mb-4">🎁</div>
+            <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/15 to-secondary/15 flex items-center justify-center mx-auto mb-4">
+              <Gift size={32} className="text-primary" />
+            </div>
             <h3 className="font-heading text-xl sm:text-2xl font-bold tracking-[-0.02em] mb-3">
               Подождите! У нас есть <span className="gradient-text">подарок</span>
             </h3>

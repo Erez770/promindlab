@@ -1,35 +1,36 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { Zap, PiggyBank, Award, Brain, ShieldCheck, Headphones, type LucideIcon } from 'lucide-react';
 
-const advantages = [
+const advantages: { Icon: LucideIcon; title: string; desc: string }[] = [
   {
-    icon: '⚡',
+    Icon: Zap,
     title: 'Скорость',
     desc: 'Готово за 3-7 дней. AI ускоряет разработку в 10 раз.',
   },
   {
-    icon: '💰',
+    Icon: PiggyBank,
     title: 'Выгода',
     desc: 'В 5-10 раз дешевле традиционной разработки.',
   },
   {
-    icon: '🎨',
+    Icon: Award,
     title: 'Качество',
     desc: 'Премиум дизайн и чистый код на уровне топ-студий.',
   },
   {
-    icon: '🤖',
+    Icon: Brain,
     title: 'AI-технологии',
     desc: 'Claude, GPT-4 и современный стек технологий.',
   },
   {
-    icon: '🛡️',
+    Icon: ShieldCheck,
     title: 'Гарантия',
     desc: 'Возврат 100% если результат не устроит.',
   },
   {
-    icon: '📞',
+    Icon: Headphones,
     title: 'Поддержка',
     desc: '24/7 на связи. Быстрая реакция на любые вопросы.',
   },
@@ -81,8 +82,8 @@ export default function Advantages() {
               className="group"
             >
               <div className="glass rounded-2xl p-8 h-full hover:border-primary/20 transition-all duration-300 group-hover:bg-foreground/[0.02]">
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center text-3xl mb-5 group-hover:scale-110 transition-transform duration-300">
-                  {adv.icon}
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300">
+                  <adv.Icon size={28} className="text-primary" />
                 </div>
                 <h3 className="font-heading text-[1.125rem] font-semibold tracking-[-0.02em] leading-[1.3] mb-2">{adv.title}</h3>
                 <p className="text-muted leading-relaxed">{adv.desc}</p>

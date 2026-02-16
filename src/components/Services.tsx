@@ -2,10 +2,11 @@
 
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { useRef } from 'react';
+import { FileText, Globe, Rocket, MessageSquare, ShoppingCart, Smartphone, Palette, Wrench, type LucideIcon } from 'lucide-react';
 
-const services = [
+const services: { Icon: LucideIcon; title: string; desc: string; features: string[]; price: string; time: string; popular: boolean }[] = [
   {
-    icon: '💼',
+    Icon: FileText,
     title: 'Лендинг Пейдж',
     desc: 'Одностраничный сайт с wow-эффектом',
     features: ['Адаптивный дизайн, анимации, формы', 'SEO-оптимизация'],
@@ -14,7 +15,7 @@ const services = [
     popular: false,
   },
   {
-    icon: '🌐',
+    Icon: Globe,
     title: 'Корпоративный сайт',
     desc: 'Многостраничный сайт (до 10 страниц)',
     features: ['CMS для управления контентом', 'Интеграции, формы, блог'],
@@ -23,7 +24,7 @@ const services = [
     popular: true,
   },
   {
-    icon: '🚀',
+    Icon: Rocket,
     title: 'SaaS платформа (MVP)',
     desc: 'Веб-приложение с личным кабинетом',
     features: ['Авторизация, база данных', 'API интеграции, панель управления'],
@@ -32,7 +33,7 @@ const services = [
     popular: true,
   },
   {
-    icon: '🤖',
+    Icon: MessageSquare,
     title: 'Telegram/WhatsApp боты',
     desc: 'Автоматизация коммуникации',
     features: ['Приём заказов, консультации', 'Интеграция с CRM/платежами'],
@@ -41,7 +42,7 @@ const services = [
     popular: false,
   },
   {
-    icon: '🛒',
+    Icon: ShoppingCart,
     title: 'Интернет-магазин',
     desc: 'E-commerce с корзиной и оплатой',
     features: ['Каталог товаров, фильтры', 'Интеграция с доставкой'],
@@ -50,7 +51,7 @@ const services = [
     popular: false,
   },
   {
-    icon: '📱',
+    Icon: Smartphone,
     title: 'Веб-приложение',
     desc: 'Кастомное решение под задачу',
     features: ['Дашборды, аналитика, автоматизация', 'Интеграции с API'],
@@ -59,7 +60,7 @@ const services = [
     popular: false,
   },
   {
-    icon: '🎨',
+    Icon: Palette,
     title: 'UI/UX дизайн',
     desc: 'Дизайн-макеты в Figma',
     features: ['Прототипирование, user flow', 'Дизайн-система'],
@@ -68,7 +69,7 @@ const services = [
     popular: false,
   },
   {
-    icon: '🔧',
+    Icon: Wrench,
     title: 'Доработка сайта',
     desc: 'Исправления, новые функции',
     features: ['Оптимизация, рефакторинг', 'Интеграции и автоматизация'],
@@ -122,7 +123,9 @@ function ServiceCard({ service, index }: { service: (typeof services)[0]; index:
           </div>
         )}
 
-        <span className="text-4xl mb-4">{service.icon}</span>
+        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/15 to-secondary/15 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+          <service.Icon size={24} className="text-primary" />
+        </div>
         <h3 className="font-heading text-[1.125rem] font-semibold tracking-[-0.02em] leading-[1.3] mb-2">{service.title}</h3>
         <p className="text-[0.875rem] leading-[1.55] text-muted mb-4">{service.desc}</p>
 

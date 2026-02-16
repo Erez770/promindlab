@@ -2,13 +2,15 @@
 
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { useRef } from 'react';
+import { Zap, ShieldCheck, Headphones } from 'lucide-react';
 import { WavyBackground } from '@/components/ui/wavy-background';
 import { useTheme } from './ThemeProvider';
+import { reachGoal } from '@/lib/metrika';
 
 const trustBadges = [
-  { icon: '⚡', text: 'Первый проект за 7 дней' },
-  { icon: '🛡️', text: 'Гарантия качества' },
-  { icon: '📞', text: 'Поддержка 24/7' },
+  { Icon: Zap, text: 'Готово за 5 дней' },
+  { Icon: ShieldCheck, text: 'Гарантия качества' },
+  { Icon: Headphones, text: 'Поддержка 24/7' },
 ];
 
 const codeLines = [
@@ -82,7 +84,7 @@ export default function Hero() {
                 className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-light mb-8"
               >
                 <span className="w-2 h-2 rounded-full bg-success animate-pulse" />
-                <span className="text-[13px] font-medium tracking-[0.01em] text-muted">AI-powered разработка нового поколения</span>
+                <span className="text-[13px] font-medium tracking-[0.01em] text-muted">Принимаем заказы — старт через 24 часа</span>
               </motion.div>
 
               <motion.h1
@@ -102,8 +104,8 @@ export default function Hero() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.6 }}
               >
-                Качество премиум-разработки за 1/10 цены. Используем Claude, GPT-4 и лучшие
-                AI-инструменты для создания проектов мирового уровня.
+                Сайт уровня топ-студии за 25 000₽ вместо 300 000₽. AI-автоматизация 80% рутины
+                позволяет нам делать за дни то, что другие делают месяцами.
               </motion.p>
 
               <motion.div
@@ -122,7 +124,7 @@ export default function Hero() {
                     className="relative px-8 py-4 rounded-2xl text-[15px] font-semibold tracking-[0.01em] text-white bg-gradient-to-r from-primary to-secondary hover:shadow-lg hover:shadow-primary/25 transition-shadow duration-300 cursor-pointer group"
                     whileTap={{ scale: 0.97 }}
                   >
-                    <span className="relative z-10">Получить расчёт</span>
+                    <span className="relative z-10">Получить расчёт за 2 часа — бесплатно</span>
                     <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary to-secondary opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-300" />
                   </motion.button>
                 </div>
@@ -136,15 +138,32 @@ export default function Hero() {
                 </button>
               </motion.div>
 
+              {/* Social proof */}
               <motion.div
-                className="flex flex-wrap gap-6"
+                className="flex items-center gap-3 mb-8"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 1.0 }}
               >
+                <div className="flex -space-x-2">
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-violet-500 to-blue-500 border-2 border-background" />
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 border-2 border-background" />
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-500 to-green-500 border-2 border-background" />
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-green-500 to-yellow-500 border-2 border-background" />
+                </div>
+                <span className="text-[13px] text-muted">50+ предпринимателей уже запустили проекты с нами</span>
+              </motion.div>
+
+              {/* Trust badges */}
+              <motion.div
+                className="flex flex-wrap gap-6"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 1.2 }}
+              >
                 {trustBadges.map((badge, i) => (
                   <div key={i} className="flex items-center gap-2 text-[13px] font-medium text-muted">
-                    <span className="text-lg">{badge.icon}</span>
+                    <badge.Icon size={16} className="text-primary" />
                     <span>{badge.text}</span>
                   </div>
                 ))}

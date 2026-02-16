@@ -1,42 +1,43 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { ClipboardList, PenLine, Bot, Search, Rocket, type LucideIcon } from 'lucide-react';
 
-const steps = [
+const steps: { num: string; title: string; desc: string; time: string; Icon: LucideIcon }[] = [
   {
     num: '01',
     title: 'Заявка и бриф',
     desc: 'Обсуждаем задачу, определяем требования и составляем техническое задание.',
     time: '1 день',
-    icon: '📋',
+    Icon: ClipboardList,
   },
   {
     num: '02',
     title: 'Прототип и согласование',
     desc: 'Создаём wireframe и дизайн-прототип. Утверждаем концепцию с вами.',
     time: '1-2 дня',
-    icon: '✏️',
+    Icon: PenLine,
   },
   {
     num: '03',
     title: 'Разработка с AI',
     desc: 'AI-инструменты генерируют код, мы контролируем качество и архитектуру.',
     time: '2-5 дней',
-    icon: '🤖',
+    Icon: Bot,
   },
   {
     num: '04',
     title: 'Тестирование и правки',
     desc: 'Тестируем на всех устройствах, вносим финальные корректировки.',
     time: '1 день',
-    icon: '🔍',
+    Icon: Search,
   },
   {
     num: '05',
     title: 'Запуск и обучение',
     desc: 'Деплоим проект, проводим обучение по управлению и передаём все доступы.',
     time: '1 день',
-    icon: '🚀',
+    Icon: Rocket,
   },
 ];
 
@@ -82,7 +83,9 @@ export default function HowWeWork() {
                     {step.num}
                   </div>
 
-                  <span className="text-3xl block mt-2 mb-4">{step.icon}</span>
+                  <div className="w-12 h-12 mx-auto rounded-xl bg-gradient-to-br from-primary/15 to-secondary/15 flex items-center justify-center mt-2 mb-4">
+                    <step.Icon size={24} className="text-primary" />
+                  </div>
                   <h3 className="font-heading text-[1.0625rem] font-semibold tracking-[-0.015em] leading-[1.35] mb-2">{step.title}</h3>
                   <p className="text-sm text-muted mb-3 leading-relaxed">{step.desc}</p>
                   <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium">

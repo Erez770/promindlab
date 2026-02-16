@@ -12,7 +12,9 @@ import {
   Mail,
   Sun,
   Moon,
+  ArrowRight,
 } from 'lucide-react';
+import { reachGoal } from '@/lib/metrika';
 
 const navItems = [
   { name: 'Услуги', url: '#services', icon: LayoutGrid },
@@ -60,11 +62,31 @@ function ThemeToggle() {
   );
 }
 
+function HeaderCTA() {
+  return (
+    <button
+      onClick={() => {
+        reachGoal('header_cta_click');
+        document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
+      }}
+      className="hidden md:inline-flex items-center gap-1.5 ml-1 px-5 py-2 rounded-full text-[0.8125rem] font-semibold text-white bg-gradient-to-r from-primary to-secondary hover:shadow-lg hover:shadow-primary/25 transition-all duration-300 cursor-pointer"
+    >
+      Получить расчёт
+      <ArrowRight size={14} />
+    </button>
+  );
+}
+
 export default function Header() {
   return (
     <NavBar
       items={navItems}
-      trailing={<ThemeToggle />}
+      trailing={
+        <>
+          <HeaderCTA />
+          <ThemeToggle />
+        </>
+      }
     />
   );
 }

@@ -1,7 +1,6 @@
 'use client';
 
-import { motion, AnimatePresence } from 'framer-motion';
-import { useState } from 'react';
+import { motion } from 'framer-motion';
 
 const faqs = [
   {
@@ -38,50 +37,6 @@ const faqs = [
   },
 ];
 
-function FAQItem({ faq, index }: { faq: (typeof faqs)[0]; index: number }) {
-  const [isOpen, setIsOpen] = useState(false);
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.4, delay: index * 0.08 }}
-    >
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="w-full glass rounded-2xl p-6 text-left hover:border-primary/20 transition-all duration-300 cursor-pointer"
-      >
-        <div className="flex items-center justify-between gap-4">
-          <h3 className="font-heading text-[1.0625rem] font-semibold tracking-[-0.015em] leading-[1.35] pr-4">{faq.q}</h3>
-          <motion.span
-            className="text-xl text-muted shrink-0"
-            animate={{ rotate: isOpen ? 45 : 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            +
-          </motion.span>
-        </div>
-        <AnimatePresence>
-          {isOpen && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: 'auto', opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.3, ease: 'easeInOut' }}
-              className="overflow-hidden"
-            >
-              <p className="text-muted leading-relaxed pt-4 border-t border-border/30 mt-4">
-                {faq.a}
-              </p>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </button>
-    </motion.div>
-  );
-}
-
 export default function FAQ() {
   return (
     <section id="faq" className="py-24 relative">
@@ -101,7 +56,25 @@ export default function FAQ() {
 
         <div className="space-y-4">
           {faqs.map((faq, i) => (
-            <FAQItem key={i} faq={faq} index={i} />
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: i * 0.08 }}
+            >
+              <details className="group glass rounded-2xl hover:border-primary/20 transition-all duration-300">
+                <summary className="flex items-center justify-between gap-4 p-6 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+                  <h3 className="font-heading text-[1.0625rem] font-semibold tracking-[-0.015em] leading-[1.35] pr-4">{faq.q}</h3>
+                  <span className="text-xl text-muted shrink-0 transition-transform duration-300 group-open:rotate-45">+</span>
+                </summary>
+                <div className="px-6 pb-6">
+                  <p className="text-muted leading-relaxed pt-4 border-t border-border/30">
+                    {faq.a}
+                  </p>
+                </div>
+              </details>
+            </motion.div>
           ))}
         </div>
       </div>

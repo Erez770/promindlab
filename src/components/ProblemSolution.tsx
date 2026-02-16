@@ -1,28 +1,29 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { BadgeDollarSign, Zap, Target, type LucideIcon } from 'lucide-react';
 
-const items = [
+const items: { problem: string; problemDesc: string; solution: string; solutionDesc: string; Icon: LucideIcon }[] = [
   {
     problem: 'Разработка дорого стоит',
     problemDesc: 'Средняя цена лендинга — 200-500 тыс. ₽. SaaS — от 2 млн.',
     solution: 'У нас в 5-10 раз дешевле',
     solutionDesc: 'AI автоматизирует 80% рутинной работы, снижая себестоимость.',
-    icon: '💰',
+    Icon: BadgeDollarSign,
   },
   {
     problem: 'Долгие сроки 2-6 месяцев',
     problemDesc: 'Классическая разработка требует месяцы на согласования.',
     solution: 'Готово за 3-7 дней',
     solutionDesc: 'AI-ассистенты генерируют код в 10 раз быстрее человека.',
-    icon: '⚡',
+    Icon: Zap,
   },
   {
     problem: 'Нужна команда специалистов',
     problemDesc: 'Дизайнер, фронтенд, бэкенд, DevOps, PM — минимум 5 человек.',
     solution: 'Один контакт, полный цикл',
     solutionDesc: 'Мы + AI = целая команда. Один менеджер на весь проект.',
-    icon: '🎯',
+    Icon: Target,
   },
 ];
 
@@ -72,7 +73,9 @@ export default function ProblemSolution() {
               className="relative group"
             >
               <div className="glass rounded-2xl p-8 h-full flex flex-col">
-                <span className="text-4xl mb-6">{item.icon}</span>
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/15 to-secondary/15 flex items-center justify-center mb-6">
+                  <item.Icon size={24} className="text-primary" />
+                </div>
 
                 {/* Problem */}
                 <div className="mb-6">
