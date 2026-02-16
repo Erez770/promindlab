@@ -8,12 +8,12 @@ const teamMembers = [
   {
     name: 'Дмитрий Кравцов',
     role: 'Fullstack-разработчик',
-    image: '/team/full stack.jpeg',
+    image: '/team/fullstack.jpeg',
   },
   {
     name: 'Артём Белоусов',
     role: 'AI-инженер',
-    image: '/team/Ai .jpeg',
+    image: '/team/Ai.jpeg',
   },
 ];
 
