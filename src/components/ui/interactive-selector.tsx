@@ -166,8 +166,35 @@ export default function InteractiveSelector() {
   return (
     <div className="flex flex-col lg:flex-row gap-6">
 
-      {/* Left — tab list */}
-      <div className="flex lg:flex-col gap-2 overflow-x-auto lg:overflow-visible lg:w-64 shrink-0 pb-2 lg:pb-0">
+      {/* Mobile — horizontal compact tabs with icon + title */}
+      <div className="flex lg:hidden gap-2 overflow-x-auto pb-2 -mx-1 px-1 scrollbar-thin">
+        {projects.map((p, i) => {
+          const TabIcon = p.icon;
+          const isActive = i === active;
+          return (
+            <button
+              key={i}
+              onClick={() => setActive(i)}
+              className={`flex flex-col items-center gap-1.5 px-3 py-2.5 rounded-xl text-center transition-all duration-300 cursor-pointer shrink-0 min-w-[76px] border
+                ${isActive
+                  ? 'glass border-primary/30 bg-primary/5'
+                  : 'glass-light border-transparent'
+                }
+              `}
+            >
+              <div className={`w-8 h-8 rounded-lg bg-gradient-to-br ${p.color} flex items-center justify-center`}>
+                <TabIcon size={15} className={isActive ? p.accent : 'text-muted'} />
+              </div>
+              <span className={`text-[10px] font-medium leading-tight ${isActive ? 'text-foreground' : 'text-muted'}`}>
+                {p.title}
+              </span>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Desktop — vertical tab list */}
+      <div className="hidden lg:flex flex-col gap-2 w-64 shrink-0">
         {projects.map((p, i) => {
           const TabIcon = p.icon;
           const isActive = i === active;
@@ -186,7 +213,7 @@ export default function InteractiveSelector() {
               <div className={`w-9 h-9 rounded-lg bg-gradient-to-br ${p.color} flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-110`}>
                 <TabIcon size={18} className={isActive ? p.accent : 'text-muted'} />
               </div>
-              <div className="min-w-0 hidden sm:block">
+              <div className="min-w-0">
                 <p className={`text-sm font-semibold leading-tight truncate ${isActive ? 'text-foreground' : 'text-muted'}`}>
                   {p.title}
                 </p>
@@ -195,7 +222,7 @@ export default function InteractiveSelector() {
               {isActive && (
                 <motion.div
                   layoutId="tab-indicator"
-                  className="ml-auto hidden lg:block w-1 h-8 rounded-full bg-primary shrink-0"
+                  className="ml-auto w-1 h-8 rounded-full bg-primary shrink-0"
                   transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                 />
               )}
@@ -216,6 +243,19 @@ export default function InteractiveSelector() {
             className="flex flex-col gap-4"
           >
             <ProjectPreview project={project} />
+
+            {/* Mobile pagination dots */}
+            <div className="flex lg:hidden justify-center gap-2">
+              {projects.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setActive(i)}
+                  className={`rounded-full transition-all duration-300 cursor-pointer ${
+                    i === active ? 'w-5 h-2 bg-primary' : 'w-2 h-2 bg-muted/30'
+                  }`}
+                />
+              ))}
+            </div>
 
             {/* Meta info */}
             <div className="flex flex-wrap items-start justify-between gap-4 px-1">
