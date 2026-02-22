@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 interface LogoProps {
   variant?: 'full' | 'icon';
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'sm' | 'md' | 'lg' | 'xl';
   href?: string;
   className?: string;
 }
@@ -14,6 +14,7 @@ const sizes = {
   sm: { full: { w: 120, h: 30 }, icon: { w: 28, h: 28 } },
   md: { full: { w: 160, h: 40 }, icon: { w: 36, h: 36 } },
   lg: { full: { w: 200, h: 50 }, icon: { w: 48, h: 48 } },
+  xl: { full: { w: 560, h: 140 }, icon: { w: 64, h: 64 } },
 };
 
 export default function Logo({ variant = 'full', size = 'md', href = '/', className = '' }: LogoProps) {

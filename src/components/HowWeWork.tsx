@@ -65,7 +65,7 @@ export default function HowWeWork() {
 
         <div className="relative">
           {/* Connecting line */}
-          <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent -translate-y-1/2" />
+          <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent -translate-y-1/2" />
 
           <div className="grid lg:grid-cols-5 gap-8">
             {steps.map((step, i) => (
@@ -95,8 +95,10 @@ export default function HowWeWork() {
 
                 {/* Arrow between cards (desktop) */}
                 {i < steps.length - 1 && (
-                  <div className="hidden lg:block absolute top-1/2 -right-5 text-muted -translate-y-1/2 z-10">
-                    →
+                  <div className="hidden lg:flex absolute top-1/2 -right-5 -translate-y-1/2 z-10 items-center justify-center w-10 h-10">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="text-primary/60">
+                      <path d="M4 10h12M12 6l4 4-4 4" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
                   </div>
                 )}
               </motion.div>

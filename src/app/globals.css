@@ -3,10 +3,11 @@
 @theme inline {
   --color-background: var(--bg);
   --color-foreground: var(--fg);
-  --color-primary: #3B82F6;
-  --color-primary-light: #60A5FA;
+  --color-primary: #6366F1;
+  --color-primary-light: #818CF8;
   --color-secondary: #8B5CF6;
   --color-accent: #A78BFA;
+  --color-tertiary: #06B6D4;
   --color-surface: var(--srf);
   --color-surface-light: var(--srf-l);
   --color-surface-lighter: var(--srf-lr);
@@ -39,8 +40,8 @@
     --glass-light-border: rgba(255, 255, 255, 0.06);
     --card-hover-bg: rgba(255, 255, 255, 0.02);
     --wavy-fill: #0a0a0f;
-    --glow-1: rgba(59, 130, 246, 0.15);
-    --glow-2: rgba(139, 92, 246, 0.1);
+    --glow-1: rgba(99, 102, 241, 0.18);
+    --glow-2: rgba(6, 182, 212, 0.1);
     color-scheme: dark;
   }
 
@@ -62,8 +63,8 @@
     --glass-light-border: rgba(0, 0, 0, 0.1);
     --card-hover-bg: rgba(0, 0, 0, 0.03);
     --wavy-fill: #f8fafc;
-    --glow-1: rgba(59, 130, 246, 0.08);
-    --glow-2: rgba(139, 92, 246, 0.06);
+    --glow-1: rgba(99, 102, 241, 0.1);
+    --glow-2: rgba(6, 182, 212, 0.06);
     color-scheme: light;
   }
 
@@ -133,7 +134,7 @@
 
   /* Gradient text */
   .gradient-text {
-    background: linear-gradient(135deg, #3B82F6, #8B5CF6, #A78BFA);
+    background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 50%, #06B6D4 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -150,12 +151,40 @@
     inset: 0;
     border-radius: inherit;
     padding: 1px;
-    background: linear-gradient(135deg, #3B82F6, #8B5CF6);
+    background: linear-gradient(135deg, #6366F1, #8B5CF6, #06B6D4);
     mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     mask-composite: exclude;
     -webkit-mask-composite: xor;
     pointer-events: none;
+  }
+
+  /* Shimmer animation for CTA buttons */
+  .btn-shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-shimmer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.18),
+      transparent
+    );
+    transform: skewX(-20deg);
+    animation: shimmer 3s ease-in-out infinite;
+  }
+
+  @keyframes shimmer {
+    0% { left: -100%; }
+    100% { left: 200%; }
   }
 
   /* Blob animation */

@@ -1,83 +1,139 @@
 'use client';
 
-import { motion, AnimatePresence } from 'framer-motion';
-import { useEffect, useState, useCallback } from 'react';
+import { motion } from 'framer-motion';
 
 const testimonials = [
   {
     name: 'Алексей Петров',
-    role: 'CEO, TechStart',
+    role: 'CEO',
+    company: 'TechStart',
     text: 'Заказали MVP для нашего стартапа. Результат превзошёл все ожидания — за неделю получили полноценный продукт, который раньше оценивали в 3 месяца разработки.',
     rating: 5,
-    avatar: 'АП',
+    initials: 'АП',
+    gradient: 'from-blue-500 to-violet-500',
+    project: 'SaaS платформа',
   },
   {
     name: 'Мария Иванова',
-    role: 'Маркетолог, DigitalPro',
+    role: 'Маркетолог',
+    company: 'DigitalPro',
     text: 'Лендинг сделали за 2 дня. Конверсия выросла на 40% по сравнению с предыдущим сайтом. Дизайн — огонь, анимации плавные, скорость загрузки отличная.',
     rating: 5,
-    avatar: 'МИ',
+    initials: 'МИ',
+    gradient: 'from-pink-500 to-rose-500',
+    project: 'Лендинг пейдж',
   },
   {
     name: 'Дмитрий Козлов',
-    role: 'Основатель, EduOnline',
+    role: 'Основатель',
+    company: 'EduOnline',
     text: 'Сделали образовательную платформу с личными кабинетами и оплатой. Качество кода отличное, всё работает стабильно. Поддержка реагирует моментально.',
     rating: 5,
-    avatar: 'ДК',
+    initials: 'ДК',
+    gradient: 'from-emerald-500 to-teal-500',
+    project: 'Онлайн-школа',
   },
   {
     name: 'Анна Сидорова',
-    role: 'Владелец, BeautyShop',
+    role: 'Владелец',
+    company: 'BeautyShop',
     text: 'Telegram-бот для записи клиентов — это лучшее вложение в бизнес. Автоматизация сэкономила нам 20 часов в неделю. Рекомендую ProMindLab всем!',
     rating: 5,
-    avatar: 'АС',
+    initials: 'АС',
+    gradient: 'from-amber-500 to-orange-500',
+    project: 'Telegram-бот',
   },
   {
     name: 'Игорь Волков',
-    role: 'CTO, FinanceApp',
+    role: 'CTO',
+    company: 'FinanceApp',
     text: 'Скептически относился к AI-разработке, но результат убедил. Сложную SaaS-платформу собрали за 10 дней. Архитектура чистая, код поддерживаемый.',
     rating: 5,
-    avatar: 'ИВ',
+    initials: 'ИВ',
+    gradient: 'from-cyan-500 to-blue-500',
+    project: 'FinTech SaaS',
   },
   {
     name: 'Елена Новикова',
     role: 'Предприниматель',
+    company: 'NoviStore',
     text: 'Интернет-магазин запустили за 5 дней. Интеграция с ЮKassa, доставкой — всё работает. Цена в 8 раз ниже, чем у обычной студии. Просто космос!',
     rating: 5,
-    avatar: 'ЕН',
+    initials: 'ЕН',
+    gradient: 'from-violet-500 to-purple-500',
+    project: 'Интернет-магазин',
   },
 ];
 
+function QuoteIcon() {
+  return (
+    <svg width="32" height="24" viewBox="0 0 32 24" fill="none" className="opacity-20">
+      <path d="M0 24V14.4C0 10.56 0.96 7.36 2.88 4.8C4.88 2.16 7.76 0.56 11.52 0L13.44 2.88C11.04 3.44 9.2 4.56 7.92 6.24C6.72 7.84 6.12 9.68 6.12 11.76H12V24H0ZM20 24V14.4C20 10.56 20.96 7.36 22.88 4.8C24.88 2.16 27.76 0.56 31.52 0L33.44 2.88C31.04 3.44 29.2 4.56 27.92 6.24C26.72 7.84 26.12 9.68 26.12 11.76H32V24H20Z" fill="currentColor"/>
+    </svg>
+  );
+}
+
+function TestimonialCard({ t, index }: { t: typeof testimonials[0]; index: number }) {
+  return (
+    <motion.div
+      className="group relative glass rounded-2xl p-6 flex flex-col gap-5 hover:border-primary/20 transition-colors duration-500"
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+    >
+      {/* Quote icon */}
+      <div className="text-primary">
+        <QuoteIcon />
+      </div>
+
+      {/* Project badge */}
+      <span className="absolute top-5 right-5 text-[11px] font-medium px-2.5 py-1 rounded-full bg-primary/10 text-primary border border-primary/15">
+        {t.project}
+      </span>
+
+      {/* Stars */}
+      <div className="flex gap-0.5">
+        {Array.from({ length: t.rating }).map((_, i) => (
+          <svg key={i} width="14" height="14" viewBox="0 0 24 24" fill="#F59E0B" className="shrink-0">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+          </svg>
+        ))}
+      </div>
+
+      {/* Text */}
+      <p className="text-[0.9375rem] leading-[1.7] text-foreground/80 flex-1">
+        {t.text}
+      </p>
+
+      {/* Author */}
+      <div className="flex items-center gap-3 pt-4 border-t border-border/20">
+        <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${t.gradient} flex items-center justify-center text-xs font-bold text-white shrink-0`}>
+          {t.initials}
+        </div>
+        <div>
+          <p className="text-sm font-semibold leading-tight">{t.name}</p>
+          <p className="text-xs text-muted mt-0.5">{t.role}, {t.company}</p>
+        </div>
+      </div>
+
+      {/* Hover glow */}
+      <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+        <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/5 via-transparent to-secondary/5" />
+      </div>
+    </motion.div>
+  );
+}
+
 export default function Testimonials() {
-  const [current, setCurrent] = useState(0);
-  const [direction, setDirection] = useState(0);
-
-  const next = useCallback(() => {
-    setDirection(1);
-    setCurrent((prev) => (prev + 1) % testimonials.length);
-  }, []);
-
-  const prev = useCallback(() => {
-    setDirection(-1);
-    setCurrent((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-  }, []);
-
-  useEffect(() => {
-    const timer = setInterval(next, 5000);
-    return () => clearInterval(timer);
-  }, [next]);
-
-  const variants = {
-    enter: (dir: number) => ({ x: dir > 0 ? 300 : -300, opacity: 0 }),
-    center: { x: 0, opacity: 1 },
-    exit: (dir: number) => ({ x: dir > 0 ? -300 : 300, opacity: 0 }),
-  };
-
-  const t = testimonials[current];
-
   return (
     <section id="testimonials" className="py-24 relative overflow-hidden">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Ambient glow */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-secondary/8 rounded-full blur-[100px]" />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 30 }}
@@ -85,87 +141,30 @@ export default function Testimonials() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="font-heading text-[1.875rem] sm:text-[2.5rem] lg:text-[3rem] font-bold tracking-[-0.025em] leading-[1.15] mb-4">
-            Что говорят <span className="gradient-text">клиенты</span>
-          </h2>
-          <p className="text-muted text-[1.0625rem] leading-[1.65] tracking-[-0.01em]">Реальные отзывы от реальных людей</p>
-        </motion.div>
-
-        <div className="relative">
-          <div className="glass rounded-2xl p-8 sm:p-12 min-h-[280px] flex items-center">
-            <AnimatePresence custom={direction} mode="wait">
-              <motion.div
-                key={current}
-                custom={direction}
-                variants={variants}
-                initial="enter"
-                animate="center"
-                exit="exit"
-                transition={{ duration: 0.4, ease: 'easeInOut' }}
-                className="w-full"
-              >
-                {/* Stars */}
-                <div className="flex gap-1 mb-6 justify-center">
-                  {Array.from({ length: t.rating }).map((_, i) => (
-                    <span key={i} className="star-filled text-xl">
-                      ★
-                    </span>
-                  ))}
-                </div>
-
-                {/* Quote */}
-                <p className="text-[1.0625rem] sm:text-[1.1875rem] text-center mb-8 leading-[1.7] tracking-[-0.01em] text-foreground/90 max-w-2xl mx-auto">
-                  &ldquo;{t.text}&rdquo;
-                </p>
-
-                {/* Author */}
-                <div className="flex items-center justify-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-sm font-bold text-white">
-                    {t.avatar}
-                  </div>
-                  <div>
-                    <p className="font-semibold">{t.name}</p>
-                    <p className="text-sm text-muted">{t.role}</p>
-                  </div>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-          </div>
-
-          {/* Navigation */}
-          <div className="flex items-center justify-center gap-4 mt-8">
-            <button
-              onClick={prev}
-              className="w-10 h-10 rounded-full glass-light flex items-center justify-center hover:bg-foreground/5 transition-colors cursor-pointer"
-              aria-label="Previous"
-            >
-              ←
-            </button>
-            <div className="flex gap-2">
-              {testimonials.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => {
-                    setDirection(i > current ? 1 : -1);
-                    setCurrent(i);
-                  }}
-                  className={`w-2.5 h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
-                    i === current
-                      ? 'bg-primary w-8'
-                      : 'bg-muted/30 hover:bg-muted/50'
-                  }`}
-                  aria-label={`Slide ${i + 1}`}
-                />
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-light mb-6">
+            <div className="flex gap-0.5">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <svg key={i} width="12" height="12" viewBox="0 0 24 24" fill="#F59E0B">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
               ))}
             </div>
-            <button
-              onClick={next}
-              className="w-10 h-10 rounded-full glass-light flex items-center justify-center hover:bg-foreground/5 transition-colors cursor-pointer"
-              aria-label="Next"
-            >
-              →
-            </button>
+            <span className="text-[12px] font-medium text-muted">50+ довольных клиентов</span>
           </div>
+
+          <h2 className="font-heading text-[1.875rem] sm:text-[2.5rem] lg:text-[3rem] font-bold tracking-[-0.025em] leading-[1.15] mb-4">
+            Клиенты о нас <span className="gradient-text">говорят</span>
+          </h2>
+          <p className="text-muted text-[1.0625rem] leading-[1.65] tracking-[-0.01em] max-w-xl mx-auto">
+            Реальные результаты от реальных проектов
+          </p>
+        </motion.div>
+
+        {/* Grid: 3 columns on desktop, 2 on tablet, 1 on mobile */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {testimonials.map((t, i) => (
+            <TestimonialCard key={i} t={t} index={i} />
+          ))}
         </div>
       </div>
     </section>

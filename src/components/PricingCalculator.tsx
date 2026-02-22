@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import { reachGoal } from '@/lib/metrika';
 
@@ -55,8 +55,9 @@ export default function PricingCalculator() {
   };
 
   return (
-    <section id="calculator" className="py-24 relative">
+    <section id="calculator" className="py-24 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-secondary/[0.02] to-transparent pointer-events-none" />
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-64 bg-primary/6 blur-[100px] rounded-full pointer-events-none" />
 
       <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
@@ -148,13 +149,22 @@ export default function PricingCalculator() {
           <div className="border-t border-border/30 pt-6 flex flex-col sm:flex-row items-center justify-between gap-6">
             <div>
               <p className="text-sm text-muted mb-1">Примерная стоимость</p>
-              <p className="font-heading text-3xl sm:text-4xl font-bold gradient-text tabular-nums">
-                {formatPrice(total)}₽
-              </p>
+              <AnimatePresence mode="wait">
+                <motion.p
+                  key={total}
+                  className="font-heading text-3xl sm:text-4xl font-bold gradient-text tabular-nums"
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 10 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  {formatPrice(total)}₽
+                </motion.p>
+              </AnimatePresence>
             </div>
             <button
               onClick={handleGetQuote}
-              className="w-full sm:w-auto px-8 py-4 rounded-xl font-semibold text-white bg-gradient-to-r from-primary to-secondary hover:shadow-lg hover:shadow-primary/25 transition-all cursor-pointer"
+              className="btn-shimmer w-full sm:w-auto px-8 py-4 rounded-xl font-semibold text-white bg-gradient-to-r from-primary to-secondary hover:shadow-lg hover:shadow-primary/25 transition-all cursor-pointer"
             >
               Получить точный расчёт
             </button>

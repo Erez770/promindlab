@@ -4,7 +4,7 @@ import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { FileText, Globe, Rocket, MessageSquare, ShoppingCart, Smartphone, Palette, Wrench, type LucideIcon } from 'lucide-react';
 
-const services: { Icon: LucideIcon; title: string; desc: string; features: string[]; price: string; time: string; popular: boolean }[] = [
+const services: { Icon: LucideIcon; title: string; desc: string; features: string[]; price: string; time: string; tier: 'featured' | 'popular' | 'standard' | 'minor' }[] = [
   {
     Icon: FileText,
     title: 'Лендинг Пейдж',
@@ -12,7 +12,7 @@ const services: { Icon: LucideIcon; title: string; desc: string; features: strin
     features: ['Адаптивный дизайн, анимации, формы', 'SEO-оптимизация'],
     price: 'от 25,000₽',
     time: '2-3 дня',
-    popular: false,
+    tier: 'popular',
   },
   {
     Icon: Globe,
@@ -21,7 +21,7 @@ const services: { Icon: LucideIcon; title: string; desc: string; features: strin
     features: ['CMS для управления контентом', 'Интеграции, формы, блог'],
     price: 'от 60,000₽',
     time: '5-7 дней',
-    popular: true,
+    tier: 'popular',
   },
   {
     Icon: Rocket,
@@ -30,7 +30,7 @@ const services: { Icon: LucideIcon; title: string; desc: string; features: strin
     features: ['Авторизация, база данных', 'API интеграции, панель управления'],
     price: 'от 150,000₽',
     time: '7-14 дней',
-    popular: true,
+    tier: 'featured',
   },
   {
     Icon: MessageSquare,
@@ -39,7 +39,7 @@ const services: { Icon: LucideIcon; title: string; desc: string; features: strin
     features: ['Приём заказов, консультации', 'Интеграция с CRM/платежами'],
     price: 'от 30,000₽',
     time: '3-5 дней',
-    popular: false,
+    tier: 'standard',
   },
   {
     Icon: ShoppingCart,
@@ -48,7 +48,7 @@ const services: { Icon: LucideIcon; title: string; desc: string; features: strin
     features: ['Каталог товаров, фильтры', 'Интеграция с доставкой'],
     price: 'от 80,000₽',
     time: '5-7 дней',
-    popular: false,
+    tier: 'standard',
   },
   {
     Icon: Smartphone,
@@ -57,7 +57,7 @@ const services: { Icon: LucideIcon; title: string; desc: string; features: strin
     features: ['Дашборды, аналитика, автоматизация', 'Интеграции с API'],
     price: 'от 100,000₽',
     time: '7-10 дней',
-    popular: false,
+    tier: 'standard',
   },
   {
     Icon: Palette,
@@ -66,7 +66,7 @@ const services: { Icon: LucideIcon; title: string; desc: string; features: strin
     features: ['Прототипирование, user flow', 'Дизайн-система'],
     price: 'от 40,000₽',
     time: '3-5 дней',
-    popular: false,
+    tier: 'standard',
   },
   {
     Icon: Wrench,
@@ -75,9 +75,48 @@ const services: { Icon: LucideIcon; title: string; desc: string; features: strin
     features: ['Оптимизация, рефакторинг', 'Интеграции и автоматизация'],
     price: 'от 15,000₽',
     time: '1-3 дня',
-    popular: false,
+    tier: 'minor',
   },
 ];
+
+const tierConfig = {
+  featured: {
+    badge: { label: 'Топ выбор', className: 'bg-gradient-to-r from-primary to-tertiary text-white' },
+    cardClass: 'border-primary/25 bg-gradient-to-b from-primary/5 to-transparent',
+    iconClass: 'from-primary/25 to-tertiary/20',
+    iconSize: 28,
+    titleClass: 'text-[1.1875rem]',
+    btnClass: 'bg-gradient-to-r from-primary to-secondary text-white hover:shadow-lg hover:shadow-primary/20 btn-shimmer',
+    btnLabel: 'Обсудить проект',
+  },
+  popular: {
+    badge: { label: 'Популярно', className: 'bg-secondary/15 text-secondary border border-secondary/25' },
+    cardClass: 'border-secondary/15',
+    iconClass: 'from-secondary/20 to-primary/15',
+    iconSize: 24,
+    titleClass: 'text-[1.125rem]',
+    btnClass: 'glass-light hover:bg-foreground/5',
+    btnLabel: 'Заказать',
+  },
+  standard: {
+    badge: null,
+    cardClass: '',
+    iconClass: 'from-primary/15 to-secondary/15',
+    iconSize: 22,
+    titleClass: 'text-[1.0625rem]',
+    btnClass: 'glass-light hover:bg-foreground/5',
+    btnLabel: 'Заказать',
+  },
+  minor: {
+    badge: null,
+    cardClass: 'opacity-80 hover:opacity-100',
+    iconClass: 'from-muted/10 to-muted/5',
+    iconSize: 20,
+    titleClass: 'text-[1rem]',
+    btnClass: 'glass-light hover:bg-foreground/5',
+    btnLabel: 'Заказать',
+  },
+};
 
 function ServiceCard({ service, index }: { service: (typeof services)[0]; index: number }) {
   const cardRef = useRef<HTMLDivElement>(null);
@@ -104,6 +143,8 @@ function ServiceCard({ service, index }: { service: (typeof services)[0]; index:
     mouseY.set(0);
   };
 
+  const cfg = tierConfig[service.tier];
+
   return (
     <motion.div
       ref={cardRef}
@@ -116,23 +157,25 @@ function ServiceCard({ service, index }: { service: (typeof services)[0]; index:
       onMouseLeave={handleLeave}
       style={{ rotateX, rotateY }}
     >
-      <div className="relative glass rounded-2xl p-6 h-full flex flex-col overflow-hidden group-hover:border-primary/30 transition-colors duration-500">
-        {service.popular && (
-          <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-gradient-to-r from-primary to-secondary text-xs font-semibold text-white">
-            Хит
+      <div className={`relative glass rounded-2xl p-6 h-full flex flex-col overflow-hidden group-hover:border-primary/30 transition-all duration-500 ${cfg.cardClass}`}>
+        {cfg.badge && (
+          <div className={`absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-semibold ${cfg.badge.className}`}>
+            {cfg.badge.label}
           </div>
         )}
 
-        <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/15 to-secondary/15 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-          <service.Icon size={24} className="text-primary" />
+        <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${cfg.iconClass} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
+          <service.Icon size={cfg.iconSize} className="text-primary" />
         </div>
-        <h3 className="font-heading text-[1.125rem] font-semibold tracking-[-0.02em] leading-[1.3] mb-2">{service.title}</h3>
+        <h3 className={`font-heading ${cfg.titleClass} font-semibold tracking-[-0.02em] leading-[1.3] mb-2`}>{service.title}</h3>
         <p className="text-[0.875rem] leading-[1.55] text-muted mb-4">{service.desc}</p>
 
         <ul className="space-y-2 mb-6 flex-1">
           {service.features.map((f, j) => (
             <li key={j} className="flex items-start gap-2 text-sm text-muted">
-              <span className="text-primary mt-0.5">✓</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="text-primary mt-0.5 shrink-0">
+                <path d="M20 6L9 17l-5-5" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
               {f}
             </li>
           ))}
@@ -149,9 +192,9 @@ function ServiceCard({ service, index }: { service: (typeof services)[0]; index:
           onClick={() =>
             document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })
           }
-          className="w-full py-2.5 rounded-xl text-sm font-medium glass-light hover:bg-foreground/5 transition-colors duration-300 cursor-pointer"
+          className={`w-full py-2.5 rounded-xl text-sm font-medium transition-all duration-300 cursor-pointer ${cfg.btnClass}`}
         >
-          Заказать
+          {cfg.btnLabel}
         </button>
 
         {/* Hover border glow */}
@@ -165,8 +208,13 @@ function ServiceCard({ service, index }: { service: (typeof services)[0]; index:
 
 export default function Services() {
   return (
-    <section id="services" className="py-24 relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="services" className="py-24 relative overflow-hidden">
+      {/* Ambient glow */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute -top-40 left-1/4 w-[500px] h-[500px] bg-primary/8 rounded-full blur-[120px]" />
+        <div className="absolute -bottom-40 right-1/4 w-[400px] h-[400px] bg-tertiary/6 rounded-full blur-[100px]" />
+      </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 30 }}

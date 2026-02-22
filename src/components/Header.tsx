@@ -1,8 +1,9 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useScroll, useSpring } from 'framer-motion';
 import { useTheme } from './ThemeProvider';
 import { NavBar } from '@/components/ui/tubelight-navbar';
+import Logo from '@/components/Logo';
 import {
   LayoutGrid,
   Briefcase,
@@ -24,6 +25,21 @@ const navItems = [
   { name: 'FAQ', url: '#faq', icon: HelpCircle },
   { name: 'Контакты', url: '#contact', icon: Mail },
 ];
+
+function ScrollProgressBar() {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
+
+  return (
+    <motion.div
+      className="fixed top-0 left-0 right-0 h-[2px] z-[60] origin-left"
+      style={{
+        scaleX,
+        background: 'linear-gradient(90deg, #6366F1 0%, #8B5CF6 50%, #06B6D4 100%)',
+      }}
+    />
+  );
+}
 
 function ThemeToggle() {
   const { theme, toggleTheme } = useTheme();
@@ -69,7 +85,7 @@ function HeaderCTA() {
         reachGoal('header_cta_click');
         document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
       }}
-      className="hidden md:inline-flex items-center gap-1.5 ml-1 px-5 py-2 rounded-full text-[0.8125rem] font-semibold text-white bg-gradient-to-r from-primary to-secondary hover:shadow-lg hover:shadow-primary/25 transition-all duration-300 cursor-pointer"
+      className="btn-shimmer hidden md:inline-flex items-center gap-1.5 ml-1 px-5 py-2 rounded-full text-[0.8125rem] font-semibold text-white bg-gradient-to-r from-primary to-secondary hover:shadow-lg hover:shadow-primary/25 transition-all duration-300 cursor-pointer"
     >
       Получить расчёт
       <ArrowRight size={14} />
@@ -79,14 +95,28 @@ function HeaderCTA() {
 
 export default function Header() {
   return (
-    <NavBar
-      items={navItems}
-      trailing={
-        <>
-          <HeaderCTA />
-          <ThemeToggle />
-        </>
-      }
-    />
+    <>
+      <ScrollProgressBar />
+
+      {/* Fixed logo — top left, desktop only */}
+      <motion.div
+        className="fixed top-4 left-6 z-50 hidden lg:flex items-center"
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+      >
+        <Logo variant="full" size="xl" />
+      </motion.div>
+
+      <NavBar
+        items={navItems}
+        trailing={
+          <>
+            <HeaderCTA />
+            <ThemeToggle />
+          </>
+        }
+      />
+    </>
   );
 }
