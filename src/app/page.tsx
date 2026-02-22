@@ -12,6 +12,7 @@ import Services from '@/components/Services';
 import PricingCalculator from '@/components/PricingCalculator';
 import HowWeWork from '@/components/HowWeWork';
 import Technologies from '@/components/Technologies';
+import CmsSection from '@/components/CmsSection';
 import TeamSection from '@/components/TeamSection';
 import Statistics from '@/components/Statistics';
 import Advantages from '@/components/Advantages';
@@ -42,6 +43,7 @@ export default function Home() {
         <PricingCalculator />
         <HowWeWork />
         <Technologies />
+        <CmsSection />
         <TeamSection />
         <Statistics />
         <Advantages />
