@@ -9,7 +9,7 @@ import FinalCTA from './FinalCTA';
 
 export default function WhyUs() {
   return (
-    <section id="pricing" className="py-24 relative">
+    <section id="why-us" className="py-24 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div

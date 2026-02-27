@@ -247,6 +247,66 @@
   }
 }
 
+/* ===== Accessibility: Focus rings ===== */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ===== Accessibility: Reduced motion ===== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .animate-marquee {
+    animation: none !important;
+  }
+
+  .blob {
+    animation: none !important;
+  }
+
+  .float {
+    animation: none !important;
+  }
+}
+
+/* ===== FAQ accordion animation ===== */
+details[open] > div {
+  animation: details-expand 0.28s ease forwards;
+}
+
+@keyframes details-expand {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== Visually hidden utility ===== */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
 /* Keyframes */
 @keyframes blob-move {
   0%, 100% { transform: translate(0, 0) scale(1); }

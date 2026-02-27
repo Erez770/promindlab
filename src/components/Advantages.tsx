@@ -50,7 +50,7 @@ const itemVariants = {
 
 export default function Advantages() {
   return (
-    <section className="py-24 relative">
+    <section id="advantages" className="py-24 relative">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-secondary/[0.02] to-transparent" />
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div

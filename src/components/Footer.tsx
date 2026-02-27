@@ -146,7 +146,7 @@ export default function Footer() {
 
         {/* Bottom */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-[0.75rem] text-muted">&copy; 2025 ProMindLab. Все права защищены.</p>
+          <p className="text-[0.75rem] text-muted">&copy; 2025–2026 ProMindLab. Все права защищены.</p>
           <div className="flex gap-6">
             <button
               onClick={() => setPrivacyOpen(true)}

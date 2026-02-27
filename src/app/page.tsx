@@ -1,5 +1,3 @@
-'use client';
-
 import Preloader from '@/components/Preloader';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';

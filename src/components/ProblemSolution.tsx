@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { BadgeDollarSign, Zap, Target, type LucideIcon } from 'lucide-react';
+import { BadgeDollarSign, Zap, Target, ArrowRight, type LucideIcon } from 'lucide-react';
 
 const items: { problem: string; problemDesc: string; solution: string; solutionDesc: string; Icon: LucideIcon }[] = [
   {
@@ -41,7 +41,7 @@ const itemVariants = {
 
 export default function ProblemSolution() {
   return (
-    <section className="py-24 relative">
+    <section id="problem-solution" className="py-24 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           className="text-center mb-16"
@@ -90,7 +90,7 @@ export default function ProblemSolution() {
                 {/* Arrow */}
                 <div className="flex items-center gap-3 mb-6">
                   <div className="h-px flex-1 bg-gradient-to-r from-red-500/20 to-success/20" />
-                  <span className="text-xl">→</span>
+                  <ArrowRight size={16} className="text-muted/60 shrink-0" aria-hidden="true" />
                   <div className="h-px flex-1 bg-gradient-to-r from-success/20 to-success/5" />
                 </div>
 

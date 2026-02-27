@@ -20,7 +20,7 @@ import { reachGoal } from '@/lib/metrika';
 const navItems = [
   { name: 'Услуги', url: '#services', icon: LayoutGrid },
   { name: 'Портфолио', url: '#portfolio', icon: Briefcase },
-  { name: 'Цены', url: '#pricing', icon: CreditCard },
+  { name: 'Цены', url: '#calculator', icon: CreditCard },
   { name: 'Отзывы', url: '#testimonials', icon: MessageSquareQuote },
   { name: 'FAQ', url: '#faq', icon: HelpCircle },
   { name: 'Контакты', url: '#contact', icon: Mail },

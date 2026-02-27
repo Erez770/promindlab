@@ -98,7 +98,7 @@ export default function Pricing() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.15 }}
-                whileHover={{ scale: 1.03 }}
+                whileHover={{ y: -4 }}
               >
                 {plan.popular && (
                   <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full bg-gradient-to-r from-primary to-secondary text-xs font-semibold text-white z-10">
@@ -124,7 +124,9 @@ export default function Pricing() {
                   <ul className="space-y-3 mb-8 flex-1">
                     {plan.features.map((feature, j) => (
                       <li key={j} className="flex items-start gap-3 text-sm">
-                        <span className="text-primary mt-0.5 shrink-0">✓</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="text-primary mt-0.5 shrink-0" aria-hidden="true">
+                          <path d="M20 6L9 17l-5-5" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
                         <span className="text-foreground/80">{feature}</span>
                       </li>
                     ))}

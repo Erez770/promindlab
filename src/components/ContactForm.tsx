@@ -171,9 +171,9 @@ export default function ContactForm() {
             {/* Mini testimonial */}
             <div className="glass rounded-2xl p-6 relative overflow-hidden">
               <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-primary/10 to-transparent rounded-2xl pointer-events-none" />
-              <div className="flex gap-0.5 mb-3">
+              <div className="flex gap-0.5 mb-3" role="img" aria-label="Оценка 5 из 5 звёзд">
                 {Array.from({ length: 5 }).map((_, i) => (
-                  <svg key={i} width="13" height="13" viewBox="0 0 24 24" fill="#F59E0B">
+                  <svg key={i} width="13" height="13" viewBox="0 0 24 24" fill="#F59E0B" aria-hidden="true">
                     <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
                   </svg>
                 ))}
@@ -230,9 +230,10 @@ export default function ContactForm() {
                   <div className="grid sm:grid-cols-2 gap-5">
                     {/* Name */}
                     <div>
-                      <label className="block text-sm font-medium mb-2">Имя</label>
+                      <label htmlFor="contact-name" className="block text-sm font-medium mb-2">Имя</label>
                       <input
                         {...register('name')}
+                        id="contact-name"
                         className="w-full px-4 py-3 rounded-xl bg-surface-light border border-border focus:border-primary focus:outline-none transition-colors text-foreground placeholder:text-muted/50"
                         placeholder="Иван Иванов"
                       />
@@ -243,9 +244,10 @@ export default function ContactForm() {
 
                     {/* Email */}
                     <div>
-                      <label className="block text-sm font-medium mb-2">Email</label>
+                      <label htmlFor="contact-email" className="block text-sm font-medium mb-2">Email</label>
                       <input
                         {...register('email')}
+                        id="contact-email"
                         type="email"
                         className="w-full px-4 py-3 rounded-xl bg-surface-light border border-border focus:border-primary focus:outline-none transition-colors text-foreground placeholder:text-muted/50"
                         placeholder="ivan@example.com"
@@ -257,9 +259,10 @@ export default function ContactForm() {
 
                     {/* Phone */}
                     <div>
-                      <label className="block text-sm font-medium mb-2">Телефон</label>
+                      <label htmlFor="contact-phone" className="block text-sm font-medium mb-2">Телефон</label>
                       <input
                         {...register('phone')}
+                        id="contact-phone"
                         type="tel"
                         className="w-full px-4 py-3 rounded-xl bg-surface-light border border-border focus:border-primary focus:outline-none transition-colors text-foreground placeholder:text-muted/50"
                         placeholder="+7 (999) 123-45-67"
@@ -271,9 +274,10 @@ export default function ContactForm() {
 
                     {/* Project Type */}
                     <div>
-                      <label className="block text-sm font-medium mb-2">Тип проекта</label>
+                      <label htmlFor="contact-project-type" className="block text-sm font-medium mb-2">Тип проекта</label>
                       <select
                         {...register('projectType')}
+                        id="contact-project-type"
                         className="w-full px-4 py-3 rounded-xl bg-surface-light border border-border focus:border-primary focus:outline-none transition-colors text-foreground appearance-none cursor-pointer"
                         defaultValue=""
                       >
@@ -294,12 +298,13 @@ export default function ContactForm() {
 
                   {/* Message */}
                   <div>
-                    <label className="block text-sm font-medium mb-2">
+                    <label htmlFor="contact-message" className="block text-sm font-medium mb-2">
                       Сообщение{' '}
                       <span className="text-muted font-normal">(необязательно)</span>
                     </label>
                     <textarea
                       {...register('message')}
+                      id="contact-message"
                       rows={4}
                       className="w-full px-4 py-3 rounded-xl bg-surface-light border border-border focus:border-primary focus:outline-none transition-colors text-foreground placeholder:text-muted/50 resize-none"
                       placeholder="Расскажите о вашем проекте..."

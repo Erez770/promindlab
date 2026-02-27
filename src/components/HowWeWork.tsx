@@ -43,7 +43,7 @@ const steps: { num: string; title: string; desc: string; time: string; Icon: Luc
 
 export default function HowWeWork() {
   return (
-    <section className="py-24 relative overflow-hidden">
+    <section id="how-we-work" className="py-24 relative overflow-hidden">
       {/* Background accent */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-surface/50 to-transparent pointer-events-none" />
 

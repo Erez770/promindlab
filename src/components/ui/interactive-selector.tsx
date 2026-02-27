@@ -245,10 +245,13 @@ export default function InteractiveSelector() {
             <ProjectPreview project={project} />
 
             {/* Mobile pagination dots */}
-            <div className="flex lg:hidden justify-center gap-2">
-              {projects.map((_, i) => (
+            <div className="flex lg:hidden justify-center gap-2" role="tablist" aria-label="Выбор проекта">
+              {projects.map((p, i) => (
                 <button
                   key={i}
+                  role="tab"
+                  aria-selected={i === active}
+                  aria-label={p.title}
                   onClick={() => setActive(i)}
                   className={`rounded-full transition-all duration-300 cursor-pointer ${
                     i === active ? 'w-5 h-2 bg-primary' : 'w-2 h-2 bg-muted/30'

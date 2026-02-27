@@ -179,9 +179,9 @@ export default function Hero() {
 
                 {/* Star rating */}
                 <div className="flex items-center gap-1.5">
-                  <div className="flex gap-0.5">
+                  <div className="flex gap-0.5" role="img" aria-label="Рейтинг 4.9 из 5 звёзд">
                     {Array.from({ length: 5 }).map((_, i) => (
-                      <svg key={i} width="13" height="13" viewBox="0 0 24 24" fill="#F59E0B">
+                      <svg key={i} width="13" height="13" viewBox="0 0 24 24" fill="#F59E0B" aria-hidden="true">
                         <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
                       </svg>
                     ))}
@@ -258,7 +258,7 @@ export default function Hero() {
                 {/* Floating badge — bottom left */}
                 <div className="absolute -bottom-6 -left-6 float float-delay-2 glass rounded-2xl px-4 py-3 shadow-xl min-w-[155px]">
                   <div className="flex items-center gap-2 mb-1">
-                    <span className="text-[13px]">⚡</span>
+                    <Zap size={13} className="text-warning shrink-0" />
                     <span className="text-[11px] font-semibold text-warning uppercase tracking-wider">AI-ускорение</span>
                   </div>
                   <p className="text-[13px] font-medium">в 10× быстрее</p>

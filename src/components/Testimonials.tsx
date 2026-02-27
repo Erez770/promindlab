@@ -93,9 +93,9 @@ function TestimonialCard({ t, index }: { t: typeof testimonials[0]; index: numbe
       </span>
 
       {/* Stars */}
-      <div className="flex gap-0.5">
+      <div className="flex gap-0.5" role="img" aria-label={`Оценка ${t.rating} из 5 звёзд`}>
         {Array.from({ length: t.rating }).map((_, i) => (
-          <svg key={i} width="14" height="14" viewBox="0 0 24 24" fill="#F59E0B" className="shrink-0">
+          <svg key={i} width="14" height="14" viewBox="0 0 24 24" fill="#F59E0B" className="shrink-0" aria-hidden="true">
             <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
           </svg>
         ))}
@@ -142,9 +142,9 @@ export default function Testimonials() {
           transition={{ duration: 0.6 }}
         >
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-light mb-6">
-            <div className="flex gap-0.5">
+            <div className="flex gap-0.5" role="img" aria-label="Рейтинг 5 звёзд">
               {Array.from({ length: 5 }).map((_, i) => (
-                <svg key={i} width="12" height="12" viewBox="0 0 24 24" fill="#F59E0B">
+                <svg key={i} width="12" height="12" viewBox="0 0 24 24" fill="#F59E0B" aria-hidden="true">
                   <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
                 </svg>
               ))}
