@@ -92,6 +92,7 @@ function StatItem({ stat, index }: { stat: (typeof stats)[0]; index: number }) {
 export default function Statistics() {
   return (
     <section id="statistics" className="py-24 relative">
+      <div className="absolute inset-0 aurora pointer-events-none" />
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/[0.02] to-transparent pointer-events-none" />
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div

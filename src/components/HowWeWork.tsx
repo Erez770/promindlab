@@ -1,6 +1,7 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
+import { useRef } from 'react';
 import { ClipboardList, PenLine, Bot, Search, Rocket, type LucideIcon } from 'lucide-react';
 
 const steps: { num: string; title: string; desc: string; time: string; Icon: LucideIcon }[] = [
@@ -42,9 +43,18 @@ const steps: { num: string; title: string; desc: string; time: string; Icon: Luc
 ];
 
 export default function HowWeWork() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start 0.8', 'end 0.6'],
+  });
+  const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
+  const lineOpacity = useTransform(scrollYProgress, [0, 0.1], [0, 1]);
+
   return (
-    <section id="how-we-work" className="py-24 relative overflow-hidden">
-      {/* Background accent */}
+    <section id="how-we-work" className="py-24 relative overflow-hidden" ref={sectionRef}>
+      {/* Background accents */}
+      <div className="absolute inset-0 dot-grid opacity-50 pointer-events-none" />
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-surface/50 to-transparent pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -64,8 +74,17 @@ export default function HowWeWork() {
         </motion.div>
 
         <div className="relative">
-          {/* Connecting line */}
-          <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent -translate-y-1/2" />
+          {/* Static base line */}
+          <div className="hidden lg:block absolute top-[4.25rem] left-[10%] right-[10%] h-px bg-border/20" />
+          {/* Animated progress line */}
+          <motion.div
+            className="hidden lg:block absolute top-[4.25rem] left-[10%] right-[10%] h-px origin-left"
+            style={{
+              scaleX,
+              opacity: lineOpacity,
+              background: 'linear-gradient(90deg, #6366F1, #8B5CF6, #06B6D4)',
+            }}
+          />
 
           <div className="grid lg:grid-cols-5 gap-8">
             {steps.map((step, i) => (
@@ -79,11 +98,11 @@ export default function HowWeWork() {
               >
                 <div className="glass rounded-2xl p-6 text-center relative group hover:border-primary/20 transition-colors duration-300">
                   {/* Step number */}
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center text-xs font-bold text-white">
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center text-xs font-bold text-white shadow-lg shadow-primary/30">
                     {step.num}
                   </div>
 
-                  <div className="w-12 h-12 mx-auto rounded-xl bg-gradient-to-br from-primary/15 to-secondary/15 flex items-center justify-center mt-2 mb-4">
+                  <div className="w-12 h-12 mx-auto rounded-xl bg-gradient-to-br from-primary/15 to-secondary/15 flex items-center justify-center mt-2 mb-4 group-hover:scale-110 transition-transform duration-300">
                     <step.Icon size={24} className="text-primary" />
                   </div>
                   <h3 className="font-heading text-[1.0625rem] font-semibold tracking-[-0.015em] leading-[1.35] mb-2">{step.title}</h3>
@@ -95,9 +114,9 @@ export default function HowWeWork() {
 
                 {/* Arrow between cards (desktop) */}
                 {i < steps.length - 1 && (
-                  <div className="hidden lg:flex absolute top-1/2 -right-5 -translate-y-1/2 z-10 items-center justify-center w-10 h-10">
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="text-primary/60">
-                      <path d="M4 10h12M12 6l4 4-4 4" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"/>
+                  <div className="hidden lg:flex absolute top-[4.25rem] -right-5 -translate-y-1/2 z-10 items-center justify-center w-10 h-10">
+                    <svg width="16" height="16" viewBox="0 0 20 20" fill="none" className="text-primary/50">
+                      <path d="M4 10h12M12 6l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                   </div>
                 )}

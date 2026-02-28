@@ -209,6 +209,8 @@ function ServiceCard({ service, index }: { service: (typeof services)[0]; index:
 export default function Services() {
   return (
     <section id="services" className="py-24 relative overflow-hidden">
+      {/* Dot grid texture */}
+      <div className="absolute inset-0 dot-grid opacity-60 pointer-events-none" />
       {/* Ambient glow */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute -top-40 left-1/4 w-[500px] h-[500px] bg-primary/8 rounded-full blur-[120px]" />

@@ -79,80 +79,98 @@ function ProjectPreview({ project }: { project: typeof projects[0] }) {
     : `https://${project.title.toLowerCase().replace(/[\s/]/g, '')}.ru`;
 
   return (
-    <div className="glass rounded-2xl overflow-hidden">
-      {/* Browser top bar */}
-      <div className="flex items-center gap-3 px-4 py-3 border-b border-border/20 bg-surface/50">
-        <div className="flex gap-1.5 shrink-0">
-          <div className="w-3 h-3 rounded-full bg-red-500/70" />
-          <div className="w-3 h-3 rounded-full bg-yellow-500/70" />
-          <div className="w-3 h-3 rounded-full bg-green-500/70" />
+    /* MacBook-style outer frame */
+    <div className="relative">
+      {/* Screen bezel */}
+      <div className="rounded-[18px] bg-gradient-to-b from-[#2a2a35] to-[#1a1a22] p-[10px] shadow-2xl border border-white/[0.06]">
+        {/* Camera notch */}
+        <div className="flex justify-center mb-[6px]">
+          <div className="w-2 h-2 rounded-full bg-[#333340] flex items-center justify-center">
+            <div className="w-1 h-1 rounded-full bg-[#252530]" />
+          </div>
         </div>
-        <div className="flex-1 flex items-center gap-2 px-3 py-1.5 rounded-lg bg-surface/80 border border-border/20 max-w-sm">
-          <div className="w-2.5 h-2.5 rounded-full bg-success/60 shrink-0" />
-          <span className="text-[12px] text-muted font-mono truncate">{displayUrl}</span>
-        </div>
-        <div className="ml-auto flex items-center gap-2">
-          {/* Live / Screenshot toggle indicator */}
-          {hasLiveUrl && !iframeError ? (
-            <span className="text-[11px] font-medium text-success flex items-center gap-1">
-              <span className="w-1.5 h-1.5 rounded-full bg-success animate-pulse" />
-              Live
-            </span>
-          ) : (
-            <span className="text-[11px] font-medium text-muted flex items-center gap-1">
-              <ImageIcon size={11} />
-              Превью
-            </span>
-          )}
-          {hasLiveUrl && (
-            <a
-              href={project.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-1.5 rounded-lg glass-light hover:bg-foreground/5 transition-colors"
-            >
-              <ExternalLink size={13} className="text-muted" />
-            </a>
-          )}
+
+        {/* Inner browser chrome */}
+        <div className="rounded-[10px] overflow-hidden border border-white/[0.08] bg-surface/30">
+          {/* Browser top bar */}
+          <div className="flex items-center gap-3 px-4 py-2.5 border-b border-border/20 bg-[rgba(15,15,20,0.9)]">
+            <div className="flex gap-1.5 shrink-0">
+              <div className="w-3 h-3 rounded-full bg-red-500/80" />
+              <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
+              <div className="w-3 h-3 rounded-full bg-green-500/80" />
+            </div>
+            <div className="flex-1 flex items-center gap-2 px-3 py-1.5 rounded-lg bg-surface/60 border border-border/20 max-w-sm">
+              <div className="w-2 h-2 rounded-full bg-success/60 shrink-0" />
+              <span className="text-[11px] text-muted font-mono truncate">{displayUrl}</span>
+            </div>
+            <div className="ml-auto flex items-center gap-2">
+              {hasLiveUrl && !iframeError ? (
+                <span className="text-[10px] font-medium text-success flex items-center gap-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-success animate-pulse" />
+                  Live
+                </span>
+              ) : (
+                <span className="text-[10px] font-medium text-muted flex items-center gap-1">
+                  <ImageIcon size={10} />
+                  Превью
+                </span>
+              )}
+              {hasLiveUrl && (
+                <a
+                  href={project.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-1.5 rounded-lg glass-light hover:bg-foreground/5 transition-colors"
+                >
+                  <ExternalLink size={12} className="text-muted" />
+                </a>
+              )}
+            </div>
+          </div>
+
+          {/* Content area */}
+          <div className="relative w-full h-[240px] sm:h-[360px] lg:h-[480px] overflow-hidden bg-surface/30">
+            {showIframe ? (
+              <>
+                {iframeLoading && (
+                  <div className="absolute inset-0 flex items-center justify-center z-10 bg-surface/80">
+                    <div className="flex flex-col items-center gap-3">
+                      <div className="w-8 h-8 border-2 border-primary/30 border-t-primary rounded-full animate-spin" />
+                      <span className="text-sm text-muted">Загружаем сайт...</span>
+                    </div>
+                  </div>
+                )}
+                <iframe
+                  key={project.url}
+                  src={project.url}
+                  className="w-full h-full border-0"
+                  title={project.title}
+                  loading="lazy"
+                  onLoad={() => setIframeLoading(false)}
+                  onError={() => { setIframeError(true); setIframeLoading(false); }}
+                  sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                />
+              </>
+            ) : (
+              <div className="w-full h-full overflow-y-auto overflow-x-hidden scrollbar-thin">
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  width={1200}
+                  height={900}
+                  className="w-full h-auto"
+                  sizes="(max-width: 768px) 100vw, 70vw"
+                />
+              </div>
+            )}
+          </div>
         </div>
       </div>
 
-      {/* Content area — responsive height, scrollable */}
-      <div className="relative w-full h-[260px] sm:h-[380px] lg:h-[520px] overflow-hidden bg-surface/30">
-        {showIframe ? (
-          <>
-            {iframeLoading && (
-              <div className="absolute inset-0 flex items-center justify-center z-10 bg-surface/80">
-                <div className="flex flex-col items-center gap-3">
-                  <div className="w-8 h-8 border-2 border-primary/30 border-t-primary rounded-full animate-spin" />
-                  <span className="text-sm text-muted">Загружаем сайт...</span>
-                </div>
-              </div>
-            )}
-            <iframe
-              key={project.url}
-              src={project.url}
-              className="w-full h-full border-0"
-              title={project.title}
-              loading="lazy"
-              onLoad={() => setIframeLoading(false)}
-              onError={() => { setIframeError(true); setIframeLoading(false); }}
-              sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-            />
-          </>
-        ) : (
-          /* Fallback: scrollable screenshot simulation */
-          <div className="w-full h-full overflow-y-auto overflow-x-hidden scrollbar-thin">
-            <Image
-              src={project.image}
-              alt={project.title}
-              width={1200}
-              height={900}
-              className="w-full h-auto"
-              sizes="(max-width: 768px) 100vw, 70vw"
-            />
-          </div>
-        )}
+      {/* MacBook base/stand */}
+      <div className="relative mx-auto mt-0">
+        <div className="h-[10px] bg-gradient-to-b from-[#232330] to-[#1c1c26] rounded-b-[4px] mx-[30px] shadow-lg" />
+        <div className="h-[4px] bg-gradient-to-b from-[#1c1c26] to-[#161620] rounded-b-[8px] mx-0 shadow-xl" />
       </div>
     </div>
   );

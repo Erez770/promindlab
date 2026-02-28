@@ -94,7 +94,8 @@ function FAQItem({ faq, index }: { faq: { q: string; a: string }; index: number 
 
 export default function FAQ() {
   return (
-    <section id="faq" className="py-24 relative">
+    <section id="faq" className="py-24 relative overflow-hidden">
+      <div className="absolute inset-0 grid-lines opacity-40 pointer-events-none" />
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           className="text-center mb-16"

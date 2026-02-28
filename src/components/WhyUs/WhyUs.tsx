@@ -9,8 +9,10 @@ import FinalCTA from './FinalCTA';
 
 export default function WhyUs() {
   return (
-    <section id="why-us" className="py-24 relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="why-us" className="py-24 relative overflow-hidden">
+      <div className="absolute inset-0 grid-lines opacity-50 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/[0.015] to-transparent pointer-events-none" />
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
           className="text-center mb-16"
@@ -53,5 +55,6 @@ export default function WhyUs() {
         <FinalCTA />
       </div>
     </section>
+
   );
 }

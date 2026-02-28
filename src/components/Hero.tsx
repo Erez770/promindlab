@@ -2,6 +2,7 @@
 
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { useRef } from 'react';
+import Image from 'next/image';
 import { Zap, ShieldCheck, Headphones } from 'lucide-react';
 import { WavyBackground } from '@/components/ui/wavy-background';
 import { useTheme } from './ThemeProvider';
@@ -11,20 +12,6 @@ const trustBadges = [
   { Icon: Zap, text: 'Старт за 24 часа' },
   { Icon: ShieldCheck, text: 'Гарантия качества' },
   { Icon: Headphones, text: 'Поддержка 24/7' },
-];
-
-const codeLines = [
-  { indent: 0, text: 'import { AI } from "promindlab";', color: 'text-[#818CF8]' },
-  { indent: 0, text: '', color: '' },
-  { indent: 0, text: 'const project = await AI.create({', color: 'text-[#ededed]' },
-  { indent: 1, text: 'type: "saas-platform",', color: 'text-[#10B981]' },
-  { indent: 1, text: 'design: "premium",', color: 'text-[#10B981]' },
-  { indent: 1, text: 'deadline: "7 days",', color: 'text-[#F59E0B]' },
-  { indent: 1, text: 'budget: "affordable",', color: 'text-[#F59E0B]' },
-  { indent: 0, text: '});', color: 'text-[#ededed]' },
-  { indent: 0, text: '', color: '' },
-  { indent: 0, text: '// Результат: wow-эффект ✨', color: 'text-[#6b7280]' },
-  { indent: 0, text: 'await project.deploy();', color: 'text-[#A78BFA]' },
 ];
 
 export default function Hero() {
@@ -207,46 +194,70 @@ export default function Hero() {
               </motion.div>
             </div>
 
-            {/* Right Column - Code Mockup */}
+            {/* Right Column - Browser Mockup */}
             <motion.div
               className="hidden lg:block"
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
             >
-              <div className="relative">
-                <div className="rounded-2xl p-6 glow bg-[rgba(17,17,24,0.85)] backdrop-blur-xl border border-white/10">
-                  {/* Window controls */}
-                  <div className="flex items-center gap-2 mb-6">
-                    <div className="w-3 h-3 rounded-full bg-red-500/80" />
-                    <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
-                    <div className="w-3 h-3 rounded-full bg-green-500/80" />
-                    <span className="ml-4 text-xs text-[#6b7280] font-mono">project.ts</span>
+              <div className="relative mt-10">
+                {/* Mini code badge — floating top left */}
+                <motion.div
+                  className="absolute -top-10 -left-2 z-20 float glass rounded-xl px-3 py-2.5 shadow-xl border border-primary/20"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 1.6, duration: 0.5 }}
+                >
+                  <div className="font-mono text-[10px] leading-[1.8] text-[#818CF8]">
+                    <div><span className="text-[#6b7280]">{'>'} </span>AI.build<span className="text-[#ededed]">(</span><span className="text-[#10B981]">'saas'</span><span className="text-[#ededed]">)</span></div>
+                    <div><span className="text-[#6b7280]">{'>'} </span>project.deploy<span className="text-[#ededed]">()</span></div>
+                    <div className="flex items-center gap-1"><span className="text-[#6b7280]">{'>'} </span><span className="text-success">✓</span><span className="text-[#ededed]"> Done in 7 days</span></div>
                   </div>
-                  {/* Code lines */}
-                  <div className="font-mono text-sm space-y-1 text-[#ededed]">
-                    {codeLines.map((line, i) => (
-                      <motion.div
-                        key={i}
-                        className={`${line.color}`}
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 1.0 + i * 0.1, duration: 0.4 }}
-                        style={{ paddingLeft: `${line.indent * 24}px` }}
-                      >
-                        {line.text || '\u00A0'}
-                      </motion.div>
-                    ))}
-                    <motion.span
-                      className="inline-block w-2.5 h-5 bg-primary"
-                      animate={{ opacity: [1, 0] }}
-                      transition={{ duration: 0.8, repeat: Infinity, repeatType: 'reverse' }}
-                    />
+                </motion.div>
+
+                {/* Browser window mockup */}
+                <div className="rounded-2xl overflow-hidden glow bg-[rgba(17,17,24,0.9)] border border-white/10 shadow-2xl">
+                  {/* Browser chrome bar */}
+                  <div className="flex items-center gap-3 px-4 py-3 bg-[rgba(17,17,24,0.98)] border-b border-white/10">
+                    <div className="flex gap-1.5 shrink-0">
+                      <div className="w-3 h-3 rounded-full bg-red-500/80" />
+                      <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
+                      <div className="w-3 h-3 rounded-full bg-green-500/80" />
+                    </div>
+                    <div className="flex-1 flex items-center gap-2 bg-surface/50 border border-white/10 rounded-lg px-3 py-1.5 max-w-[200px] mx-auto">
+                      <div className="w-2 h-2 rounded-full bg-success/70 animate-pulse shrink-0" />
+                      <span className="text-[11px] text-muted font-mono truncate">fintrack.promindlab.ru</span>
+                    </div>
+                    <span className="ml-auto text-[10px] text-success font-medium flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-success animate-pulse" />
+                      Live
+                    </span>
+                  </div>
+
+                  {/* Screenshot with slow-scroll pan */}
+                  <div className="relative h-[360px] overflow-hidden">
+                    <motion.div
+                      initial={{ y: 0 }}
+                      animate={{ y: -80 }}
+                      transition={{ delay: 2.5, duration: 10, ease: 'easeInOut', repeat: Infinity, repeatType: 'reverse' }}
+                    >
+                      <Image
+                        src="/portfolio-fintrack.png"
+                        alt="FinTech SaaS — пример проекта ProMind Lab"
+                        width={800}
+                        height={600}
+                        className="w-full h-auto"
+                        priority
+                      />
+                    </motion.div>
+                    {/* Bottom fade */}
+                    <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[rgba(10,10,15,0.85)] to-transparent pointer-events-none" />
                   </div>
                 </div>
 
                 {/* Floating badge — top right */}
-                <div className="absolute -top-8 -right-6 float glass rounded-2xl px-4 py-3 shadow-xl min-w-[170px]">
+                <div className="absolute -top-8 -right-6 float glass rounded-2xl px-4 py-3 shadow-xl min-w-[170px] z-10">
                   <div className="flex items-center gap-2 mb-1">
                     <span className="w-2 h-2 rounded-full bg-success animate-pulse" />
                     <span className="text-[11px] font-semibold text-success uppercase tracking-wider">Deploy complete</span>
@@ -256,7 +267,7 @@ export default function Hero() {
                 </div>
 
                 {/* Floating badge — bottom left */}
-                <div className="absolute -bottom-6 -left-6 float float-delay-2 glass rounded-2xl px-4 py-3 shadow-xl min-w-[155px]">
+                <div className="absolute -bottom-6 -left-6 float float-delay-2 glass rounded-2xl px-4 py-3 shadow-xl min-w-[155px] z-10">
                   <div className="flex items-center gap-2 mb-1">
                     <Zap size={13} className="text-warning shrink-0" />
                     <span className="text-[11px] font-semibold text-warning uppercase tracking-wider">AI-ускорение</span>
@@ -265,11 +276,11 @@ export default function Hero() {
                   <p className="text-[11px] text-muted mt-0.5">чем обычная студия</p>
                 </div>
 
-                {/* Floating badge — bottom right (new: satisfaction) */}
-                <div className="absolute -bottom-2 -right-4 float float-delay-3 glass rounded-2xl px-3 py-2.5 shadow-xl">
+                {/* Floating badge — bottom right */}
+                <div className="absolute -bottom-2 -right-4 float float-delay-3 glass rounded-2xl px-3 py-2.5 shadow-xl z-10">
                   <div className="flex items-center gap-1.5 mb-0.5">
                     {Array.from({ length: 5 }).map((_, i) => (
-                      <svg key={i} width="10" height="10" viewBox="0 0 24 24" fill="#F59E0B">
+                      <svg key={i} width="10" height="10" viewBox="0 0 24 24" fill="#F59E0B" aria-hidden="true">
                         <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
                       </svg>
                     ))}
