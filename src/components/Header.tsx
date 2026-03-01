@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useMotionValue, useSpring, useScroll } from 'framer-motion';
+import { motion, useSpring, useScroll } from 'framer-motion';
 import { useTheme } from './ThemeProvider';
 import Logo from '@/components/Logo';
 import {
@@ -19,7 +19,7 @@ import {
 import { reachGoal } from '@/lib/metrika';
 import { useTranslations, useLocale } from 'next-intl';
 import { routing } from '@/i18n/routing';
-import { Dock, DockIcon, DockItem, DockLabel } from '@/components/ui/dock';
+import { FloatingNav, FloatingNavItem } from '@/components/ui/floating-nav';
 import { useState, useRef, useEffect } from 'react';
 
 const localeConfig: Record<string, { label: string; flag: string; name: string }> = {
@@ -28,6 +28,31 @@ const localeConfig: Record<string, { label: string; flag: string; name: string }
   he: { label: 'עב', flag: '🇮🇱', name: 'עברית' },
   ar: { label: 'عر', flag: '🇸🇦', name: 'العربية' },
 };
+
+const SECTIONS = ['services', 'portfolio', 'calculator', 'testimonials', 'faq', 'contact'];
+
+function useActiveSection() {
+  const [active, setActive] = useState('');
+
+  useEffect(() => {
+    const observers: IntersectionObserver[] = [];
+
+    SECTIONS.forEach((id) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const obs = new IntersectionObserver(
+        ([entry]) => { if (entry.isIntersecting) setActive(id); },
+        { rootMargin: '-40% 0px -55% 0px' }
+      );
+      obs.observe(el);
+      observers.push(obs);
+    });
+
+    return () => observers.forEach((o) => o.disconnect());
+  }, []);
+
+  return active;
+}
 
 function ScrollProgressBar() {
   const { scrollYProgress } = useScroll();
@@ -44,12 +69,10 @@ function ScrollProgressBar() {
   );
 }
 
-/* ── Language picker inside dock ── */
-function LangDockItem() {
+function LangPicker() {
   const locale = useLocale();
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
-  const isHoveredMV = useMotionValue(0);
 
   useEffect(() => {
     function handleOutside(e: MouseEvent) {
@@ -62,39 +85,30 @@ function LangDockItem() {
   const cfg = localeConfig[locale];
 
   return (
-    <div ref={ref} className="relative inline-flex items-center justify-center">
-      {/* mimic DockItem sizing via fixed 40px wrapper */}
+    <div ref={ref} className="relative flex items-center justify-center">
       <button
         onClick={() => setOpen((v) => !v)}
-        onMouseEnter={() => isHoveredMV.set(1)}
-        onMouseLeave={() => isHoveredMV.set(0)}
-        className="w-10 h-10 rounded-full bg-surface border border-border/40 flex flex-col items-center justify-center gap-0.5 hover:border-primary/50 transition-all cursor-pointer"
+        className="flex flex-col items-center justify-center w-10 h-10 rounded-xl hover:bg-foreground/8 transition-colors cursor-pointer gap-0.5"
         aria-label="Switch language"
       >
-        <Globe size={15} className="text-foreground/70" />
-        <span className="text-[9px] font-bold leading-none text-foreground/60">{cfg?.label}</span>
+        <Globe size={16} className="text-foreground/60" />
+        <span className="text-[9px] font-bold leading-none text-foreground/50 hidden sm:block">{cfg?.label}</span>
       </button>
 
-      {/* Tooltip */}
-      <div className="absolute -top-8 left-1/2 -translate-x-1/2 pointer-events-none opacity-0 group-hover:opacity-100 whitespace-nowrap rounded-lg border border-border/50 bg-surface px-2.5 py-1 text-[11px] font-medium text-foreground shadow-lg">
-        {cfg?.name}
-      </div>
-
-      {/* Dropdown */}
       {open && (
-        <div className="absolute top-[calc(100%+8px)] left-1/2 -translate-x-1/2 z-[300] min-w-[150px] rounded-2xl border border-border/20 bg-background/95 backdrop-blur-xl shadow-2xl shadow-black/40 overflow-hidden dropdown-appear">
+        <div className="absolute top-[calc(100%+6px)] left-1/2 -translate-x-1/2 z-[300] min-w-[150px] rounded-2xl border border-border/20 bg-background/95 backdrop-blur-xl shadow-2xl shadow-black/40 overflow-hidden dropdown-appear">
           {routing.locales.map((loc) => {
             const c = localeConfig[loc];
-            const active = loc === locale;
+            const isActive = loc === locale;
             return (
               <button
                 key={loc}
-                onClick={() => { if (!active) window.location.href = `/${loc}`; setOpen(false); }}
-                className={`w-full flex items-center gap-3 px-4 py-2.5 text-left transition-colors cursor-pointer ${active ? 'bg-primary/10 text-foreground' : 'text-muted hover:bg-foreground/6 hover:text-foreground'}`}
+                onClick={() => { if (!isActive) window.location.href = `/${loc}`; setOpen(false); }}
+                className={`w-full flex items-center gap-3 px-4 py-2.5 text-left transition-colors cursor-pointer ${isActive ? 'bg-primary/10 text-foreground' : 'text-muted hover:bg-foreground/6 hover:text-foreground'}`}
               >
                 <span className="text-base leading-none">{c?.flag}</span>
                 <span className="flex-1 text-[12px] font-medium">{c?.name}</span>
-                {active && <Check size={12} className="text-primary shrink-0" />}
+                {isActive && <Check size={12} className="text-primary shrink-0" />}
               </button>
             );
           })}
@@ -104,80 +118,73 @@ function LangDockItem() {
   );
 }
 
-/* ── Theme toggle inside dock ── */
-function ThemeDockItem() {
+function ThemeToggle() {
   const { theme, toggleTheme } = useTheme();
   const t = useTranslations('Header');
 
   return (
-    <DockItem className="aspect-square rounded-full bg-surface border border-border/40 hover:border-primary/50 transition-all">
-      <DockLabel>{theme === 'dark' ? t('themeLight') : t('themeDark')}</DockLabel>
-      <DockIcon>
-        <button
-          onClick={toggleTheme}
-          className="w-full h-full flex items-center justify-center cursor-pointer"
-          aria-label={theme === 'dark' ? t('themeLight') : t('themeDark')}
+    <button
+      onClick={toggleTheme}
+      className="flex flex-col items-center justify-center w-10 h-10 rounded-xl hover:bg-foreground/8 transition-colors cursor-pointer gap-0.5"
+      aria-label={theme === 'dark' ? t('themeLight') : t('themeDark')}
+    >
+      <div className="relative w-4 h-4 flex items-center justify-center">
+        <motion.div
+          animate={{ scale: theme === 'light' ? 1 : 0, opacity: theme === 'light' ? 1 : 0 }}
+          transition={{ duration: 0.2 }}
+          className="absolute"
         >
-          <div className="relative w-5 h-5 flex items-center justify-center">
-            <motion.div
-              animate={{ scale: theme === 'light' ? 1 : 0, opacity: theme === 'light' ? 1 : 0 }}
-              transition={{ duration: 0.25 }}
-              className="absolute"
-            >
-              <Sun size={18} className="text-foreground/80" />
-            </motion.div>
-            <motion.div
-              animate={{ scale: theme === 'dark' ? 1 : 0, opacity: theme === 'dark' ? 1 : 0 }}
-              transition={{ duration: 0.25 }}
-              className="absolute"
-            >
-              <Moon size={18} className="text-foreground/80" />
-            </motion.div>
-          </div>
-        </button>
-      </DockIcon>
-    </DockItem>
+          <Sun size={16} className="text-foreground/60" />
+        </motion.div>
+        <motion.div
+          animate={{ scale: theme === 'dark' ? 1 : 0, opacity: theme === 'dark' ? 1 : 0 }}
+          transition={{ duration: 0.2 }}
+          className="absolute"
+        >
+          <Moon size={16} className="text-foreground/60" />
+        </motion.div>
+      </div>
+      <span className="text-[9px] font-bold leading-none text-foreground/50 hidden sm:block">
+        {theme === 'dark' ? 'Light' : 'Dark'}
+      </span>
+    </button>
   );
 }
 
-/* ── CTA inside dock ── */
-function CTADockItem() {
+function CTAButton() {
   const t = useTranslations('Header');
   return (
-    <DockItem className="rounded-full bg-gradient-to-br from-primary to-secondary shadow-lg shadow-primary/30">
-      <DockLabel>{t('cta')}</DockLabel>
-      <DockIcon>
-        <button
-          onClick={() => {
-            reachGoal('header_cta_click');
-            document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
-          }}
-          className="w-full h-full flex items-center justify-center cursor-pointer"
-        >
-          <ArrowRight size={18} className="text-white" />
-        </button>
-      </DockIcon>
-    </DockItem>
+    <button
+      onClick={() => {
+        reachGoal('header_cta_click');
+        document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
+      }}
+      className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-gradient-to-r from-primary to-secondary text-white text-[12px] font-semibold shadow-md shadow-primary/25 hover:shadow-lg hover:shadow-primary/35 hover:scale-105 transition-all cursor-pointer"
+    >
+      <span className="hidden sm:block">{t('cta')}</span>
+      <ArrowRight size={14} />
+    </button>
   );
 }
 
 export default function Header() {
   const t = useTranslations('Header');
+  const activeSection = useActiveSection();
 
-  const navItems = [
-    { name: t('nav.services'),     url: '#services',     Icon: LayoutGrid },
-    { name: t('nav.portfolio'),    url: '#portfolio',    Icon: Briefcase },
-    { name: t('nav.pricing'),      url: '#calculator',   Icon: CreditCard },
-    { name: t('nav.testimonials'), url: '#testimonials', Icon: MessageSquareQuote },
-    { name: t('nav.faq'),          url: '#faq',          Icon: HelpCircle },
-    { name: t('nav.contacts'),     url: '#contact',      Icon: Mail },
+  const navItems: FloatingNavItem[] = [
+    { id: 'services',     label: t('nav.services'),     icon: <LayoutGrid size={18} />,        onClick: () => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' }) },
+    { id: 'portfolio',    label: t('nav.portfolio'),    icon: <Briefcase size={18} />,         onClick: () => document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' }) },
+    { id: 'calculator',   label: t('nav.pricing'),      icon: <CreditCard size={18} />,        onClick: () => document.getElementById('calculator')?.scrollIntoView({ behavior: 'smooth' }) },
+    { id: 'testimonials', label: t('nav.testimonials'), icon: <MessageSquareQuote size={18} />, onClick: () => document.getElementById('testimonials')?.scrollIntoView({ behavior: 'smooth' }) },
+    { id: 'faq',          label: t('nav.faq'),          icon: <HelpCircle size={18} />,        onClick: () => document.getElementById('faq')?.scrollIntoView({ behavior: 'smooth' }) },
+    { id: 'contact',      label: t('nav.contacts'),     icon: <Mail size={18} />,              onClick: () => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }) },
   ];
 
   return (
     <>
       <ScrollProgressBar />
 
-      {/* Logo — top left (hidden on small screens where dock overlaps) */}
+      {/* Logo — top left */}
       <motion.div
         className="fixed top-4 left-6 z-50 hidden xl:flex items-center"
         initial={{ opacity: 0, x: -20 }}
@@ -187,50 +194,33 @@ export default function Header() {
         <Logo variant="full" size="xl" />
       </motion.div>
 
-      {/* Dock — top center */}
+      {/* Floating nav — top center */}
       <motion.div
-        className="fixed top-4 left-1/2 -translate-x-1/2 z-50"
+        className="fixed top-6 left-1/2 -translate-x-1/2 z-50"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.3 }}
       >
-        <Dock
-          magnification={68}
-          panelHeight={56}
-          distance={120}
-          className="border border-border/20 bg-background/70 backdrop-blur-xl shadow-2xl shadow-black/20 pb-1"
-        >
-          {/* Nav items */}
-          {navItems.map(({ name, url, Icon }) => (
-            <DockItem
-              key={url}
-              className="aspect-square rounded-full bg-surface/80 border border-border/30 hover:border-primary/50 transition-all"
-            >
-              <DockLabel>{name}</DockLabel>
-              <DockIcon>
-                <button
-                  onClick={() => document.querySelector(url)?.scrollIntoView({ behavior: 'smooth' })}
-                  className="w-full h-full flex items-center justify-center cursor-pointer"
-                  aria-label={name}
-                >
-                  <Icon className="w-full h-full text-foreground/70 p-0.5" />
-                </button>
-              </DockIcon>
-            </DockItem>
-          ))}
+        <div className="flex items-center gap-1 px-2 py-1.5 rounded-2xl border border-border/20 bg-background/75 backdrop-blur-xl shadow-xl shadow-black/15">
+          {/* Nav items with sliding indicator */}
+          <FloatingNav
+            items={navItems}
+            activeId={activeSection}
+          />
 
           {/* Divider */}
-          <div className="w-px self-center h-8 bg-border/30 mx-1" />
+          <div className="w-px h-7 bg-border/30 mx-1 shrink-0" />
 
-          {/* Language */}
-          <LangDockItem />
+          {/* Utilities */}
+          <LangPicker />
+          <ThemeToggle />
 
-          {/* Theme */}
-          <ThemeDockItem />
+          {/* Divider */}
+          <div className="w-px h-7 bg-border/30 mx-1 shrink-0" />
 
           {/* CTA */}
-          <CTADockItem />
-        </Dock>
+          <CTAButton />
+        </div>
       </motion.div>
     </>
   );

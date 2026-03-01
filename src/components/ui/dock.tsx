@@ -15,13 +15,11 @@ import {
   createContext,
   useContext,
   useEffect,
-  useMemo,
   useRef,
   useState,
 } from 'react';
 import { cn } from '@/lib/utils';
 
-const DOCK_HEIGHT = 128;
 const DEFAULT_MAGNIFICATION = 80;
 const DEFAULT_DISTANCE = 150;
 const DEFAULT_PANEL_HEIGHT = 64;
@@ -81,31 +79,18 @@ function Dock({
   panelHeight = DEFAULT_PANEL_HEIGHT,
 }: DockProps) {
   const mouseX = useMotionValue(Infinity);
-  const isHovered = useMotionValue(0);
-
-  const maxHeight = useMemo(() => {
-    return Math.max(DOCK_HEIGHT, magnification + magnification / 2 + 4);
-  }, [magnification]);
-
-  const heightRow = useTransform(isHovered, [0, 1], [panelHeight, maxHeight]);
-  const height = useSpring(heightRow, spring);
 
   return (
-    <motion.div
-      style={{ height, scrollbarWidth: 'none' }}
-      className="mx-2 flex max-w-full items-end overflow-x-auto"
-    >
+    <div className="mx-2 flex max-w-full items-center overflow-x-auto" style={{ scrollbarWidth: 'none' }}>
       <motion.div
         onMouseMove={({ pageX }) => {
-          isHovered.set(1);
           mouseX.set(pageX);
         }}
         onMouseLeave={() => {
-          isHovered.set(0);
           mouseX.set(Infinity);
         }}
         className={cn(
-          'mx-auto flex w-fit gap-3 rounded-2xl px-4',
+          'mx-auto flex w-fit gap-3 rounded-2xl px-4 items-center',
           className
         )}
         style={{ height: panelHeight }}
@@ -116,7 +101,7 @@ function Dock({
           {children}
         </DockProvider>
       </motion.div>
-    </motion.div>
+    </div>
   );
 }
 
