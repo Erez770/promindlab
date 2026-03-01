@@ -3,80 +3,17 @@
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { FileText, Globe, Rocket, MessageSquare, ShoppingCart, Smartphone, Palette, Wrench, type LucideIcon } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
-const services: { Icon: LucideIcon; title: string; desc: string; features: string[]; price: string; time: string; tier: 'featured' | 'popular' | 'standard' | 'minor' }[] = [
-  {
-    Icon: FileText,
-    title: 'Лендинг Пейдж',
-    desc: 'Одностраничный сайт с wow-эффектом',
-    features: ['Адаптивный дизайн, анимации, формы', 'SEO-оптимизация'],
-    price: 'от 25,000₽',
-    time: '2-3 дня',
-    tier: 'popular',
-  },
-  {
-    Icon: Globe,
-    title: 'Корпоративный сайт',
-    desc: 'Многостраничный сайт (до 10 страниц)',
-    features: ['CMS для управления контентом', 'Интеграции, формы, блог'],
-    price: 'от 60,000₽',
-    time: '5-7 дней',
-    tier: 'popular',
-  },
-  {
-    Icon: Rocket,
-    title: 'SaaS платформа (MVP)',
-    desc: 'Веб-приложение с личным кабинетом',
-    features: ['Авторизация, база данных', 'API интеграции, панель управления'],
-    price: 'от 150,000₽',
-    time: '7-14 дней',
-    tier: 'featured',
-  },
-  {
-    Icon: MessageSquare,
-    title: 'Telegram/WhatsApp боты',
-    desc: 'Автоматизация коммуникации',
-    features: ['Приём заказов, консультации', 'Интеграция с CRM/платежами'],
-    price: 'от 30,000₽',
-    time: '3-5 дней',
-    tier: 'standard',
-  },
-  {
-    Icon: ShoppingCart,
-    title: 'Интернет-магазин',
-    desc: 'E-commerce с корзиной и оплатой',
-    features: ['Каталог товаров, фильтры', 'Интеграция с доставкой'],
-    price: 'от 80,000₽',
-    time: '5-7 дней',
-    tier: 'standard',
-  },
-  {
-    Icon: Smartphone,
-    title: 'Веб-приложение',
-    desc: 'Кастомное решение под задачу',
-    features: ['Дашборды, аналитика, автоматизация', 'Интеграции с API'],
-    price: 'от 100,000₽',
-    time: '7-10 дней',
-    tier: 'standard',
-  },
-  {
-    Icon: Palette,
-    title: 'UI/UX дизайн',
-    desc: 'Дизайн-макеты в Figma',
-    features: ['Прототипирование, user flow', 'Дизайн-система'],
-    price: 'от 40,000₽',
-    time: '3-5 дней',
-    tier: 'standard',
-  },
-  {
-    Icon: Wrench,
-    title: 'Доработка сайта',
-    desc: 'Исправления, новые функции',
-    features: ['Оптимизация, рефакторинг', 'Интеграции и автоматизация'],
-    price: 'от 15,000₽',
-    time: '1-3 дня',
-    tier: 'minor',
-  },
+const services: { Icon: LucideIcon; tier: 'featured' | 'popular' | 'standard' | 'minor' }[] = [
+  { Icon: FileText, tier: 'popular' },
+  { Icon: Globe, tier: 'popular' },
+  { Icon: Rocket, tier: 'featured' },
+  { Icon: MessageSquare, tier: 'standard' },
+  { Icon: ShoppingCart, tier: 'standard' },
+  { Icon: Smartphone, tier: 'standard' },
+  { Icon: Palette, tier: 'standard' },
+  { Icon: Wrench, tier: 'minor' },
 ];
 
 const tierConfig = {
@@ -87,7 +24,6 @@ const tierConfig = {
     iconSize: 28,
     titleClass: 'text-[1.1875rem]',
     btnClass: 'bg-gradient-to-r from-primary to-secondary text-white hover:shadow-lg hover:shadow-primary/20 btn-shimmer',
-    btnLabel: 'Обсудить проект',
   },
   popular: {
     badge: { label: 'Популярно', className: 'bg-secondary/15 text-secondary border border-secondary/25' },
@@ -96,7 +32,6 @@ const tierConfig = {
     iconSize: 24,
     titleClass: 'text-[1.125rem]',
     btnClass: 'glass-light hover:bg-foreground/5',
-    btnLabel: 'Заказать',
   },
   standard: {
     badge: null,
@@ -105,7 +40,6 @@ const tierConfig = {
     iconSize: 22,
     titleClass: 'text-[1.0625rem]',
     btnClass: 'glass-light hover:bg-foreground/5',
-    btnLabel: 'Заказать',
   },
   minor: {
     badge: null,
@@ -114,11 +48,20 @@ const tierConfig = {
     iconSize: 20,
     titleClass: 'text-[1rem]',
     btnClass: 'glass-light hover:bg-foreground/5',
-    btnLabel: 'Заказать',
   },
 };
 
-function ServiceCard({ service, index }: { service: (typeof services)[0]; index: number }) {
+type MergedService = {
+  Icon: LucideIcon;
+  tier: 'featured' | 'popular' | 'standard' | 'minor';
+  title: string;
+  desc: string;
+  features: string[];
+  price: string;
+  time: string;
+};
+
+function ServiceCard({ service, index, t }: { service: MergedService; index: number; t: ReturnType<typeof useTranslations<'Services'>> }) {
   const cardRef = useRef<HTMLDivElement>(null);
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -144,6 +87,8 @@ function ServiceCard({ service, index }: { service: (typeof services)[0]; index:
   };
 
   const cfg = tierConfig[service.tier];
+  const badgeLabel = service.tier === 'featured' ? t('badges.featured') : service.tier === 'popular' ? t('badges.popular') : null;
+  const btnLabel = service.tier === 'featured' ? t('btns.discuss') : t('btns.order');
 
   return (
     <motion.div
@@ -158,9 +103,9 @@ function ServiceCard({ service, index }: { service: (typeof services)[0]; index:
       style={{ rotateX, rotateY }}
     >
       <div className={`relative glass rounded-2xl p-6 h-full flex flex-col overflow-hidden group-hover:border-primary/30 transition-all duration-500 ${cfg.cardClass}`}>
-        {cfg.badge && (
+        {cfg.badge && badgeLabel && (
           <div className={`absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-semibold ${cfg.badge.className}`}>
-            {cfg.badge.label}
+            {badgeLabel}
           </div>
         )}
 
@@ -184,7 +129,7 @@ function ServiceCard({ service, index }: { service: (typeof services)[0]; index:
         <div className="flex items-center justify-between mb-4 pt-4 border-t border-border/30">
           <div>
             <p className="font-heading text-[1.0625rem] font-bold gradient-text tabular-nums">{service.price}</p>
-            <p className="text-[0.75rem] font-medium text-muted">Срок: {service.time}</p>
+            <p className="text-[0.75rem] font-medium text-muted">{t('timeline')} {service.time}</p>
           </div>
         </div>
 
@@ -194,7 +139,7 @@ function ServiceCard({ service, index }: { service: (typeof services)[0]; index:
           }
           className={`w-full py-2.5 rounded-xl text-sm font-medium transition-all duration-300 cursor-pointer ${cfg.btnClass}`}
         >
-          {cfg.btnLabel}
+          {btnLabel}
         </button>
 
         {/* Hover border glow */}
@@ -207,6 +152,10 @@ function ServiceCard({ service, index }: { service: (typeof services)[0]; index:
 }
 
 export default function Services() {
+  const t = useTranslations('Services');
+  const serviceTranslations = t.raw('services') as Array<{title: string; desc: string; features: string[]; price: string; time: string}>;
+  const mergedServices: MergedService[] = services.map((s, i) => ({ ...s, ...serviceTranslations[i] }));
+
   return (
     <section id="services" className="py-24 relative overflow-hidden">
       {/* Dot grid texture */}
@@ -225,16 +174,16 @@ export default function Services() {
           transition={{ duration: 0.6 }}
         >
           <h2 className="font-heading text-[1.875rem] sm:text-[2.5rem] lg:text-[3rem] font-bold tracking-[-0.025em] leading-[1.15] mb-4">
-            Наши <span className="gradient-text">услуги</span>
+            {t('headline')} <span className="gradient-text">{t('headlineAccent')}</span>
           </h2>
           <p className="text-muted text-[1.0625rem] leading-[1.65] tracking-[-0.01em] max-w-2xl mx-auto">
-            Полный спектр digital-разработки с использованием AI-технологий
+            {t('subtitle')}
           </p>
         </motion.div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {services.map((s, i) => (
-            <ServiceCard key={i} service={s} index={i} />
+          {mergedServices.map((s, i) => (
+            <ServiceCard key={i} service={s} index={i} t={t} />
           ))}
         </div>
       </div>

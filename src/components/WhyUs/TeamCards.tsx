@@ -2,35 +2,14 @@
 
 import { motion } from 'framer-motion';
 import { Brain, Code2, Rocket } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
-const cards = [
-  {
-    icon: Brain,
-    title: 'Prompt Engineers',
-    description:
-      'Мы знаем как правильно говорить с AI. Правильный промпт — это 80% результата. Мы написали тысячи промптов и знаем точно что написать чтобы получить идеальный результат с первого раза.',
-    badge: 'Claude AI  \u2022  GPT-4  \u2022  Midjourney',
-    popular: false,
-  },
-  {
-    icon: Code2,
-    title: 'Fullstack Разработчики',
-    description:
-      'AI пишет код, мы его проверяем, дорабатываем и оптимизируем. Мы понимаем каждую строку кода и знаем когда AI ошибается. Результат — чистый профессиональный продукт.',
-    badge: 'React  \u2022  Next.js  \u2022  Node.js  \u2022  Python',
-    popular: true,
-  },
-  {
-    icon: Rocket,
-    title: 'AI Интеграторы',
-    description:
-      'Мы знаем какой AI инструмент подходит для каждой задачи. Claude для кода, Midjourney для дизайна, GPT-4 для текстов. Комбинация инструментов даёт результат который невозможно получить используя один инструмент.',
-    badge: '50+ AI инструментов в арсенале',
-    popular: false,
-  },
-];
+const icons = [Brain, Code2, Rocket];
 
 export default function TeamCards() {
+  const t = useTranslations('TeamCards');
+  const rawCards = t.raw('cards') as Array<{title: string; description: string; badge: string}>;
+  const cards = rawCards.map((c, i) => ({ ...c, icon: icons[i], popular: i === 1 }));
   return (
     <div>
       <motion.div
@@ -41,7 +20,7 @@ export default function TeamCards() {
         transition={{ duration: 0.5 }}
       >
         <h3 className="font-heading text-2xl sm:text-3xl font-bold tracking-tight mb-3">
-          Мы не просто используем AI — <span className="gradient-text">мы им управляем</span>
+          {t('headline')} <span className="gradient-text">{t('headlineAccent')}</span>
         </h3>
       </motion.div>
 
@@ -61,7 +40,7 @@ export default function TeamCards() {
             >
               {card.popular && (
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-gradient-to-r from-primary to-secondary text-xs font-semibold text-white">
-                  Ключевая роль
+                  {t('keyRole')}
                 </div>
               )}
 

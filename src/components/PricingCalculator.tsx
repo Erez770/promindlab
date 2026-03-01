@@ -3,34 +3,26 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import { reachGoal } from '@/lib/metrika';
+import { useTranslations, useLocale } from 'next-intl';
 
-const projectTypes = [
-  { id: 'landing', label: 'Лендинг пейдж', base: 25000 },
-  { id: 'corporate', label: 'Корпоративный сайт', base: 50000 },
-  { id: 'ecommerce', label: 'Интернет-магазин', base: 80000 },
-  { id: 'saas', label: 'SaaS / Веб-приложение', base: 150000 },
-  { id: 'bot', label: 'Telegram / WhatsApp бот', base: 35000 },
-];
-
-const addons = [
-  { id: 'design', label: 'Premium UI/UX дизайн', price: 15000 },
-  { id: 'cms', label: 'Админ-панель (CMS)', price: 20000 },
-  { id: 'seo', label: 'SEO оптимизация', price: 10000 },
-  { id: 'analytics', label: 'Яндекс.Метрика + Google Analytics', price: 5000 },
-  { id: 'bot_addon', label: 'Telegram бот в подарок', price: 0 },
-  { id: 'support3', label: 'Поддержка 3 мес.', price: 15000 },
-];
-
-function formatPrice(price: number): string {
-  return price.toLocaleString('ru-RU');
-}
+const projectTypePrices = [25000, 50000, 80000, 150000, 35000];
+const addonPrices = [15000, 20000, 10000, 5000, 0, 15000];
 
 export default function PricingCalculator() {
+  const t = useTranslations('PricingCalculator');
+  const locale = useLocale();
+
+  const ptTranslations = t.raw('projectTypes') as Array<{ id: string; label: string }>;
+  const projectTypes = ptTranslations.map((pt, i) => ({ ...pt, base: projectTypePrices[i] }));
+
+  const addonTranslations = t.raw('addons') as Array<{ id: string; label: string }>;
+  const addons = addonTranslations.map((a, i) => ({ ...a, price: addonPrices[i] }));
+
   const [selectedType, setSelectedType] = useState('landing');
   const [selectedAddons, setSelectedAddons] = useState<string[]>([]);
   const [pages, setPages] = useState(5);
 
-  const projectType = projectTypes.find((t) => t.id === selectedType)!;
+  const projectType = projectTypes.find((tp) => tp.id === selectedType)!;
   const pageMultiplier = selectedType === 'landing' || selectedType === 'bot' ? 1 : Math.max(1, pages / 5);
   const basePrice = Math.round(projectType.base * pageMultiplier);
   const addonsPrice = selectedAddons.reduce((sum, id) => {
@@ -38,6 +30,10 @@ export default function PricingCalculator() {
     return sum + (addon?.price ?? 0);
   }, 0);
   const total = basePrice + addonsPrice;
+
+  function formatPrice(price: number): string {
+    return price.toLocaleString(locale === 'ru' ? 'ru-RU' : locale);
+  }
 
   const toggleAddon = (id: string) => {
     setSelectedAddons((prev) =>
@@ -67,10 +63,10 @@ export default function PricingCalculator() {
           viewport={{ once: true }}
         >
           <h2 className="font-heading text-[1.875rem] sm:text-[2.5rem] lg:text-[3rem] font-bold tracking-[-0.025em] leading-[1.15] mb-4">
-            Рассчитайте <span className="gradient-text">стоимость</span>
+            {t('headline')} <span className="gradient-text">{t('headlineAccent')}</span>
           </h2>
           <p className="text-muted text-[1.0625rem] leading-[1.65] max-w-xl mx-auto">
-            Выберите параметры и узнайте примерную стоимость вашего проекта
+            {t('subtitle')}
           </p>
         </motion.div>
 
@@ -82,7 +78,7 @@ export default function PricingCalculator() {
         >
           {/* Project type */}
           <div className="mb-8">
-            <label className="block text-sm font-medium mb-3">Тип проекта</label>
+            <label className="block text-sm font-medium mb-3">{t('projectTypeLabel')}</label>
             <div className="grid sm:grid-cols-2 gap-3">
               {projectTypes.map((type) => (
                 <button
@@ -95,7 +91,7 @@ export default function PricingCalculator() {
                   }`}
                 >
                   {type.label}
-                  <span className="block text-xs mt-0.5 opacity-75">от {formatPrice(type.base)}₽</span>
+                  <span className="block text-xs mt-0.5 opacity-75">{t('from')} {formatPrice(type.base)}₽</span>
                 </button>
               ))}
             </div>
@@ -105,7 +101,7 @@ export default function PricingCalculator() {
           {selectedType !== 'landing' && selectedType !== 'bot' && (
             <div className="mb-8">
               <label className="block text-sm font-medium mb-3">
-                Количество страниц: <strong className="gradient-text">{pages}</strong>
+                {t('pagesLabel')} <strong className="gradient-text">{pages}</strong>
               </label>
               <input
                 type="range"
@@ -124,7 +120,7 @@ export default function PricingCalculator() {
 
           {/* Addons */}
           <div className="mb-8">
-            <label className="block text-sm font-medium mb-3">Дополнительно</label>
+            <label className="block text-sm font-medium mb-3">{t('addonsLabel')}</label>
             <div className="grid sm:grid-cols-2 gap-3">
               {addons.map((addon) => (
                 <button
@@ -138,7 +134,7 @@ export default function PricingCalculator() {
                 >
                   <span>{addon.label}</span>
                   <span className="text-xs font-medium text-muted">
-                    {addon.price === 0 ? 'Бесплатно' : `+${formatPrice(addon.price)}₽`}
+                    {addon.price === 0 ? t('free') : `+${formatPrice(addon.price)}₽`}
                   </span>
                 </button>
               ))}
@@ -148,7 +144,7 @@ export default function PricingCalculator() {
           {/* Total */}
           <div className="border-t border-border/30 pt-6 flex flex-col sm:flex-row items-center justify-between gap-6">
             <div>
-              <p className="text-sm text-muted mb-1">Примерная стоимость</p>
+              <p className="text-sm text-muted mb-1">{t('estimatedPrice')}</p>
               <AnimatePresence mode="wait">
                 <motion.p
                   key={total}
@@ -166,7 +162,7 @@ export default function PricingCalculator() {
               onClick={handleGetQuote}
               className="btn-shimmer w-full sm:w-auto px-8 py-4 rounded-xl font-semibold text-white bg-gradient-to-r from-primary to-secondary hover:shadow-lg hover:shadow-primary/25 transition-all cursor-pointer"
             >
-              Получить точный расчёт
+              {t('ctaBtn')}
             </button>
           </div>
         </motion.div>

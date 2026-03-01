@@ -359,3 +359,35 @@ details[open] > div {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
+
+/* ===== RTL support for Hebrew and Arabic ===== */
+[dir="rtl"] {
+  /* Use Noto fonts for RTL languages */
+  --font-sans: var(--font-noto-arabic), var(--font-noto-hebrew), system-ui, -apple-system, sans-serif;
+  --font-heading: var(--font-noto-arabic), var(--font-noto-hebrew), system-ui, -apple-system, sans-serif;
+}
+
+/* Flip marquee animation for RTL */
+[dir="rtl"] .animate-marquee {
+  animation-direction: reverse;
+}
+
+/* Flip scroll progress from right for RTL */
+[dir="rtl"] .origin-left {
+  transform-origin: right;
+}
+
+/* Language switcher dropdown animation */
+@keyframes dropdown-appear {
+  from { opacity: 0; transform: translateY(-6px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0)   scale(1); }
+}
+.dropdown-appear {
+  animation: dropdown-appear 0.15s ease-out both;
+}
+
+/* RTL: open dropdown to the left */
+[dir="rtl"] .dropdown-appear {
+  right: auto;
+  left: 0;
+}

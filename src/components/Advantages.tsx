@@ -2,39 +2,9 @@
 
 import { motion } from 'framer-motion';
 import { Zap, PiggyBank, Award, Brain, ShieldCheck, Headphones, type LucideIcon } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
-const advantages: { Icon: LucideIcon; title: string; desc: string }[] = [
-  {
-    Icon: Zap,
-    title: 'Скорость',
-    desc: 'Готово за 3-7 дней. AI ускоряет разработку в 10 раз.',
-  },
-  {
-    Icon: PiggyBank,
-    title: 'Выгода',
-    desc: 'В 5-10 раз дешевле традиционной разработки.',
-  },
-  {
-    Icon: Award,
-    title: 'Качество',
-    desc: 'Премиум дизайн и чистый код на уровне топ-студий.',
-  },
-  {
-    Icon: Brain,
-    title: 'AI-технологии',
-    desc: 'Claude, GPT-4 и современный стек технологий.',
-  },
-  {
-    Icon: ShieldCheck,
-    title: 'Гарантия',
-    desc: 'Возврат 100% если результат не устроит.',
-  },
-  {
-    Icon: Headphones,
-    title: 'Поддержка',
-    desc: '24/7 на связи. Быстрая реакция на любые вопросы.',
-  },
-];
+const icons: LucideIcon[] = [Zap, PiggyBank, Award, Brain, ShieldCheck, Headphones];
 
 const containerVariants = {
   hidden: {},
@@ -49,6 +19,8 @@ const itemVariants = {
 };
 
 export default function Advantages() {
+  const t = useTranslations('Advantages');
+  const items = (t.raw('items') as Array<{title: string; desc: string}>).map((item, i) => ({ ...item, Icon: icons[i] }));
   return (
     <section id="advantages" className="py-24 relative">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-secondary/[0.02] to-transparent" />
@@ -61,10 +33,10 @@ export default function Advantages() {
           transition={{ duration: 0.6 }}
         >
           <h2 className="font-heading text-[1.875rem] sm:text-[2.5rem] lg:text-[3rem] font-bold tracking-[-0.025em] leading-[1.15] mb-4">
-            Почему <span className="gradient-text">выбирают нас</span>
+            {t('headline')} <span className="gradient-text">{t('headlineAccent')}</span>
           </h2>
           <p className="text-muted text-[1.0625rem] leading-[1.65] tracking-[-0.01em] max-w-2xl mx-auto">
-            6 причин доверить проект ProMindLab
+            {t('subtitle')}
           </p>
         </motion.div>
 
@@ -75,7 +47,7 @@ export default function Advantages() {
           whileInView="visible"
           viewport={{ once: true, margin: '-100px' }}
         >
-          {advantages.map((adv, i) => (
+          {items.map((adv, i) => (
             <motion.div
               key={i}
               variants={itemVariants}

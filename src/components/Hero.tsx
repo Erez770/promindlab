@@ -7,16 +7,18 @@ import { Zap, ShieldCheck, Headphones } from 'lucide-react';
 import { WavyBackground } from '@/components/ui/wavy-background';
 import { useTheme } from './ThemeProvider';
 import { reachGoal } from '@/lib/metrika';
-
-const trustBadges = [
-  { Icon: Zap, text: 'Старт за 24 часа' },
-  { Icon: ShieldCheck, text: 'Гарантия качества' },
-  { Icon: Headphones, text: 'Поддержка 24/7' },
-];
+import { useTranslations } from 'next-intl';
 
 export default function Hero() {
   const { theme } = useTheme();
+  const t = useTranslations('Hero');
   const btnRef = useRef<HTMLButtonElement>(null);
+
+  const trustBadges = [
+    { Icon: Zap, text: t('badges.start') },
+    { Icon: ShieldCheck, text: t('badges.quality') },
+    { Icon: Headphones, text: t('badges.support') },
+  ];
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   const springX = useSpring(mouseX, { stiffness: 150, damping: 15 });
@@ -70,7 +72,7 @@ export default function Hero() {
                 className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-light mb-8"
               >
                 <span className="w-2 h-2 rounded-full bg-success animate-pulse" />
-                <span className="text-[13px] font-medium tracking-[0.01em] text-muted">Принимаем заказы — старт через 24 часа</span>
+                <span className="text-[13px] font-medium tracking-[0.01em] text-muted">{t('badge')}</span>
               </motion.div>
 
               {/* Headline */}
@@ -81,8 +83,8 @@ export default function Hero() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.4 }}
               >
-                Сайт уровня топ-студии{' '}
-                <span className="gradient-text">за 3–7 дней</span>
+                {t('headline')}{' '}
+                <span className="gradient-text">{t('headlineAccent')}</span>
               </motion.h1>
 
               {/* Description with price highlight */}
@@ -93,14 +95,14 @@ export default function Hero() {
                 transition={{ duration: 0.7, delay: 0.6 }}
               >
                 <p className="text-[1.125rem] sm:text-[1.25rem] text-muted max-w-xl leading-[1.65] tracking-[-0.01em] mb-4">
-                  AI-автоматизация 80% рутины позволяет делать за дни то, что другие делают месяцами.
+                  {t('description')}
                 </p>
                 {/* Price comparison pill */}
                 <div className="inline-flex items-center gap-3 px-4 py-2 rounded-xl glass-light border border-success/20">
-                  <span className="text-muted/50 line-through text-sm tabular-nums">300 000₽</span>
+                  <span className="text-muted/50 line-through text-sm tabular-nums">{t('priceOriginal')}</span>
                   <span className="text-[0.75rem] text-muted/40">→</span>
-                  <span className="font-heading font-bold text-success text-[1rem] tabular-nums">от 25 000₽</span>
-                  <span className="text-[11px] font-medium text-success/70 bg-success/10 px-2 py-0.5 rounded-full">−92%</span>
+                  <span className="font-heading font-bold text-success text-[1rem] tabular-nums">{t('priceFrom')}</span>
+                  <span className="text-[11px] font-medium text-success/70 bg-success/10 px-2 py-0.5 rounded-full">{t('priceDiscount')}</span>
                 </div>
               </motion.div>
 
@@ -122,7 +124,7 @@ export default function Hero() {
                     className="btn-shimmer relative px-8 py-4 rounded-2xl text-[15px] font-semibold tracking-[0.01em] text-white bg-gradient-to-r from-primary to-secondary hover:shadow-lg hover:shadow-primary/25 transition-shadow duration-300 cursor-pointer group"
                     whileTap={{ scale: 0.97 }}
                   >
-                    <span className="relative z-10">Получить расчёт — бесплатно</span>
+                    <span className="relative z-10">{t('ctaPrimary')}</span>
                     <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary to-secondary opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-300" />
                   </motion.button>
                 </div>
@@ -137,7 +139,7 @@ export default function Hero() {
                   {/* gradient border via pseudo-overlay */}
                   <span className="absolute inset-0 rounded-2xl p-[1px] bg-gradient-to-r from-primary/50 via-secondary/50 to-tertiary/50" style={{ WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)', WebkitMaskComposite: 'xor', maskComposite: 'exclude' }} />
                   <span className="absolute inset-[1px] rounded-[14px] bg-background group-hover:bg-foreground/5 transition-colors duration-300" />
-                  <span className="relative z-10">Посмотреть портфолио</span>
+                  <span className="relative z-10">{t('ctaSecondary')}</span>
                 </button>
               </motion.div>
 
@@ -159,7 +161,7 @@ export default function Hero() {
                     <div key={i} className={`w-8 h-8 rounded-full bg-gradient-to-br ${g} border-2 border-background`} />
                   ))}
                 </div>
-                <span className="text-[13px] text-muted">50+ проектов запущено</span>
+                <span className="text-[13px] text-muted">{t('socialProof')}</span>
 
                 {/* Divider */}
                 <span className="hidden sm:block w-px h-4 bg-border/40" />
@@ -174,7 +176,7 @@ export default function Hero() {
                     ))}
                   </div>
                   <span className="text-[13px] font-semibold">4.9</span>
-                  <span className="text-[12px] text-muted">средняя оценка</span>
+                  <span className="text-[12px] text-muted">{t('rating')}</span>
                 </div>
               </motion.div>
 
@@ -260,20 +262,20 @@ export default function Hero() {
                 <div className="absolute -top-8 -right-6 float glass rounded-2xl px-4 py-3 shadow-xl min-w-[170px] z-10">
                   <div className="flex items-center gap-2 mb-1">
                     <span className="w-2 h-2 rounded-full bg-success animate-pulse" />
-                    <span className="text-[11px] font-semibold text-success uppercase tracking-wider">Deploy complete</span>
+                    <span className="text-[11px] font-semibold text-success uppercase tracking-wider">{t('floatingBadge.deploy')}</span>
                   </div>
-                  <p className="text-[13px] font-medium">Лендинг — 2 дня</p>
-                  <p className="text-[11px] text-muted mt-0.5">Конверсия +38%</p>
+                  <p className="text-[13px] font-medium">{t('floatingBadge.landing')}</p>
+                  <p className="text-[11px] text-muted mt-0.5">{t('floatingBadge.conversion')}</p>
                 </div>
 
                 {/* Floating badge — bottom left */}
                 <div className="absolute -bottom-6 -left-6 float float-delay-2 glass rounded-2xl px-4 py-3 shadow-xl min-w-[155px] z-10">
                   <div className="flex items-center gap-2 mb-1">
                     <Zap size={13} className="text-warning shrink-0" />
-                    <span className="text-[11px] font-semibold text-warning uppercase tracking-wider">AI-ускорение</span>
+                    <span className="text-[11px] font-semibold text-warning uppercase tracking-wider">{t('floatingBadge.aiSpeed')}</span>
                   </div>
-                  <p className="text-[13px] font-medium">в 10× быстрее</p>
-                  <p className="text-[11px] text-muted mt-0.5">чем обычная студия</p>
+                  <p className="text-[13px] font-medium">{t('floatingBadge.faster')}</p>
+                  <p className="text-[11px] text-muted mt-0.5">{t('floatingBadge.fasterDesc')}</p>
                 </div>
 
                 {/* Floating badge — bottom right */}
@@ -286,7 +288,7 @@ export default function Hero() {
                     ))}
                   </div>
                   <p className="text-[12px] font-semibold">4.9 / 5.0</p>
-                  <p className="text-[10px] text-muted">50+ клиентов</p>
+                  <p className="text-[10px] text-muted">50+ {t('floatingBadge.clients')}</p>
                 </div>
               </div>
             </motion.div>

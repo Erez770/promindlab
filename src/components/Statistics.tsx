@@ -4,12 +4,15 @@ import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { Rocket, Zap, PiggyBank, Star, type LucideIcon } from 'lucide-react';
 import { useCountUp } from '@/hooks/useCountUp';
+import { useTranslations } from 'next-intl';
 
-const stats: { value: number; suffix: string; prefix?: string; label: string; Icon: LucideIcon }[] = [
-  { value: 50, suffix: '+', label: 'Проектов запущено', Icon: Rocket },
-  { value: 5, suffix: ' дней', label: 'Средний срок разработки', Icon: Zap },
-  { value: 10, suffix: 'x', prefix: '5-', label: 'Дешевле обычной разработки', Icon: PiggyBank },
-  { value: 100, suffix: '%', label: 'Довольных клиентов', Icon: Star },
+type StatItem = { value: number; suffix: string; prefix?: string; label: string; Icon: LucideIcon };
+
+const statMeta: { value: number; suffix: string; prefix?: string; Icon: LucideIcon }[] = [
+  { value: 50, suffix: '+', Icon: Rocket },
+  { value: 5, suffix: ' дней', Icon: Zap },
+  { value: 10, suffix: 'x', prefix: '5-', Icon: PiggyBank },
+  { value: 100, suffix: '%', Icon: Star },
 ];
 
 function TiltCard({ children }: { children: React.ReactNode }) {
@@ -61,7 +64,7 @@ function TiltCard({ children }: { children: React.ReactNode }) {
   );
 }
 
-function StatItem({ stat, index }: { stat: (typeof stats)[0]; index: number }) {
+function StatCard({ stat, index }: { stat: StatItem; index: number }) {
   const { count, ref } = useCountUp(stat.value, 2000);
 
   return (
@@ -90,6 +93,9 @@ function StatItem({ stat, index }: { stat: (typeof stats)[0]; index: number }) {
 }
 
 export default function Statistics() {
+  const t = useTranslations('Statistics');
+  const statLabels = t.raw('stats') as Array<{label: string}>;
+  const stats = statMeta.map((s, i) => ({ ...s, label: statLabels[i].label }));
   return (
     <section id="statistics" className="py-24 relative">
       <div className="absolute inset-0 aurora pointer-events-none" />
@@ -103,13 +109,13 @@ export default function Statistics() {
           transition={{ duration: 0.6 }}
         >
           <h2 className="font-heading text-[1.875rem] sm:text-[2.5rem] lg:text-[3rem] font-bold tracking-[-0.025em] leading-[1.15] mb-4">
-            Цифры говорят <span className="gradient-text">за нас</span>
+            {t('headline')} <span className="gradient-text">{t('headlineAccent')}</span>
           </h2>
         </motion.div>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
           {stats.map((stat, i) => (
-            <StatItem key={i} stat={stat} index={i} />
+            <StatCard key={i} stat={stat} index={i} />
           ))}
         </div>
       </div>

@@ -4,6 +4,7 @@ import { Mail, Phone } from 'lucide-react';
 import { ReactNode, useState } from 'react';
 import Image from 'next/image';
 import LegalModal, { PrivacyContent, OfferContent } from './LegalModal';
+import { useTranslations } from 'next-intl';
 
 const TelegramIcon = ({ className }: { className?: string }) => (
   <svg viewBox="0 0 24 24" className={className} fill="currentColor">
@@ -17,15 +18,6 @@ const WhatsAppIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
-const footerLinks = [
-  { label: 'Услуги', href: '#services' },
-  { label: 'Цены', href: '#pricing' },
-  { label: 'Портфолио', href: '#portfolio' },
-  { label: 'Отзывы', href: '#testimonials' },
-  { label: 'FAQ', href: '#faq' },
-  { label: 'Контакты', href: '#contact' },
-];
-
 const socialLinks: { label: string; href: string; icon: ReactNode }[] = [
   { label: 'Telegram', href: 'https://t.me/ProMindLabAdmin', icon: <TelegramIcon className="w-5 h-5" /> },
   { label: 'WhatsApp', href: 'https://wa.me/79263000674', icon: <WhatsAppIcon className="w-5 h-5" /> },
@@ -33,8 +25,11 @@ const socialLinks: { label: string; href: string; icon: ReactNode }[] = [
 ];
 
 export default function Footer() {
+  const t = useTranslations('Footer');
   const [privacyOpen, setPrivacyOpen] = useState(false);
   const [offerOpen, setOfferOpen] = useState(false);
+
+  const footerLinks = t.raw('nav') as Array<{label: string; href: string}>;
 
   const scrollTo = (href: string) => {
     const el = document.querySelector(href);
@@ -60,7 +55,7 @@ export default function Footer() {
               style={{ width: '220px', height: 'auto' }}
             />
             <p className="text-muted text-[0.8125rem] leading-relaxed mb-6">
-              Создаём сайты, SaaS, боты и веб-приложения с помощью AI-технологий за 3-7 дней.
+              {t('tagline')}
             </p>
             <div className="flex gap-3">
               {socialLinks.map((link) => (
@@ -80,7 +75,7 @@ export default function Footer() {
 
           {/* Navigation */}
           <div>
-            <h4 className="font-heading text-[0.9375rem] font-semibold tracking-[-0.01em] mb-4">Навигация</h4>
+            <h4 className="font-heading text-[0.9375rem] font-semibold tracking-[-0.01em] mb-4">{t('navTitle')}</h4>
             <ul className="space-y-2">
               {footerLinks.map((link) => (
                 <li key={link.href}>
@@ -97,20 +92,17 @@ export default function Footer() {
 
           {/* Services */}
           <div>
-            <h4 className="font-heading text-[0.9375rem] font-semibold tracking-[-0.01em] mb-4">Услуги</h4>
+            <h4 className="font-heading text-[0.9375rem] font-semibold tracking-[-0.01em] mb-4">{t('servicesTitle')}</h4>
             <ul className="space-y-2 text-[0.8125rem] text-muted">
-              <li>Лендинг пейдж</li>
-              <li>Корпоративный сайт</li>
-              <li>SaaS платформа</li>
-              <li>Telegram боты</li>
-              <li>Интернет-магазин</li>
-              <li>UI/UX дизайн</li>
+              {(t.raw('servicesList') as string[]).map((item) => (
+                <li key={item}>{item}</li>
+              ))}
             </ul>
           </div>
 
           {/* Contacts */}
           <div>
-            <h4 className="font-heading text-[0.9375rem] font-semibold tracking-[-0.01em] mb-4">Контакты</h4>
+            <h4 className="font-heading text-[0.9375rem] font-semibold tracking-[-0.01em] mb-4">{t('contactsTitle')}</h4>
             <ul className="space-y-3 text-[0.8125rem] text-muted">
               <li className="flex items-center gap-2">
                 <Mail size={16} />
@@ -140,35 +132,35 @@ export default function Footer() {
         {/* Legal info */}
         <div className="border-t border-border/30 pt-6 mb-4">
           <p className="text-[0.6875rem] text-muted/60">
-            ООО &laquo;ПРОМАЙНД&raquo; | ОГРН: 1197746653961 | ИНН: 7743321261
+            {t('legalInfo')}
           </p>
         </div>
 
         {/* Bottom */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-[0.75rem] text-muted">&copy; 2025–2026 ProMindLab. Все права защищены.</p>
+          <p className="text-[0.75rem] text-muted">{t('copyright')}</p>
           <div className="flex gap-6">
             <button
               onClick={() => setPrivacyOpen(true)}
               className="text-[0.75rem] text-muted hover:text-foreground transition-colors cursor-pointer"
             >
-              Политика конфиденциальности
+              {t('privacy')}
             </button>
             <button
               onClick={() => setOfferOpen(true)}
               className="text-[0.75rem] text-muted hover:text-foreground transition-colors cursor-pointer"
             >
-              Оферта
+              {t('offer')}
             </button>
           </div>
         </div>
       </div>
 
-      <LegalModal isOpen={privacyOpen} onClose={() => setPrivacyOpen(false)} title="Политика конфиденциальности">
+      <LegalModal isOpen={privacyOpen} onClose={() => setPrivacyOpen(false)} title={t('privacy')}>
         <PrivacyContent />
       </LegalModal>
 
-      <LegalModal isOpen={offerOpen} onClose={() => setOfferOpen(false)} title="Публичная оферта">
+      <LegalModal isOpen={offerOpen} onClose={() => setOfferOpen(false)} title={t('offer')}>
         <OfferContent />
       </LegalModal>
     </footer>

@@ -2,8 +2,10 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react';
+import { useTranslations } from 'next-intl';
 
 export default function CookieBanner() {
+  const t = useTranslations('CookieBanner');
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -31,9 +33,9 @@ export default function CookieBanner() {
         >
           <div className="max-w-4xl mx-auto glass rounded-2xl p-4 sm:p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="text-sm text-muted text-center sm:text-left">
-              Мы используем cookie для улучшения работы сайта.{' '}
+              {t('text')}{' '}
               <button className="text-primary hover:underline cursor-pointer">
-                Подробнее
+                {t('learnMore')}
               </button>
             </p>
             <div className="flex gap-3 shrink-0">
@@ -41,13 +43,13 @@ export default function CookieBanner() {
                 onClick={accept}
                 className="px-5 py-2 rounded-xl text-sm font-medium bg-gradient-to-r from-primary to-secondary text-white hover:opacity-90 transition-opacity cursor-pointer"
               >
-                Принять
+                {t('accept')}
               </button>
               <button
                 onClick={accept}
                 className="px-5 py-2 rounded-xl text-sm font-medium glass-light hover:bg-foreground/5 transition-colors cursor-pointer"
               >
-                Отклонить
+                {t('decline')}
               </button>
             </div>
           </div>

@@ -4,8 +4,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { Gift } from 'lucide-react';
 import { reachGoal } from '@/lib/metrika';
+import { useTranslations } from 'next-intl';
 
 export default function ExitIntentPopup() {
+  const t = useTranslations('ExitIntentPopup');
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
@@ -65,7 +67,7 @@ export default function ExitIntentPopup() {
             <button
               onClick={close}
               className="absolute top-4 right-4 w-8 h-8 rounded-full glass-light flex items-center justify-center text-muted hover:text-foreground transition-colors cursor-pointer"
-              aria-label="Закрыть"
+              aria-label={t('closeAria')}
             >
               &times;
             </button>
@@ -74,23 +76,23 @@ export default function ExitIntentPopup() {
               <Gift size={32} className="text-primary" />
             </div>
             <h3 className="font-heading text-xl sm:text-2xl font-bold tracking-[-0.02em] mb-3">
-              Подождите! У нас есть <span className="gradient-text">подарок</span>
+              {t('title')} <span className="gradient-text">{t('titleAccent')}</span>
             </h3>
             <p className="text-sm text-muted mb-6 leading-relaxed">
-              Оставьте заявку сейчас и получите бесплатный аудит вашего текущего сайта + скидку 10% на первый проект
+              {t('desc')}
             </p>
 
             <button
               onClick={handleCTA}
               className="w-full py-3.5 rounded-xl font-semibold text-white bg-gradient-to-r from-primary to-secondary hover:shadow-lg hover:shadow-primary/25 transition-all cursor-pointer mb-3"
             >
-              Получить подарок
+              {t('ctaBtn')}
             </button>
             <button
               onClick={close}
               className="text-xs text-muted hover:text-foreground transition-colors cursor-pointer"
             >
-              Нет, спасибо
+              {t('declineBtn')}
             </button>
           </motion.div>
         </motion.div>

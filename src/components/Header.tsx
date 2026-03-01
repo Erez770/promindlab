@@ -16,15 +16,8 @@ import {
   ArrowRight,
 } from 'lucide-react';
 import { reachGoal } from '@/lib/metrika';
-
-const navItems = [
-  { name: 'Услуги', url: '#services', icon: LayoutGrid },
-  { name: 'Портфолио', url: '#portfolio', icon: Briefcase },
-  { name: 'Цены', url: '#calculator', icon: CreditCard },
-  { name: 'Отзывы', url: '#testimonials', icon: MessageSquareQuote },
-  { name: 'FAQ', url: '#faq', icon: HelpCircle },
-  { name: 'Контакты', url: '#contact', icon: Mail },
-];
+import { useTranslations } from 'next-intl';
+import LanguageSwitcher from './LanguageSwitcher';
 
 function ScrollProgressBar() {
   const { scrollYProgress } = useScroll();
@@ -43,12 +36,13 @@ function ScrollProgressBar() {
 
 function ThemeToggle() {
   const { theme, toggleTheme } = useTheme();
+  const t = useTranslations('Header');
 
   return (
     <button
       onClick={toggleTheme}
       className="relative w-9 h-9 rounded-full flex items-center justify-center hover:bg-primary/10 transition-all duration-300 cursor-pointer ml-1"
-      aria-label={theme === 'dark' ? 'Светлая тема' : 'Тёмная тема'}
+      aria-label={theme === 'dark' ? t('themeLight') : t('themeDark')}
     >
       <motion.div
         initial={false}
@@ -79,6 +73,7 @@ function ThemeToggle() {
 }
 
 function HeaderCTA() {
+  const t = useTranslations('Header');
   return (
     <button
       onClick={() => {
@@ -87,13 +82,24 @@ function HeaderCTA() {
       }}
       className="btn-shimmer hidden md:inline-flex items-center gap-1.5 ml-1 px-5 py-2 rounded-full text-[0.8125rem] font-semibold text-white bg-gradient-to-r from-primary to-secondary hover:shadow-lg hover:shadow-primary/25 transition-all duration-300 cursor-pointer"
     >
-      Получить расчёт
+      {t('cta')}
       <ArrowRight size={14} />
     </button>
   );
 }
 
 export default function Header() {
+  const t = useTranslations('Header');
+
+  const navItems = [
+    { name: t('nav.services'), url: '#services', icon: LayoutGrid },
+    { name: t('nav.portfolio'), url: '#portfolio', icon: Briefcase },
+    { name: t('nav.pricing'), url: '#calculator', icon: CreditCard },
+    { name: t('nav.testimonials'), url: '#testimonials', icon: MessageSquareQuote },
+    { name: t('nav.faq'), url: '#faq', icon: HelpCircle },
+    { name: t('nav.contacts'), url: '#contact', icon: Mail },
+  ];
+
   return (
     <>
       <ScrollProgressBar />
@@ -112,6 +118,7 @@ export default function Header() {
         items={navItems}
         trailing={
           <>
+            <LanguageSwitcher />
             <HeaderCTA />
             <ThemeToggle />
           </>

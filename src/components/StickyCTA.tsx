@@ -3,8 +3,10 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { reachGoal } from '@/lib/metrika';
+import { useTranslations } from 'next-intl';
 
 export default function StickyCTA() {
+  const t = useTranslations('StickyCTA');
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -37,7 +39,7 @@ export default function StickyCTA() {
               }}
               className="w-full py-3 rounded-xl font-semibold text-white text-sm bg-gradient-to-r from-primary to-secondary hover:shadow-lg hover:shadow-primary/25 transition-all cursor-pointer"
             >
-              Получить бесплатный расчёт
+              {t('btn')}
             </button>
           </div>
         </motion.div>

@@ -3,8 +3,10 @@
 import { motion } from 'framer-motion';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import { reachGoal } from '@/lib/metrika';
+import { useTranslations } from 'next-intl';
 
 export default function FinalCTA() {
+  const t = useTranslations('FinalCTA');
   const scrollToContact = () => {
     reachGoal('whyus_cta_click');
     document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
@@ -26,11 +28,10 @@ export default function FinalCTA() {
         {/* Left — Try yourself */}
         <div className="p-8 sm:p-10 lg:p-12 flex flex-col justify-center">
           <h3 className="font-heading text-xl sm:text-2xl font-bold mb-4 text-white/60">
-            Попробуйте сами
+            {t('selfTitle')}
           </h3>
           <p className="text-white/35 text-sm leading-relaxed mb-6">
-            Нет ничего плохого в экспериментах. Потратьте 2-3 недели, попробуйте ChatGPT. Если устанете — мы
-            будем здесь.
+            {t('selfDesc')}
           </p>
           <div>
             <button
@@ -40,7 +41,7 @@ export default function FinalCTA() {
               }}
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-white/10 text-sm font-medium text-white/40 hover:text-white/60 hover:border-white/20 transition-all duration-300 cursor-pointer"
             >
-              Попробую сам
+              {t('selfBtn')}
               <ArrowRight size={16} />
             </button>
           </div>
@@ -51,7 +52,7 @@ export default function FinalCTA() {
           <div className="flex flex-col items-center gap-3">
             <div className="w-px h-12 bg-gradient-to-b from-transparent to-white/10" />
             <span className="text-xs text-white/40 font-medium bg-[#0a0a18] px-3 py-1 rounded-full border border-white/10">
-              или
+              {t('or')}
             </span>
             <div className="w-px h-12 bg-gradient-to-b from-white/10 to-transparent" />
           </div>
@@ -60,17 +61,17 @@ export default function FinalCTA() {
         {/* Mobile divider */}
         <div className="md:hidden flex items-center gap-4 px-8">
           <div className="flex-1 h-px bg-white/10" />
-          <span className="text-xs text-white/40 font-medium">или</span>
+          <span className="text-xs text-white/40 font-medium">{t('or')}</span>
           <div className="flex-1 h-px bg-white/10" />
         </div>
 
         {/* Right — Work with us */}
         <div className="p-8 sm:p-10 lg:p-12 flex flex-col justify-center bg-gradient-to-br from-primary/10 to-secondary/10">
           <h3 className="font-heading text-xl sm:text-2xl font-bold mb-4">
-            <span className="gradient-text">Доверьте профессионалам</span>
+            <span className="gradient-text">{t('proTitle')}</span>
           </h3>
           <p className="text-white/60 text-sm leading-relaxed mb-6">
-            Пока вы читаете это — мы уже могли бы сделать половину вашего сайта. Старт через 24 часа.
+            {t('proDesc')}
           </p>
           <div>
             <button
@@ -78,7 +79,7 @@ export default function FinalCTA() {
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-primary to-secondary text-sm font-semibold text-white hover:shadow-lg hover:shadow-primary/25 transition-all duration-300 cursor-pointer group"
             >
               <Sparkles size={16} />
-              Начать проект
+              {t('proBtn')}
               <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform duration-300" />
             </button>
           </div>

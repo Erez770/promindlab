@@ -3,72 +3,31 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { BarChart3, GraduationCap, Bot, Palette, ShoppingCart, ExternalLink, Clock, ImageIcon } from 'lucide-react';
+import { BarChart3, GraduationCap, Bot, Palette, ShoppingCart, ExternalLink, Clock, ImageIcon, type LucideIcon } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
-const projects = [
-  {
-    title: 'FinTech SaaS',
-    category: 'SaaS платформа',
-    description: 'Финтех-платформа с аналитикой портфеля, графиками и транзакциями в реальном времени. Личный кабинет, авторизация, дашборд.',
-    image: '/portfolio-fintrack.png',
-    icon: BarChart3,
-    tags: ['React', 'Node.js', 'PostgreSQL'],
-    url: '#',
-    timeline: '7 дней',
-    color: 'from-blue-500/20 to-cyan-500/20',
-    accent: 'text-blue-400',
-  },
-  {
-    title: 'Education Platform',
-    category: 'Онлайн-школа',
-    description: 'Платформа онлайн-курсов с видеоуроками, прогрессом студентов и адаптивным дизайном. Интеграция с Stripe.',
-    image: '/portfolio-eduplatform.png',
-    icon: GraduationCap,
-    tags: ['Next.js', 'Stripe', 'AI'],
-    url: '#',
-    timeline: '5 дней',
-    color: 'from-emerald-500/20 to-teal-500/20',
-    accent: 'text-emerald-400',
-  },
-  {
-    title: 'Telegram / WhatsApp Bot',
-    category: 'Чат-бот',
-    description: 'AI-платформа для автоматизации чатов в Telegram и WhatsApp с визуальным конструктором сценариев.',
-    image: '/portfolio-shopbot.png',
-    icon: Bot,
-    tags: ['Node.js', 'Telegram API', 'WhatsApp API'],
-    url: '#',
-    timeline: '3 дня',
-    color: 'from-violet-500/20 to-purple-500/20',
-    accent: 'text-violet-400',
-  },
-  {
-    title: 'Luxury Landing',
-    category: 'Премиум лендинг',
-    description: 'Премиальный лендинг для консалтингового агентства с 3D-элементами, анимациями и высокой конверсией.',
-    image: '/portfolio-landing.png',
-    icon: Palette,
-    tags: ['Next.js', 'Framer Motion', '3D'],
-    url: '#',
-    timeline: '3 дня',
-    color: 'from-pink-500/20 to-rose-500/20',
-    accent: 'text-pink-400',
-  },
-  {
-    title: 'E-Commerce',
-    category: 'Интернет-магазин',
-    description: 'Премиальный магазин с каталогом, фильтрами, корзиной, оплатой через ЮKassa и интеграцией с доставкой.',
-    image: '/portfolio-ecommerce.png',
-    icon: ShoppingCart,
-    tags: ['React', 'ЮKassa', 'CRM'],
-    url: '#',
-    timeline: '5 дней',
-    color: 'from-amber-500/20 to-orange-500/20',
-    accent: 'text-amber-400',
-  },
+const projectMeta: { icon: LucideIcon; tags: string[]; url: string; image: string; color: string; accent: string }[] = [
+  { icon: BarChart3, tags: ['React', 'Node.js', 'PostgreSQL'], url: '#', image: '/portfolio-fintrack.png', color: 'from-blue-500/20 to-cyan-500/20', accent: 'text-blue-400' },
+  { icon: GraduationCap, tags: ['Next.js', 'Stripe', 'AI'], url: '#', image: '/portfolio-eduplatform.png', color: 'from-emerald-500/20 to-teal-500/20', accent: 'text-emerald-400' },
+  { icon: Bot, tags: ['Node.js', 'Telegram API', 'WhatsApp API'], url: '#', image: '/portfolio-shopbot.png', color: 'from-violet-500/20 to-purple-500/20', accent: 'text-violet-400' },
+  { icon: Palette, tags: ['Next.js', 'Framer Motion', '3D'], url: '#', image: '/portfolio-landing.png', color: 'from-pink-500/20 to-rose-500/20', accent: 'text-pink-400' },
+  { icon: ShoppingCart, tags: ['React', 'ЮKassa', 'CRM'], url: '#', image: '/portfolio-ecommerce.png', color: 'from-amber-500/20 to-orange-500/20', accent: 'text-amber-400' },
 ];
 
-function ProjectPreview({ project }: { project: typeof projects[0] }) {
+type Project = {
+  icon: LucideIcon;
+  tags: string[];
+  url: string;
+  image: string;
+  color: string;
+  accent: string;
+  title: string;
+  category: string;
+  description: string;
+  timeline: string;
+};
+
+function ProjectPreview({ project, loadingText, previewText }: { project: Project; loadingText: string; previewText: string }) {
   const [iframeError, setIframeError] = useState(false);
   const [iframeLoading, setIframeLoading] = useState(true);
 
@@ -112,7 +71,7 @@ function ProjectPreview({ project }: { project: typeof projects[0] }) {
               ) : (
                 <span className="text-[10px] font-medium text-muted flex items-center gap-1">
                   <ImageIcon size={10} />
-                  Превью
+                  {previewText}
                 </span>
               )}
               {hasLiveUrl && (
@@ -136,7 +95,7 @@ function ProjectPreview({ project }: { project: typeof projects[0] }) {
                   <div className="absolute inset-0 flex items-center justify-center z-10 bg-surface/80">
                     <div className="flex flex-col items-center gap-3">
                       <div className="w-8 h-8 border-2 border-primary/30 border-t-primary rounded-full animate-spin" />
-                      <span className="text-sm text-muted">Загружаем сайт...</span>
+                      <span className="text-sm text-muted">{loadingText}</span>
                     </div>
                   </div>
                 )}
@@ -177,6 +136,10 @@ function ProjectPreview({ project }: { project: typeof projects[0] }) {
 }
 
 export default function InteractiveSelector() {
+  const t = useTranslations('Portfolio');
+  const projectTranslations = t.raw('projects') as Array<{ title: string; category: string; description: string; timeline: string }>;
+  const projects: Project[] = projectMeta.map((m, i) => ({ ...m, ...projectTranslations[i] }));
+
   const [active, setActive] = useState(0);
   const project = projects[active];
   const Icon = project.icon;
@@ -260,10 +223,10 @@ export default function InteractiveSelector() {
             transition={{ duration: 0.3 }}
             className="flex flex-col gap-4"
           >
-            <ProjectPreview project={project} />
+            <ProjectPreview project={project} loadingText={t('loading')} previewText={t('preview')} />
 
             {/* Mobile pagination dots */}
-            <div className="flex lg:hidden justify-center gap-2" role="tablist" aria-label="Выбор проекта">
+            <div className="flex lg:hidden justify-center gap-2" role="tablist" aria-label={t('selectProject')}>
               {projects.map((p, i) => (
                 <button
                   key={i}

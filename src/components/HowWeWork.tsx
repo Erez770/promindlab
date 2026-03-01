@@ -3,46 +3,16 @@
 import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { ClipboardList, PenLine, Bot, Search, Rocket, type LucideIcon } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
-const steps: { num: string; title: string; desc: string; time: string; Icon: LucideIcon }[] = [
-  {
-    num: '01',
-    title: 'Заявка и бриф',
-    desc: 'Обсуждаем задачу, определяем требования и составляем техническое задание.',
-    time: '1 день',
-    Icon: ClipboardList,
-  },
-  {
-    num: '02',
-    title: 'Прототип и согласование',
-    desc: 'Создаём wireframe и дизайн-прототип. Утверждаем концепцию с вами.',
-    time: '1-2 дня',
-    Icon: PenLine,
-  },
-  {
-    num: '03',
-    title: 'Разработка с AI',
-    desc: 'AI-инструменты генерируют код, мы контролируем качество и архитектуру.',
-    time: '2-5 дней',
-    Icon: Bot,
-  },
-  {
-    num: '04',
-    title: 'Тестирование и правки',
-    desc: 'Тестируем на всех устройствах, вносим финальные корректировки.',
-    time: '1 день',
-    Icon: Search,
-  },
-  {
-    num: '05',
-    title: 'Запуск и обучение',
-    desc: 'Деплоим проект, проводим обучение по управлению и передаём все доступы.',
-    time: '1 день',
-    Icon: Rocket,
-  },
-];
+const stepIcons: LucideIcon[] = [ClipboardList, PenLine, Bot, Search, Rocket];
 
 export default function HowWeWork() {
+  const t = useTranslations('HowWeWork');
+  const steps = (t.raw('steps') as Array<{ num: string; title: string; desc: string; time: string }>).map(
+    (s, i) => ({ ...s, Icon: stepIcons[i] })
+  );
+
   const sectionRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -66,10 +36,10 @@ export default function HowWeWork() {
           transition={{ duration: 0.6 }}
         >
           <h2 className="font-heading text-[1.875rem] sm:text-[2.5rem] lg:text-[3rem] font-bold tracking-[-0.025em] leading-[1.15] mb-4">
-            Как мы <span className="gradient-text">работаем</span>
+            {t('headline')} <span className="gradient-text">{t('headlineAccent')}</span>
           </h2>
           <p className="text-muted text-[1.0625rem] leading-[1.65] tracking-[-0.01em] max-w-2xl mx-auto">
-            Прозрачный процесс от заявки до запуска
+            {t('subtitle')}
           </p>
         </motion.div>
 

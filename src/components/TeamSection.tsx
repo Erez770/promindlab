@@ -3,21 +3,16 @@
 import { motion } from 'framer-motion';
 import { Send, Linkedin } from 'lucide-react';
 import Image from 'next/image';
-
-const teamMembers = [
-  {
-    name: 'Дмитрий Кравцов',
-    role: 'Fullstack-разработчик',
-    image: '/team/fullstack.jpeg',
-  },
-  {
-    name: 'Артём Белоусов',
-    role: 'AI-инженер',
-    image: '/team/Ai.jpeg',
-  },
-];
+import { useTranslations } from 'next-intl';
 
 export default function TeamSection() {
+  const t = useTranslations('TeamSection');
+  const memberData = t.raw('members') as Array<{ name: string; role: string }>;
+  const teamMembers = [
+    { name: memberData[0].name, role: memberData[0].role, image: '/team/fullstack.jpeg' },
+    { name: memberData[1].name, role: memberData[1].role, image: '/team/Ai.jpeg' },
+  ];
+
   return (
     <section className="py-24 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -29,11 +24,11 @@ export default function TeamSection() {
           transition={{ duration: 0.6 }}
         >
           <h2 className="font-heading text-[1.875rem] sm:text-[2.5rem] lg:text-[3rem] font-bold tracking-[-0.025em] leading-[1.15] mb-4">
-            Люди, которые стоят{' '}
-            <span className="gradient-text">за ProMindLab</span>
+            {t('headline')}{' '}
+            <span className="gradient-text">{t('headlineAccent')}</span>
           </h2>
           <p className="text-muted text-[1.0625rem] leading-[1.65] tracking-[-0.01em] max-w-2xl mx-auto">
-            Не анонимное агентство — реальная команда с реальным опытом
+            {t('subtitle')}
           </p>
         </motion.div>
 
@@ -56,10 +51,9 @@ export default function TeamSection() {
               />
             </div>
             <h3 className="font-heading text-xl font-bold mb-1">Максим Тарасов</h3>
-            <p className="text-primary text-sm font-medium mb-4">Основатель ProMindLab</p>
+            <p className="text-primary text-sm font-medium mb-4">{t('founder.role')}</p>
             <p className="text-muted text-sm leading-relaxed mb-6">
-              Опыт в разработке и AI-технологиях. Основал ProMindLab, чтобы сделать
-              качественную разработку доступной для бизнеса любого масштаба.
+              {t('founder.bio')}
             </p>
             <div className="flex gap-3">
               <a

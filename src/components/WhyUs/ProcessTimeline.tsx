@@ -2,36 +2,13 @@
 
 import { motion } from 'framer-motion';
 import { Target, PenTool, Bot, Wrench, Rocket } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
-const steps = [
-  {
-    icon: Target,
-    title: 'Анализ',
-    description: 'Изучаем нишу, конкурентов и цели. AI помогает обработать данные за минуты вместо дней.',
-  },
-  {
-    icon: PenTool,
-    title: 'Промпт-дизайн',
-    description: 'Пишем точные промпты для каждой задачи. Это искусство которому учатся годами.',
-  },
-  {
-    icon: Bot,
-    title: 'AI-генерация',
-    description: 'Claude и GPT-4 создают код, дизайн, тексты под нашим руководством.',
-  },
-  {
-    icon: Wrench,
-    title: 'Доработка',
-    description: 'Программисты проверяют, улучшают и оптимизируют каждый элемент. AI не идеален — мы знаем это.',
-  },
-  {
-    icon: Rocket,
-    title: 'Запуск',
-    description: 'Деплой, тестирование, SEO-настройка, обучение. Вы получаете готовый продукт.',
-  },
-];
+const stepIcons = [Target, PenTool, Bot, Wrench, Rocket];
 
 export default function ProcessTimeline() {
+  const t = useTranslations('ProcessTimeline');
+  const steps = (t.raw('steps') as Array<{title: string; description: string}>).map((s, i) => ({ ...s, icon: stepIcons[i] }));
   return (
     <div>
       <motion.div
@@ -42,7 +19,7 @@ export default function ProcessTimeline() {
         transition={{ duration: 0.5 }}
       >
         <h3 className="font-heading text-2xl sm:text-3xl font-bold tracking-tight">
-          Наш процесс — это не просто <span className="gradient-text">&laquo;спросить ChatGPT&raquo;</span>
+          {t('headline')} <span className="gradient-text">{t('headlineAccent')}</span>
         </h3>
       </motion.div>
 
@@ -67,7 +44,7 @@ export default function ProcessTimeline() {
                   <div className="relative z-10 w-12 h-12 rounded-full bg-surface border-2 border-primary/30 flex items-center justify-center mb-4 group-hover:border-primary group-hover:glow transition-all duration-500">
                     <Icon size={20} className="text-primary" />
                   </div>
-                  <span className="text-xs text-primary/60 font-medium mb-1">Шаг {i + 1}</span>
+                  <span className="text-xs text-primary/60 font-medium mb-1">{t('stepLabel', { n: i + 1 })}</span>
                   <h4 className="font-heading text-sm font-semibold mb-2">{step.title}</h4>
                   <p className="text-foreground/50 text-xs leading-relaxed">{step.description}</p>
                 </motion.div>
@@ -100,7 +77,7 @@ export default function ProcessTimeline() {
 
               {/* Content */}
               <div className="pb-8">
-                <span className="text-xs text-primary/60 font-medium">Шаг {i + 1}</span>
+                <span className="text-xs text-primary/60 font-medium">{t('stepLabel', { n: i + 1 })}</span>
                 <h4 className="font-heading text-base font-semibold mb-1">{step.title}</h4>
                 <p className="text-foreground/50 text-sm leading-relaxed">{step.description}</p>
               </div>

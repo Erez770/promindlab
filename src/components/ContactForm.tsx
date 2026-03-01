@@ -7,6 +7,7 @@ import { z } from 'zod';
 import { useState } from 'react';
 import { reachGoal } from '@/lib/metrika';
 import { Send, MessageCircle, Mail, Clock, ShieldCheck, Star } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 const schema = z.object({
   name: z.string().min(2, 'Минимум 2 символа'),
@@ -17,18 +18,6 @@ const schema = z.object({
 });
 
 type FormData = z.infer<typeof schema>;
-
-const projectTypes = [
-  'Лендинг пейдж',
-  'Корпоративный сайт',
-  'SaaS платформа',
-  'Telegram/WhatsApp бот',
-  'Интернет-магазин',
-  'Веб-приложение',
-  'UI/UX дизайн',
-  'Доработка сайта',
-  'Другое',
-];
 
 const contactMethods = [
   {
@@ -57,13 +46,14 @@ const contactMethods = [
   },
 ];
 
-const trustPoints = [
-  { Icon: Clock, text: 'Ответим в течение 2 часов' },
-  { Icon: ShieldCheck, text: 'Бесплатная консультация' },
-  { Icon: Star, text: 'Рейтинг 4.9 — 50+ клиентов' },
-];
-
 export default function ContactForm() {
+  const t = useTranslations('ContactForm');
+
+  const projectTypes = t.raw('projectTypes') as string[];
+
+  const icons = [Clock, ShieldCheck, Star];
+  const trustPoints = (t.raw('trustPoints') as string[]).map((text, i) => ({ Icon: icons[i], text }));
+
   const [isSubmitted, setIsSubmitted] = useState(false);
   const {
     register,
@@ -95,7 +85,7 @@ export default function ContactForm() {
       reset();
       setTimeout(() => setIsSubmitted(false), 5000);
     } catch (err) {
-      setSubmitError(err instanceof Error ? err.message : 'Не удалось отправить заявку. Попробуйте позже.');
+      setSubmitError(err instanceof Error ? err.message : t('errorFallback'));
     }
   };
 
@@ -114,10 +104,10 @@ export default function ContactForm() {
           transition={{ duration: 0.6 }}
         >
           <h2 className="font-heading text-[1.875rem] sm:text-[2.5rem] lg:text-[3rem] font-bold tracking-[-0.025em] leading-[1.15] mb-4">
-            Готовы <span className="gradient-text">запустить проект?</span>
+            {t('headline')} <span className="gradient-text">{t('headlineAccent')}</span>
           </h2>
           <p className="text-muted text-[1.0625rem] leading-[1.65] tracking-[-0.01em] max-w-xl mx-auto">
-            Оставьте заявку и получите бесплатный расчёт стоимости
+            {t('subtitle')}
           </p>
         </motion.div>
 
@@ -133,7 +123,7 @@ export default function ContactForm() {
           >
             {/* Trust points */}
             <div className="glass rounded-2xl p-7 flex flex-col gap-4">
-              <h3 className="font-heading text-lg font-bold mb-1">Почему выбирают нас</h3>
+              <h3 className="font-heading text-lg font-bold mb-1">{t('whyUs')}</h3>
               {trustPoints.map(({ Icon, text }, i) => (
                 <div key={i} className="flex items-center gap-3">
                   <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary/15 to-secondary/15 flex items-center justify-center shrink-0">
@@ -146,7 +136,7 @@ export default function ContactForm() {
 
             {/* Contact channels */}
             <div className="glass rounded-2xl p-7">
-              <h3 className="font-heading text-lg font-bold mb-5">Связаться напрямую</h3>
+              <h3 className="font-heading text-lg font-bold mb-5">{t('contactDirect')}</h3>
               <div className="flex flex-col gap-3">
                 {contactMethods.map(({ icon: Icon, label, value, href, color, bg }, i) => (
                   <a
@@ -171,7 +161,7 @@ export default function ContactForm() {
             {/* Mini testimonial */}
             <div className="glass rounded-2xl p-6 relative overflow-hidden">
               <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-primary/10 to-transparent rounded-2xl pointer-events-none" />
-              <div className="flex gap-0.5 mb-3" role="img" aria-label="Оценка 5 из 5 звёзд">
+              <div className="flex gap-0.5 mb-3" role="img" aria-label={t('starsAria')}>
                 {Array.from({ length: 5 }).map((_, i) => (
                   <svg key={i} width="13" height="13" viewBox="0 0 24 24" fill="#F59E0B" aria-hidden="true">
                     <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
@@ -179,11 +169,11 @@ export default function ContactForm() {
                 ))}
               </div>
               <p className="text-sm text-muted leading-relaxed italic mb-4">
-                &ldquo;Получили готовый SaaS за 5 дней. Качество — на уровне агентств, цена — в 8 раз ниже.&rdquo;
+                {t('miniTestimonial')}
               </p>
               <div className="flex items-center gap-2">
                 <div className="w-7 h-7 rounded-full bg-gradient-to-br from-violet-500 to-blue-500" />
-                <span className="text-xs font-medium">Александр К. — CEO TechStart</span>
+                <span className="text-xs font-medium">{t('miniTestimonialAuthor')}</span>
               </div>
             </div>
           </motion.div>
@@ -215,8 +205,8 @@ export default function ContactForm() {
                       <polyline points="20 6 9 17 4 12"/>
                     </svg>
                   </motion.div>
-                  <h3 className="font-heading text-[1.375rem] font-bold tracking-[-0.02em] mb-2">Заявка отправлена!</h3>
-                  <p className="text-muted">Мы свяжемся с вами в течение 2 часов</p>
+                  <h3 className="font-heading text-[1.375rem] font-bold tracking-[-0.02em] mb-2">{t('successTitle')}</h3>
+                  <p className="text-muted">{t('successDesc')}</p>
                 </motion.div>
               ) : (
                 <motion.form
@@ -230,12 +220,12 @@ export default function ContactForm() {
                   <div className="grid sm:grid-cols-2 gap-5">
                     {/* Name */}
                     <div>
-                      <label htmlFor="contact-name" className="block text-sm font-medium mb-2">Имя</label>
+                      <label htmlFor="contact-name" className="block text-sm font-medium mb-2">{t('fields.name')}</label>
                       <input
                         {...register('name')}
                         id="contact-name"
                         className="w-full px-4 py-3 rounded-xl bg-surface-light border border-border focus:border-primary focus:outline-none transition-colors text-foreground placeholder:text-muted/50"
-                        placeholder="Иван Иванов"
+                        placeholder={t('fields.namePlaceholder')}
                       />
                       {errors.name && (
                         <p className="text-red-400 text-xs mt-1">{errors.name.message}</p>
@@ -244,13 +234,13 @@ export default function ContactForm() {
 
                     {/* Email */}
                     <div>
-                      <label htmlFor="contact-email" className="block text-sm font-medium mb-2">Email</label>
+                      <label htmlFor="contact-email" className="block text-sm font-medium mb-2">{t('fields.email')}</label>
                       <input
                         {...register('email')}
                         id="contact-email"
                         type="email"
                         className="w-full px-4 py-3 rounded-xl bg-surface-light border border-border focus:border-primary focus:outline-none transition-colors text-foreground placeholder:text-muted/50"
-                        placeholder="ivan@example.com"
+                        placeholder={t('fields.emailPlaceholder')}
                       />
                       {errors.email && (
                         <p className="text-red-400 text-xs mt-1">{errors.email.message}</p>
@@ -259,13 +249,13 @@ export default function ContactForm() {
 
                     {/* Phone */}
                     <div>
-                      <label htmlFor="contact-phone" className="block text-sm font-medium mb-2">Телефон</label>
+                      <label htmlFor="contact-phone" className="block text-sm font-medium mb-2">{t('fields.phone')}</label>
                       <input
                         {...register('phone')}
                         id="contact-phone"
                         type="tel"
                         className="w-full px-4 py-3 rounded-xl bg-surface-light border border-border focus:border-primary focus:outline-none transition-colors text-foreground placeholder:text-muted/50"
-                        placeholder="+7 (999) 123-45-67"
+                        placeholder={t('fields.phonePlaceholder')}
                       />
                       {errors.phone && (
                         <p className="text-red-400 text-xs mt-1">{errors.phone.message}</p>
@@ -274,7 +264,7 @@ export default function ContactForm() {
 
                     {/* Project Type */}
                     <div>
-                      <label htmlFor="contact-project-type" className="block text-sm font-medium mb-2">Тип проекта</label>
+                      <label htmlFor="contact-project-type" className="block text-sm font-medium mb-2">{t('fields.projectType')}</label>
                       <select
                         {...register('projectType')}
                         id="contact-project-type"
@@ -282,7 +272,7 @@ export default function ContactForm() {
                         defaultValue=""
                       >
                         <option value="" disabled>
-                          Выберите тип
+                          {t('fields.projectTypePlaceholder')}
                         </option>
                         {projectTypes.map((type) => (
                           <option key={type} value={type}>
@@ -299,15 +289,15 @@ export default function ContactForm() {
                   {/* Message */}
                   <div>
                     <label htmlFor="contact-message" className="block text-sm font-medium mb-2">
-                      Сообщение{' '}
-                      <span className="text-muted font-normal">(необязательно)</span>
+                      {t('fields.message')}{' '}
+                      <span className="text-muted font-normal">{t('fields.messageOptional')}</span>
                     </label>
                     <textarea
                       {...register('message')}
                       id="contact-message"
                       rows={4}
                       className="w-full px-4 py-3 rounded-xl bg-surface-light border border-border focus:border-primary focus:outline-none transition-colors text-foreground placeholder:text-muted/50 resize-none"
-                      placeholder="Расскажите о вашем проекте..."
+                      placeholder={t('fields.messagePlaceholder')}
                     />
                   </div>
 
@@ -323,10 +313,10 @@ export default function ContactForm() {
                           animate={{ rotate: 360 }}
                           transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
                         />
-                        Отправка...
+                        {t('submitting')}
                       </span>
                     ) : (
-                      'Получить бесплатный расчёт'
+                      t('submitBtn')
                     )}
                   </button>
 
@@ -335,7 +325,7 @@ export default function ContactForm() {
                   )}
 
                   <p className="text-center text-sm text-muted">
-                    Ответим в течение 2 часов. Никакого спама.
+                    {t('footer')}
                   </p>
                 </motion.form>
               )}

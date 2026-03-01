@@ -2,41 +2,7 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-
-const faqs = [
-  {
-    q: 'Как AI помогает в разработке?',
-    a: 'AI-инструменты (Claude, GPT-4, Cursor) генерируют до 80% кода, создают дизайн-макеты и автоматизируют тестирование. Мы контролируем качество, архитектуру и бизнес-логику. Результат — продукт уровня топ-студии за долю времени и цены.',
-  },
-  {
-    q: 'Почему так быстро и дёшево?',
-    a: 'AI автоматизирует рутинные задачи: написание boilerplate-кода, вёрстку, настройку инфраструктуры. Мы фокусируемся на архитектуре, UX и бизнес-логике. Это позволяет сократить срок разработки в 5-10 раз без потери качества.',
-  },
-  {
-    q: 'Какие гарантии качества?',
-    a: 'Гарантируем: код проходит code review, тестирование на всех устройствах, Lighthouse score 90+. Если результат не устроит — вернём 100% оплаты. После запуска предоставляем бесплатную поддержку от 1 до 6 месяцев.',
-  },
-  {
-    q: 'Будет ли поддержка после запуска?',
-    a: 'Да! В зависимости от пакета — от 1 до 6 месяцев бесплатной поддержки. Исправление багов, мелкие доработки, консультации. После окончания бесплатного периода — техподдержка по абонементу от 10,000₽/мес.',
-  },
-  {
-    q: 'Можно ли внести правки?',
-    a: 'Конечно! В процессе разработки — до 3 раундов правок бесплатно. В пакете "Премиум" — неограниченные правки. Мы работаем итеративно: показываем результат на каждом этапе.',
-  },
-  {
-    q: 'Какие способы оплаты?',
-    a: 'Принимаем: банковские карты, расчётный счёт (для юрлиц), ЮKassa, Stripe (для международных клиентов). Оплата в 2 этапа: 50% предоплата + 50% после сдачи проекта.',
-  },
-  {
-    q: 'Работаете ли с СНГ?',
-    a: 'Да, работаем с клиентами из России, Казахстана, Беларуси, Узбекистана и других стран СНГ. Для международных клиентов принимаем оплату в USD/EUR через Stripe.',
-  },
-  {
-    q: 'Что если мне не понравится?',
-    a: 'Мы показываем прототип до начала основной разработки. Если концепция не устроит — вернём предоплату. Если финальный результат не соответствует ТЗ — бесплатно дорабатываем или возвращаем деньги.',
-  },
-];
+import { useTranslations } from 'next-intl';
 
 function FAQItem({ faq, index }: { faq: { q: string; a: string }; index: number }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -93,6 +59,9 @@ function FAQItem({ faq, index }: { faq: { q: string; a: string }; index: number 
 }
 
 export default function FAQ() {
+  const t = useTranslations('FAQ');
+  const faqs = t.raw('items') as Array<{q: string; a: string}>;
+
   return (
     <section id="faq" className="py-24 relative overflow-hidden">
       <div className="absolute inset-0 grid-lines opacity-40 pointer-events-none" />
@@ -105,9 +74,9 @@ export default function FAQ() {
           transition={{ duration: 0.6 }}
         >
           <h2 className="font-heading text-[1.875rem] sm:text-[2.5rem] lg:text-[3rem] font-bold tracking-[-0.025em] leading-[1.15] mb-4">
-            Частые <span className="gradient-text">вопросы</span>
+            {t('headline')} <span className="gradient-text">{t('headlineAccent')}</span>
           </h2>
-          <p className="text-muted text-[1.0625rem] leading-[1.65] tracking-[-0.01em]">Ответы на популярные вопросы о нашей работе</p>
+          <p className="text-muted text-[1.0625rem] leading-[1.65] tracking-[-0.01em]">{t('subtitle')}</p>
         </motion.div>
 
         <div className="space-y-4">

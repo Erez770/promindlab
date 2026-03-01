@@ -1,0 +1,660 @@
+{
+  "Metadata": {
+    "title": "ProMindLab — AI-Powered Websites, SaaS & Bots in 3-7 Days | From ₽25,000",
+    "description": "We build premium websites, SaaS platforms and Telegram bots using AI (Claude, GPT-4) in 3-7 days. Top-agency quality at 10x lower price. Landing pages from ₽25,000, e-commerce from ₽80,000, SaaS from ₽150,000. Guaranteed results.",
+    "keywords": "AI website development, SaaS development with AI, AI development agency, Claude AI development, GPT-4 development, Telegram bots on demand, fast MVP development, affordable website development, landing page creation, AI web applications, business automation, ProMindLab",
+    "ogTitle": "ProMindLab — AI-Powered Websites in 3-7 Days | From ₽25,000",
+    "ogDescription": "Premium websites, SaaS & bots with AI (Claude, GPT-4) in one week. 10x cheaper than traditional development. 50+ launched projects. Quality guaranteed.",
+    "twitterTitle": "ProMindLab — AI Development in 3-7 Days",
+    "twitterDescription": "Websites, SaaS, bots on Claude/GPT-4. From ₽25,000. Done in a week."
+  },
+  "Header": {
+    "nav": {
+      "services": "Services",
+      "portfolio": "Portfolio",
+      "pricing": "Pricing",
+      "testimonials": "Reviews",
+      "faq": "FAQ",
+      "contacts": "Contact"
+    },
+    "cta": "Get a Quote",
+    "themeLight": "Light theme",
+    "themeDark": "Dark theme"
+  },
+  "Hero": {
+    "badge": "Accepting orders — start in 24 hours",
+    "headline": "Agency-level website",
+    "headlineAccent": "in 3–7 days",
+    "description": "AI automation of 80% of routine work lets us do in days what others do in months.",
+    "priceFrom": "from ₽25,000",
+    "priceOriginal": "₽300,000",
+    "priceDiscount": "−92%",
+    "ctaPrimary": "Get a Free Quote",
+    "ctaSecondary": "View Portfolio",
+    "socialProof": "50+ projects launched",
+    "rating": "average rating",
+    "badges": {
+      "start": "Start in 24 hours",
+      "quality": "Quality guarantee",
+      "support": "24/7 support"
+    },
+    "floatingBadge": {
+      "deploy": "Deploy complete",
+      "landing": "Landing — 2 days",
+      "conversion": "Conversion +38%",
+      "aiSpeed": "AI acceleration",
+      "faster": "10× faster",
+      "fasterDesc": "than a regular studio",
+      "clients": "clients"
+    }
+  },
+  "TechStrip": {
+    "ariaLabel": "Technologies we use"
+  },
+  "ProblemSolution": {
+    "headline": "Why pay more",
+    "headlineAccent": "and wait longer?",
+    "subtitle": "AI development solves the main problems of the traditional approach",
+    "problemLabel": "Problem",
+    "solutionLabel": "Solution",
+    "items": [
+      {
+        "problem": "Development is expensive",
+        "problemDesc": "Average landing page price — ₽200-500k. SaaS — from ₽2M.",
+        "solution": "5-10x cheaper with us",
+        "solutionDesc": "AI automates 80% of routine work, reducing costs."
+      },
+      {
+        "problem": "Long timelines: 2-6 months",
+        "problemDesc": "Traditional development requires months of approvals.",
+        "solution": "Ready in 3-7 days",
+        "solutionDesc": "AI assistants generate code 10x faster than humans."
+      },
+      {
+        "problem": "Need a team of specialists",
+        "problemDesc": "Designer, frontend, backend, DevOps, PM — minimum 5 people.",
+        "solution": "One contact, full cycle",
+        "solutionDesc": "Us + AI = a full team. One manager for the entire project."
+      }
+    ]
+  },
+  "WhyUs": {
+    "headline": "Why",
+    "headlineAccent": "professionals",
+    "headlineSuffix": "are better,",
+    "headlineSuffix2": "than",
+    "headlineMuted": "ChatGPT alone",
+    "subtitle": "You can try building a website through AI yourself. We know how it usually ends."
+  },
+  "ComparisonTable": {
+    "selfTitle": "You + ChatGPT on your own",
+    "proTitle": "You + ProMindLab",
+    "selfItems": [
+      "2-4 weeks of attempts and redoing",
+      "Result looks like a template",
+      "Don't know which prompt to write",
+      "Code works but you don't know why",
+      "Errors that are impossible to find",
+      "Site is not optimized and not indexed",
+      "No animations — only static blocks",
+      "Everything breaks on mobile",
+      "No support — you're on your own"
+    ],
+    "proItems": [
+      "Ready in 3-7 days",
+      "Design worth $15,000",
+      "Prompt engineers know how to give AI the right task",
+      "Clean, scalable, professional code",
+      "Everything works, tested, deployed",
+      "SEO, speed, indexing from day one",
+      "Smooth animations and wow effects",
+      "Perfect on all devices",
+      "24/7 support after launch"
+    ]
+  },
+  "TeamCards": {
+    "headline": "We don't just use AI —",
+    "headlineAccent": "we control it",
+    "keyRole": "Key role",
+    "cards": [
+      {
+        "title": "Prompt Engineers",
+        "description": "We know how to talk to AI correctly. The right prompt is 80% of the result. We've written thousands of prompts and know exactly what to write to get perfect results on the first try.",
+        "badge": "Claude AI  •  GPT-4  •  Midjourney"
+      },
+      {
+        "title": "Fullstack Developers",
+        "description": "AI writes the code, we review, refine and optimize it. We understand every line of code and know when AI makes mistakes. Result — clean professional product.",
+        "badge": "React  •  Next.js  •  Node.js  •  Python"
+      },
+      {
+        "title": "AI Integrators",
+        "description": "We know which AI tool is right for each task. Claude for code, Midjourney for design, GPT-4 for text. The combination of tools gives results impossible to achieve with a single tool.",
+        "badge": "50+ AI tools in our arsenal"
+      }
+    ]
+  },
+  "BigStat": {
+    "quote": "The average entrepreneur spends 3-6 weeks trying to build a website with ChatGPT on their own. Gets a template result that doesn't convert. Then comes to us anyway.",
+    "quoteSource": "— Observation from 50+ projects",
+    "stats": [
+      {
+        "suffix": "%",
+        "label": "of clients come after failed self-attempts"
+      },
+      {
+        "suffix": " wks.",
+        "label": "on average an entrepreneur wastes on self-attempts"
+      },
+      {
+        "suffix": " ₽",
+        "label": "costs a consultation before starting"
+      }
+    ]
+  },
+  "ProcessTimeline": {
+    "headline": "Our process is not just",
+    "headlineAccent": "\"asking ChatGPT\"",
+    "stepLabel": "Step {n}",
+    "steps": [
+      {
+        "title": "Analysis",
+        "description": "We study the niche, competitors and goals. AI helps process data in minutes instead of days."
+      },
+      {
+        "title": "Prompt Design",
+        "description": "We write precise prompts for each task. This is an art that takes years to master."
+      },
+      {
+        "title": "AI Generation",
+        "description": "Claude and GPT-4 create code, design, and texts under our guidance."
+      },
+      {
+        "title": "Refinement",
+        "description": "Developers review, improve and optimize every element. AI is not perfect — we know that."
+      },
+      {
+        "title": "Launch",
+        "description": "Deploy, testing, SEO setup, training. You get a finished product."
+      }
+    ]
+  },
+  "FinalCTA": {
+    "selfTitle": "Try it yourself",
+    "selfDesc": "There's nothing wrong with experimenting. Spend 2-3 weeks, try ChatGPT. If you get tired — we'll be here.",
+    "selfBtn": "I'll try myself",
+    "or": "or",
+    "proTitle": "Trust the professionals",
+    "proDesc": "While you're reading this — we could have already built half your website. Start in 24 hours.",
+    "proBtn": "Start a project"
+  },
+  "Portfolio": {
+    "headline": "Our",
+    "headlineAccent": "cases",
+    "subtitle": "Real projects, real results",
+    "selectProject": "Select project",
+    "preview": "Preview",
+    "loading": "Loading website...",
+    "projects": [
+      {
+        "title": "FinTech SaaS",
+        "category": "SaaS Platform",
+        "description": "Fintech platform with portfolio analytics, charts and real-time transactions. Personal dashboard, authentication, admin panel.",
+        "timeline": "7 days"
+      },
+      {
+        "title": "Education Platform",
+        "category": "Online School",
+        "description": "Online course platform with video lessons, student progress tracking and adaptive design. Stripe integration.",
+        "timeline": "5 days"
+      },
+      {
+        "title": "Telegram / WhatsApp Bot",
+        "category": "Chatbot",
+        "description": "AI platform for automating chats in Telegram and WhatsApp with a visual scenario builder.",
+        "timeline": "3 days"
+      },
+      {
+        "title": "Luxury Landing",
+        "category": "Premium Landing",
+        "description": "Premium landing page for a consulting agency with 3D elements, animations and high conversion rate.",
+        "timeline": "3 days"
+      },
+      {
+        "title": "E-Commerce",
+        "category": "Online Store",
+        "description": "Premium store with catalog, filters, cart, payment via ЮKassa and delivery integration.",
+        "timeline": "5 days"
+      }
+    ]
+  },
+  "Testimonials": {
+    "badge": "50+ happy clients",
+    "ratingAria": "5 star rating",
+    "headline": "What clients",
+    "headlineAccent": "say about us",
+    "subtitle": "Real results from real projects",
+    "starRating": "Rating {rating} out of 5 stars",
+    "testimonials": [
+      {
+        "name": "Alexey Petrov",
+        "role": "CEO",
+        "company": "TechStart",
+        "text": "Ordered an MVP for our startup. The result exceeded all expectations — in a week we got a full product that was previously estimated at 3 months of development.",
+        "project": "SaaS Platform",
+        "initials": "AP"
+      },
+      {
+        "name": "Maria Ivanova",
+        "role": "Marketing Manager",
+        "company": "DigitalPro",
+        "text": "Landing page was built in 2 days. Conversion increased by 40% compared to the previous site. Design is fire, animations are smooth, loading speed is excellent.",
+        "project": "Landing Page",
+        "initials": "MI"
+      },
+      {
+        "name": "Dmitry Kozlov",
+        "role": "Founder",
+        "company": "EduOnline",
+        "text": "Built an educational platform with personal dashboards and payments. Code quality is excellent, everything works stably. Support responds instantly.",
+        "project": "Online School",
+        "initials": "DK"
+      },
+      {
+        "name": "Anna Sidorova",
+        "role": "Owner",
+        "company": "BeautyShop",
+        "text": "Telegram bot for client bookings — this is the best investment in business. Automation saved us 20 hours a week. I recommend ProMindLab to everyone!",
+        "project": "Telegram Bot",
+        "initials": "AS"
+      },
+      {
+        "name": "Igor Volkov",
+        "role": "CTO",
+        "company": "FinanceApp",
+        "text": "Was skeptical about AI development, but the result convinced me. A complex SaaS platform was built in 10 days. Architecture is clean, code is maintainable.",
+        "project": "FinTech SaaS",
+        "initials": "IV"
+      },
+      {
+        "name": "Elena Novikova",
+        "role": "Entrepreneur",
+        "company": "NoviStore",
+        "text": "Online store launched in 5 days. Integration with ЮKassa, delivery — everything works. Price is 8 times lower than a regular agency. Simply amazing!",
+        "project": "Online Store",
+        "initials": "EN"
+      }
+    ]
+  },
+  "Services": {
+    "headline": "Our",
+    "headlineAccent": "services",
+    "subtitle": "Full range of digital development using AI technologies",
+    "timeline": "Timeline:",
+    "badges": {
+      "featured": "Top choice",
+      "popular": "Popular"
+    },
+    "btns": {
+      "discuss": "Discuss project",
+      "order": "Order"
+    },
+    "services": [
+      {
+        "title": "Landing Page",
+        "desc": "Single-page site with wow effect",
+        "features": ["Responsive design, animations, forms", "SEO optimization"],
+        "price": "from ₽25,000",
+        "time": "2-3 days"
+      },
+      {
+        "title": "Corporate Website",
+        "desc": "Multi-page website (up to 10 pages)",
+        "features": ["CMS for content management", "Integrations, forms, blog"],
+        "price": "from ₽60,000",
+        "time": "5-7 days"
+      },
+      {
+        "title": "SaaS Platform (MVP)",
+        "desc": "Web application with user dashboard",
+        "features": ["Authentication, database", "API integrations, admin panel"],
+        "price": "from ₽150,000",
+        "time": "7-14 days"
+      },
+      {
+        "title": "Telegram/WhatsApp Bots",
+        "desc": "Communication automation",
+        "features": ["Order processing, consultations", "CRM/payment integration"],
+        "price": "from ₽30,000",
+        "time": "3-5 days"
+      },
+      {
+        "title": "Online Store",
+        "desc": "E-commerce with cart and payment",
+        "features": ["Product catalog, filters", "Delivery integration"],
+        "price": "from ₽80,000",
+        "time": "5-7 days"
+      },
+      {
+        "title": "Web Application",
+        "desc": "Custom solution for any task",
+        "features": ["Dashboards, analytics, automation", "API integrations"],
+        "price": "from ₽100,000",
+        "time": "7-10 days"
+      },
+      {
+        "title": "UI/UX Design",
+        "desc": "Design mockups in Figma",
+        "features": ["Prototyping, user flow", "Design system"],
+        "price": "from ₽40,000",
+        "time": "3-5 days"
+      },
+      {
+        "title": "Website Improvement",
+        "desc": "Fixes, new features",
+        "features": ["Optimization, refactoring", "Integrations and automation"],
+        "price": "from ₽15,000",
+        "time": "1-3 days"
+      }
+    ]
+  },
+  "PricingCalculator": {
+    "headline": "Calculate",
+    "headlineAccent": "the cost",
+    "subtitle": "Select parameters and find out the approximate cost of your project",
+    "projectTypeLabel": "Project type",
+    "pagesLabel": "Number of pages:",
+    "addonsLabel": "Add-ons",
+    "estimatedPrice": "Estimated cost",
+    "ctaBtn": "Get exact quote",
+    "from": "from",
+    "free": "Free",
+    "projectTypes": [
+      { "id": "landing", "label": "Landing Page" },
+      { "id": "corporate", "label": "Corporate Website" },
+      { "id": "ecommerce", "label": "Online Store" },
+      { "id": "saas", "label": "SaaS / Web Application" },
+      { "id": "bot", "label": "Telegram / WhatsApp Bot" }
+    ],
+    "addons": [
+      { "id": "design", "label": "Premium UI/UX Design" },
+      { "id": "cms", "label": "Admin Panel (CMS)" },
+      { "id": "seo", "label": "SEO Optimization" },
+      { "id": "analytics", "label": "Yandex.Metrica + Google Analytics" },
+      { "id": "bot_addon", "label": "Telegram Bot as gift" },
+      { "id": "support3", "label": "3 months support" }
+    ]
+  },
+  "HowWeWork": {
+    "headline": "How we",
+    "headlineAccent": "work",
+    "subtitle": "Transparent process from request to launch",
+    "steps": [
+      {
+        "num": "01",
+        "title": "Request & Brief",
+        "desc": "We discuss the task, define requirements and create technical specifications.",
+        "time": "1 day"
+      },
+      {
+        "num": "02",
+        "title": "Prototype & Approval",
+        "desc": "We create wireframes and design prototypes. We approve the concept with you.",
+        "time": "1-2 days"
+      },
+      {
+        "num": "03",
+        "title": "AI Development",
+        "desc": "AI tools generate code, we control quality and architecture.",
+        "time": "2-5 days"
+      },
+      {
+        "num": "04",
+        "title": "Testing & Revisions",
+        "desc": "We test on all devices and make final adjustments.",
+        "time": "1 day"
+      },
+      {
+        "num": "05",
+        "title": "Launch & Training",
+        "desc": "We deploy the project, provide training on management and hand over all credentials.",
+        "time": "1 day"
+      }
+    ]
+  },
+  "Technologies": {
+    "headline": "Modern",
+    "headlineAccent": "technologies",
+    "subtitle": "We use the best stack for each project"
+  },
+  "CmsSection": {
+    "headline": "We work on",
+    "headlineAccent": "any platform",
+    "subtitle": "Website development on WordPress, Tilda, Shopify, Bitrix and other CMS — we'll choose the platform for your project and budget",
+    "bottomText": "We build online stores on Shopify and WooCommerce, corporate websites on WordPress and 1C-Bitrix, landing pages on Tilda and Wix, online school platforms on GetCourse and Teachable. We also develop websites from scratch on Next.js without CMS — faster, cheaper, with better SEO.",
+    "categories": [
+      { "label": "Builders" },
+      { "label": "CMS Platforms" },
+      { "label": "E-Commerce" },
+      { "label": "Online Learning" }
+    ]
+  },
+  "TeamSection": {
+    "headline": "The people behind",
+    "headlineAccent": "ProMindLab",
+    "subtitle": "Not an anonymous agency — a real team with real experience",
+    "founder": {
+      "name": "Maxim Tarasov",
+      "role": "Founder of ProMindLab",
+      "bio": "Experience in development and AI technologies. Founded ProMindLab to make quality development accessible to businesses of any scale."
+    },
+    "members": [
+      { "name": "Dmitry Kravtsov", "role": "Fullstack Developer" },
+      { "name": "Artem Belousov", "role": "AI Engineer" }
+    ]
+  },
+  "Statistics": {
+    "headline": "Numbers speak",
+    "headlineAccent": "for themselves",
+    "stats": [
+      { "suffix": "+", "label": "Projects launched" },
+      { "suffix": " days", "label": "Average development time" },
+      { "suffix": "x", "prefix": "5-", "label": "Cheaper than traditional development" },
+      { "suffix": "%", "label": "Satisfied clients" }
+    ]
+  },
+  "Advantages": {
+    "headline": "Why",
+    "headlineAccent": "choose us",
+    "subtitle": "6 reasons to trust ProMindLab with your project",
+    "items": [
+      { "title": "Speed", "desc": "Ready in 3-7 days. AI accelerates development 10x." },
+      { "title": "Value", "desc": "5-10x cheaper than traditional development." },
+      { "title": "Quality", "desc": "Premium design and clean code at top-agency level." },
+      { "title": "AI Technologies", "desc": "Claude, GPT-4 and modern tech stack." },
+      { "title": "Guarantee", "desc": "100% refund if you're not satisfied." },
+      { "title": "Support", "desc": "24/7 available. Fast response to any questions." }
+    ]
+  },
+  "FAQ": {
+    "headline": "Frequently",
+    "headlineAccent": "asked questions",
+    "subtitle": "Answers to popular questions about our work",
+    "items": [
+      {
+        "q": "How does AI help in development?",
+        "a": "AI tools (Claude, GPT-4, Cursor) generate up to 80% of code, create design mockups and automate testing. We control quality, architecture and business logic. Result — a top-agency product in a fraction of the time and price."
+      },
+      {
+        "q": "Why is it so fast and cheap?",
+        "a": "AI automates routine tasks: writing boilerplate code, layout, infrastructure setup. We focus on architecture, UX and business logic. This allows reducing development time by 5-10x without losing quality."
+      },
+      {
+        "q": "What quality guarantees do you provide?",
+        "a": "We guarantee: code passes code review, testing on all devices, Lighthouse score 90+. If the result doesn't satisfy you — we refund 100% of payment. After launch we provide free support from 1 to 6 months."
+      },
+      {
+        "q": "Will there be support after launch?",
+        "a": "Yes! Depending on the package — from 1 to 6 months of free support. Bug fixing, minor improvements, consultations. After the free period — technical support by subscription from ₽10,000/month."
+      },
+      {
+        "q": "Can revisions be made?",
+        "a": "Of course! During development — up to 3 rounds of free revisions. In the \"Premium\" package — unlimited revisions. We work iteratively: showing results at each stage."
+      },
+      {
+        "q": "What payment methods do you accept?",
+        "a": "We accept: bank cards, business account (for legal entities), ЮKassa, Stripe (for international clients). Payment in 2 stages: 50% upfront + 50% after project delivery."
+      },
+      {
+        "q": "Do you work with international clients?",
+        "a": "Yes, we work with clients from Russia, Kazakhstan, Belarus, Uzbekistan and other CIS countries. For international clients we accept payment in USD/EUR via Stripe."
+      },
+      {
+        "q": "What if I'm not satisfied?",
+        "a": "We show a prototype before the main development begins. If the concept doesn't suit you — we refund the deposit. If the final result doesn't meet the specifications — we revise for free or refund the money."
+      }
+    ]
+  },
+  "ContactForm": {
+    "headline": "Ready to",
+    "headlineAccent": "launch a project?",
+    "subtitle": "Leave a request and get a free cost estimate",
+    "whyUs": "Why choose us",
+    "contactDirect": "Contact directly",
+    "trustPoints": [
+      "We respond within 2 hours",
+      "Free consultation",
+      "Rating 4.9 — 50+ clients"
+    ],
+    "miniTestimonial": "\"Got a ready SaaS in 5 days. Quality at agency level, price 8x lower.\"",
+    "miniTestimonialAuthor": "Alexander K. — CEO TechStart",
+    "fields": {
+      "name": "Name",
+      "namePlaceholder": "John Smith",
+      "email": "Email",
+      "emailPlaceholder": "john@example.com",
+      "phone": "Phone",
+      "phonePlaceholder": "+1 (999) 123-45-67",
+      "projectType": "Project type",
+      "projectTypePlaceholder": "Select type",
+      "message": "Message",
+      "messageOptional": "(optional)",
+      "messagePlaceholder": "Tell us about your project..."
+    },
+    "validation": {
+      "nameMin": "Minimum 2 characters",
+      "emailInvalid": "Enter a valid email",
+      "phoneInvalid": "Enter a valid phone number",
+      "projectTypeRequired": "Select a project type"
+    },
+    "projectTypes": [
+      "Landing Page",
+      "Corporate Website",
+      "SaaS Platform",
+      "Telegram/WhatsApp Bot",
+      "Online Store",
+      "Web Application",
+      "UI/UX Design",
+      "Website Improvement",
+      "Other"
+    ],
+    "submitBtn": "Get Free Quote",
+    "submitting": "Sending...",
+    "successTitle": "Request sent!",
+    "successDesc": "We will contact you within 2 hours",
+    "errorFallback": "Failed to send request. Please try again.",
+    "submitError": "Sending error",
+    "footer": "We respond within 2 hours. No spam.",
+    "starsAria": "Rating 5 out of 5 stars"
+  },
+  "SeoContent": {
+    "ariaLabel": "Detailed information about AI development",
+    "title": "Website, SaaS Platform and Bot Development with Artificial Intelligence",
+    "intro": "ProMindLab — agency for developing websites, web applications and Telegram bots using artificial intelligence. We create premium solutions in 3-7 days at prices 5-10x lower than traditional development, using cutting-edge AI technologies: Claude AI, GPT-4, GitHub Copilot and Cursor AI.",
+    "expandBtn": "↓ Learn more about our services",
+    "collapseBtn": "↑ Collapse",
+    "servicesTitle": "AI Development Services",
+    "stackTitle": "Technology Stack",
+    "stackText": "In development we use: React, Next.js, Node.js, Python, TypeScript, Tailwind CSS, PostgreSQL, MongoDB, Supabase, Firebase, Telegram Bot API, Stripe, ЮKassa. AI tools automate up to 80% of routine tasks — writing code, layout, testing — allowing projects to be completed in 3-7 days instead of 2-6 months.",
+    "portfolioTitle": "Portfolio and Results",
+    "portfolioText": "Over the past year we have developed and launched more than 50 projects for startups, small and medium businesses in Russia and CIS countries. Our cases include fintech platforms, educational services, e-commerce solutions, CRM systems and sales automation through Telegram bots. Average development time — 7 days, client satisfaction — 100%.",
+    "guaranteesTitle": "Guarantees and Support",
+    "guaranteesText": "We guarantee premium quality: modern design, responsive layout, fast loading (Lighthouse 90+), SEO optimization, security. Unlimited revisions during development, 24/7 technical support, system training. 100% money back guarantee if not satisfied.",
+    "geographyTitle": "Geography",
+    "geographyText": "We work with clients across Russia (Moscow, St. Petersburg, Kazan, Novosibirsk, Yekaterinburg) and CIS countries (Kazakhstan, Belarus, Uzbekistan, Armenia). All processes remote: online meetings, demos via Vercel. Payment: bank transfer, ЮKassa, Stripe.",
+    "serviceItems": [
+      "Landing page development from ₽25,000 in 2-3 days — single-page sites with animations, responsive design and SEO optimization",
+      "Corporate website creation from ₽60,000 in 5-7 days — multi-page sites with CMS, integrations and content management",
+      "SaaS platform development (MVP) from ₽150,000 in 7-14 days — web applications with user dashboard, authentication, database and API",
+      "Telegram and WhatsApp bots from ₽30,000 in 3-5 days — communication automation, order processing, CRM and payment integration",
+      "Online stores from ₽80,000 in 5-7 days — e-commerce with cart, ЮKassa payment, catalog and delivery",
+      "Web applications from ₽100,000 in 7-10 days — dashboards, analytics, business process automation"
+    ]
+  },
+  "Footer": {
+    "tagline": "We build websites, SaaS, bots and web applications using AI technologies in 3-7 days.",
+    "navTitle": "Navigation",
+    "servicesTitle": "Services",
+    "contactsTitle": "Contacts",
+    "nav": [
+      { "label": "Services", "href": "#services" },
+      { "label": "Pricing", "href": "#pricing" },
+      { "label": "Portfolio", "href": "#portfolio" },
+      { "label": "Reviews", "href": "#testimonials" },
+      { "label": "FAQ", "href": "#faq" },
+      { "label": "Contact", "href": "#contact" }
+    ],
+    "servicesList": [
+      "Landing Page",
+      "Corporate Website",
+      "SaaS Platform",
+      "Telegram Bots",
+      "Online Store",
+      "UI/UX Design"
+    ],
+    "legalInfo": "ООО «ПРОМАЙНД» | ОГРН: 1197746653961 | ИНН: 7743321261",
+    "copyright": "© 2025–2026 ProMindLab. All rights reserved.",
+    "privacy": "Privacy Policy",
+    "offer": "Terms of Service"
+  },
+  "SocialProof": {
+    "stats": [
+      { "value": "50+", "label": "projects" },
+      { "value": "10+", "label": "industries" },
+      { "value": "100%", "label": "satisfied" }
+    ],
+    "marqueeLabel": "We work with companies from various industries",
+    "categories": [
+      "Startups",
+      "E-commerce",
+      "SaaS",
+      "Education",
+      "Marketing",
+      "Fintech",
+      "Medtech",
+      "HR Tech",
+      "Corporations",
+      "AI/ML"
+    ]
+  },
+  "StickyCTA": {
+    "btn": "Get a Free Quote"
+  },
+  "ExitIntentPopup": {
+    "closeAria": "Close",
+    "title": "Wait! We have a",
+    "titleAccent": "gift for you",
+    "desc": "Leave a request now and get a free audit of your current website + 10% discount on your first project",
+    "ctaBtn": "Get the gift",
+    "declineBtn": "No, thanks"
+  },
+  "CookieBanner": {
+    "text": "We use cookies to improve the website.",
+    "learnMore": "Learn more",
+    "accept": "Accept",
+    "decline": "Decline"
+  },
+  "LanguageSwitcher": {
+    "label": "Language"
+  }
+}

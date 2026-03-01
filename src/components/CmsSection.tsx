@@ -1,11 +1,11 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Layers, Globe, ShoppingBag, GraduationCap } from 'lucide-react';
+import { Layers, Globe, ShoppingBag, GraduationCap, type LucideIcon } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
-const categories = [
+const categoryMeta: { Icon: LucideIcon; color: string; accent: string; border: string; bg: string; platforms: string[] }[] = [
   {
-    label: 'Конструкторы',
     Icon: Layers,
     color: 'from-blue-500/20 to-cyan-500/20',
     accent: 'text-blue-400',
@@ -14,7 +14,6 @@ const categories = [
     platforms: ['Tilda', 'Wix'],
   },
   {
-    label: 'CMS платформы',
     Icon: Globe,
     color: 'from-violet-500/20 to-purple-500/20',
     accent: 'text-violet-400',
@@ -23,7 +22,6 @@ const categories = [
     platforms: ['WordPress', '1C-Битрикс', 'Joomla'],
   },
   {
-    label: 'E-Commerce',
     Icon: ShoppingBag,
     color: 'from-emerald-500/20 to-teal-500/20',
     accent: 'text-emerald-400',
@@ -32,7 +30,6 @@ const categories = [
     platforms: ['Shopify', 'WooCommerce', 'OpenCart', 'PrestaShop', 'Magento', 'BigCommerce'],
   },
   {
-    label: 'Онлайн-обучение',
     Icon: GraduationCap,
     color: 'from-amber-500/20 to-orange-500/20',
     accent: 'text-amber-400',
@@ -43,6 +40,10 @@ const categories = [
 ];
 
 export default function CmsSection() {
+  const t = useTranslations('CmsSection');
+  const categoryLabels = t.raw('categories') as Array<{ label: string }>;
+  const categories = categoryMeta.map((m, i) => ({ ...m, label: categoryLabels[i].label }));
+
   return (
     <section className="py-24 relative overflow-hidden">
       {/* Ambient glow */}
@@ -57,12 +58,11 @@ export default function CmsSection() {
           transition={{ duration: 0.6 }}
         >
           <h2 className="font-heading text-[1.875rem] sm:text-[2.5rem] lg:text-[3rem] font-bold tracking-[-0.025em] leading-[1.15] mb-4">
-            Работаем на{' '}
-            <span className="gradient-text">любой платформе</span>
+            {t('headline')}{' '}
+            <span className="gradient-text">{t('headlineAccent')}</span>
           </h2>
           <p className="text-muted text-[1.0625rem] leading-[1.65] tracking-[-0.01em] max-w-2xl mx-auto">
-            Разработка сайтов на WordPress, Tilda, Shopify, Битрикс и других CMS —
-            подберём платформу под ваш проект и бюджет
+            {t('subtitle')}
           </p>
         </motion.div>
 
@@ -110,9 +110,7 @@ export default function CmsSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
-          Создаём интернет-магазины на Shopify и WooCommerce, корпоративные сайты на WordPress и 1C-Битрикс,
-          лендинги на Tilda и Wix, платформы для онлайн-школ на GetCourse и Teachable.
-          Также разрабатываем сайты с нуля на Next.js без CMS — быстрее, дешевле, с лучшим SEO.
+          {t('bottomText')}
         </motion.p>
       </div>
     </section>

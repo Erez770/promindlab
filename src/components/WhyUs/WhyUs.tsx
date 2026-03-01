@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { useTranslations } from 'next-intl';
 import ComparisonTable from './ComparisonTable';
 import TeamCards from './TeamCards';
 import BigStat from './BigStat';
@@ -8,6 +9,7 @@ import ProcessTimeline from './ProcessTimeline';
 import FinalCTA from './FinalCTA';
 
 export default function WhyUs() {
+  const t = useTranslations('WhyUs');
   return (
     <section id="why-us" className="py-24 relative overflow-hidden">
       <div className="absolute inset-0 grid-lines opacity-50 pointer-events-none" />
@@ -22,12 +24,12 @@ export default function WhyUs() {
           transition={{ duration: 0.6 }}
         >
           <h2 className="font-heading text-[1.875rem] sm:text-[2.5rem] lg:text-[3rem] font-bold tracking-[-0.025em] leading-[1.15] mb-4">
-            Почему <span className="gradient-text">профессионалы</span> лучше,
+            {t('headline')} <span className="gradient-text">{t('headlineAccent')}</span> {t('headlineSuffix')}
             <br className="hidden sm:block" />
-            чем <span className="text-muted">ChatGPT сам по себе</span>
+            {t('headlineSuffix2')} <span className="text-muted">{t('headlineMuted')}</span>
           </h2>
           <p className="text-muted text-[1.0625rem] leading-[1.65] tracking-[-0.01em] max-w-2xl mx-auto">
-            Вы можете попробовать сделать сайт через AI самостоятельно. Мы знаем, чем это обычно заканчивается.
+            {t('subtitle')}
           </p>
         </motion.div>
 

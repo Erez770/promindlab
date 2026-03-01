@@ -2,27 +2,27 @@
 
 import { motion } from 'framer-motion';
 import { Rocket, ShoppingCart, Cloud, BookOpen, TrendingUp, CreditCard, HeartPulse, Users, Building2, Cpu, type LucideIcon } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
-const row1: { name: string; Icon: LucideIcon; accent: string }[] = [
-  { name: 'Стартапы', Icon: Rocket, accent: 'text-violet-400' },
-  { name: 'E-commerce', Icon: ShoppingCart, accent: 'text-amber-400' },
-  { name: 'SaaS', Icon: Cloud, accent: 'text-sky-400' },
-  { name: 'Образование', Icon: BookOpen, accent: 'text-emerald-400' },
-  { name: 'Маркетинг', Icon: TrendingUp, accent: 'text-rose-400' },
-  { name: 'Финтех', Icon: CreditCard, accent: 'text-blue-400' },
-  { name: 'Медтех', Icon: HeartPulse, accent: 'text-red-400' },
-  { name: 'HR Tech', Icon: Users, accent: 'text-teal-400' },
-  { name: 'Корпорации', Icon: Building2, accent: 'text-indigo-400' },
-  { name: 'AI/ML', Icon: Cpu, accent: 'text-cyan-400' },
-];
-
-const stats = [
-  { value: '50+', label: 'проектов' },
-  { value: '10+', label: 'отраслей' },
-  { value: '100%', label: 'довольных' },
+const categoryIcons: { Icon: LucideIcon; accent: string }[] = [
+  { Icon: Rocket, accent: 'text-violet-400' },
+  { Icon: ShoppingCart, accent: 'text-amber-400' },
+  { Icon: Cloud, accent: 'text-sky-400' },
+  { Icon: BookOpen, accent: 'text-emerald-400' },
+  { Icon: TrendingUp, accent: 'text-rose-400' },
+  { Icon: CreditCard, accent: 'text-blue-400' },
+  { Icon: HeartPulse, accent: 'text-red-400' },
+  { Icon: Users, accent: 'text-teal-400' },
+  { Icon: Building2, accent: 'text-indigo-400' },
+  { Icon: Cpu, accent: 'text-cyan-400' },
 ];
 
 export default function SocialProof() {
+  const t = useTranslations('SocialProof');
+  const statsData = t.raw('stats') as Array<{ value: string; label: string }>;
+  const categoryNames = t.raw('categories') as string[];
+
+  const row1 = categoryIcons.map((meta, i) => ({ ...meta, name: categoryNames[i] }));
   const doubled = [...row1, ...row1];
 
   return (
@@ -37,7 +37,7 @@ export default function SocialProof() {
       >
         {/* Stats row */}
         <div className="flex justify-center items-center gap-8 mb-8 px-4">
-          {stats.map((s, i) => (
+          {statsData.map((s, i) => (
             <div key={i} className="text-center">
               <p className="font-heading text-[1.5rem] font-bold gradient-text tabular-nums leading-none">{s.value}</p>
               <p className="text-[0.7rem] text-muted uppercase tracking-[0.08em] mt-1">{s.label}</p>
@@ -46,7 +46,7 @@ export default function SocialProof() {
         </div>
 
         <p className="text-center text-[0.75rem] text-muted mb-6 tracking-[0.1em] uppercase font-medium">
-          Работаем с компаниями из разных отраслей
+          {t('marqueeLabel')}
         </p>
 
         {/* Marquee */}

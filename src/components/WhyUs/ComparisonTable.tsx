@@ -2,30 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { X, Check, AlertTriangle, Zap } from 'lucide-react';
-
-const selfItems = [
-  '2-4 недели попыток и переделок',
-  'Результат выглядит как шаблон',
-  'Не знаете какой промпт написать',
-  'Код работает, но непонятно почему',
-  'Ошибки которые невозможно найти',
-  'Сайт не оптимизирован и не индексируется',
-  'Нет анимаций — только статичные блоки',
-  'На мобильных всё "едет"',
-  'Поддержки нет — вы один на один с проблемой',
-];
-
-const proItems = [
-  'Готово за 3-7 дней',
-  'Дизайн уровня $15,000',
-  'Промпт-инженеры знают как правильно поставить задачу AI',
-  'Чистый, масштабируемый, профессиональный код',
-  'Всё работает, протестировано, задеплоено',
-  'SEO, скорость, индексация с первого дня',
-  'Плавные анимации и wow-эффекты',
-  'Идеально на всех устройствах',
-  'Поддержка 24/7 после запуска',
-];
+import { useTranslations } from 'next-intl';
 
 const itemVariants = {
   hidden: { opacity: 0, x: -10 },
@@ -37,6 +14,9 @@ const itemVariants = {
 };
 
 export default function ComparisonTable() {
+  const t = useTranslations('ComparisonTable');
+  const selfItems = t.raw('selfItems') as string[];
+  const proItems = t.raw('proItems') as string[];
   return (
     <div className="grid md:grid-cols-2 gap-5 sm:gap-6">
       {/* Self column */}
@@ -52,7 +32,7 @@ export default function ComparisonTable() {
             <AlertTriangle size={20} className="text-red-400" />
           </div>
           <div>
-            <h3 className="font-heading text-base sm:text-lg font-semibold">Вы + ChatGPT самостоятельно</h3>
+            <h3 className="font-heading text-base sm:text-lg font-semibold">{t('selfTitle')}</h3>
           </div>
         </div>
         <div className="p-6 space-y-3.5">
@@ -88,7 +68,7 @@ export default function ComparisonTable() {
             <Zap size={20} className="text-primary" />
           </div>
           <div>
-            <h3 className="font-heading text-base sm:text-lg font-semibold">Вы + ProMindLab</h3>
+            <h3 className="font-heading text-base sm:text-lg font-semibold">{t('proTitle')}</h3>
           </div>
         </div>
         <div className="p-6 space-y-3.5">

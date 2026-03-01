@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Atom, Triangle, Code2, Server, Palette, Brain, Sparkles, Send, Zap, Flame, CreditCard, Wallet, FileCode2, Database, Container, Globe, type LucideIcon } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 const techs: { name: string; Icon: LucideIcon; color: string }[] = [
   { name: 'React', Icon: Atom, color: 'from-cyan-500/20 to-blue-500/20' },
@@ -23,6 +24,8 @@ const techs: { name: string; Icon: LucideIcon; color: string }[] = [
 ];
 
 export default function Technologies() {
+  const t = useTranslations('Technologies');
+
   return (
     <section className="py-24 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -34,10 +37,10 @@ export default function Technologies() {
           transition={{ duration: 0.6 }}
         >
           <h2 className="font-heading text-[1.875rem] sm:text-[2.5rem] lg:text-[3rem] font-bold tracking-[-0.025em] leading-[1.15] mb-4">
-            Современные <span className="gradient-text">технологии</span>
+            {t('headline')} <span className="gradient-text">{t('headlineAccent')}</span>
           </h2>
           <p className="text-muted text-[1.0625rem] leading-[1.65] tracking-[-0.01em] max-w-2xl mx-auto">
-            Используем лучший стек для каждого проекта
+            {t('subtitle')}
           </p>
         </motion.div>
 

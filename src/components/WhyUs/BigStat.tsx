@@ -3,6 +3,7 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 import { Quote } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 function CountUp({ target, suffix, duration = 2000 }: { target: number; suffix: string; duration?: number }) {
   const ref = useRef<HTMLSpanElement>(null);
@@ -29,13 +30,12 @@ function CountUp({ target, suffix, duration = 2000 }: { target: number; suffix: 
   );
 }
 
-const stats = [
-  { value: 87, suffix: '%', label: 'клиентов приходят после неудачной попытки сделать сами' },
-  { value: 3, suffix: ' нед.', label: 'в среднем теряет предприниматель на самостоятельные попытки' },
-  { value: 0, suffix: ' \u20BD', label: 'стоит консультация перед стартом', isZero: true },
-];
+const statValues = [{ value: 87, isZero: false }, { value: 3, isZero: false }, { value: 0, isZero: true }];
 
 export default function BigStat() {
+  const t = useTranslations('BigStat');
+  const statLabels = t.raw('stats') as Array<{suffix: string; label: string}>;
+  const stats = statValues.map((s, i) => ({ ...s, ...statLabels[i] }));
   return (
     <motion.div
       className="relative rounded-2xl overflow-hidden"
@@ -53,11 +53,9 @@ export default function BigStat() {
         <div className="flex flex-col justify-center">
           <Quote size={40} className="text-primary/30 mb-4" />
           <p className="text-lg sm:text-xl leading-relaxed text-foreground/80 mb-6">
-            Среднестатистический предприниматель тратит 3-6 недель на попытки сделать сайт с ChatGPT
-            самостоятельно. Получает шаблонный результат который не конвертирует. Потом всё равно обращается к
-            нам.
+            {t('quote')}
           </p>
-          <p className="text-muted text-sm">— Наблюдение из 50+ проектов</p>
+          <p className="text-muted text-sm">{t('quoteSource')}</p>
         </div>
 
         {/* Stats */}
@@ -73,7 +71,7 @@ export default function BigStat() {
             >
               {stat.isZero ? (
                 <span className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold gradient-text tabular-nums">
-                  0 {'\u20BD'}
+                  0{stat.suffix}
                 </span>
               ) : (
                 <CountUp target={stat.value} suffix={stat.suffix} />
